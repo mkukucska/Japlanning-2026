@@ -1,0 +1,16 @@
+{
+  "name": "HK · Shenzhen · Japan 2026",
+  "short_name": "Trip 2026",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#070711",
+  "theme_color": "#7c3aed",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

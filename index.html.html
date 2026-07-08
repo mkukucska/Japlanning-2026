@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HK · Shenzhen · Japan — Oct 2026</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#7c3aed">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Trip 2026">
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(e => console.log('SW error:', e));
+  });
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+:root{--bg:#070711;--surface:rgba(255,255,255,0.025);--border:rgba(255,255,255,0.07);--text:#ede9e0;--muted:#9ca3af;--dim:#6b7280;--accent:#a78bfa;--accent-dark:#7c3aed;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min-height:100vh;}
+.header{background:linear-gradient(160deg,#100820 0%,#08101e 55%,#08140a 100%);border-bottom:1px solid var(--border);padding:28px 20px 20px;text-align:center;}
+.header-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:6px;color:var(--accent);margin-bottom:6px;}
+.header h1{font-size:clamp(22px,6vw,46px);font-weight:400;letter-spacing:-1.5px;line-height:1.1;margin-bottom:4px;}
+.header-names{color:var(--muted);font-size:13px;margin-bottom:4px;}
+.header-sub{color:var(--dim);font-family:'DM Mono',monospace;font-size:11px;margin-bottom:16px;}
+.legend{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:16px;}
+.legend-pill{padding:2px 8px;border-radius:999px;font-family:'DM Mono',monospace;font-size:10px;}
+.tabs{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;}
+.tab-btn{padding:7px 13px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-size:12px;font-family:'DM Mono',monospace;transition:all 0.15s;}
+.tab-btn.active{border-color:var(--accent);background:var(--accent-dark);color:white;}
+.content{max-width:820px;margin:0 auto;padding:20px 14px;}
+.tab-content{display:none;}.tab-content.active{display:block;}
+.alert{background:rgba(220,38,38,0.1);border:1px solid rgba(220,38,38,0.3);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
+.alert-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#f87171;margin-bottom:8px;}
+.alert p{font-size:13px;color:#fca5a5;line-height:1.9;}
+.city-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.city-btn{padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--dim);cursor:pointer;font-size:12px;font-family:'DM Mono',monospace;transition:all 0.15s;}
+.city-btn.active{border-color:var(--accent);background:rgba(124,58,237,0.2);color:#c4b5fd;}
+.day-card{margin-bottom:8px;border-radius:12px;border:1px solid var(--border);overflow:hidden;}
+.day-card.open{border-color:rgba(167,139,250,0.35);}
+.day-header{width:100%;text-align:left;padding:14px 16px;background:var(--surface);border:none;cursor:pointer;display:flex;align-items:flex-start;gap:12px;transition:background 0.15s;}
+.day-header:hover{background:rgba(255,255,255,0.04);}
+.day-card.open .day-header{background:rgba(124,58,237,0.08);}
+.day-emoji{font-size:18px;flex-shrink:0;margin-top:2px;}
+.day-meta{flex:1;min-width:0;}
+.day-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px;}
+.day-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);}
+.city-tag{padding:2px 10px;border-radius:999px;font-family:'DM Mono',monospace;font-size:10px;}
+.day-title{font-size:15px;color:var(--text);line-height:1.3;}
+
+/* Suggestions bubble on day cards */
+.day-suggestions{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;margin-top:12px;}
+.day-suggestions-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--dim);display:block;margin-bottom:8px;}
+.day-sugg-item{display:flex;gap:8px;font-size:12px;color:var(--dim);line-height:1.5;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+.day-sugg-item:last-child{border-bottom:none;}
+.day-sugg-item a{color:#818cf8;text-decoration:none;}
+.day-sugg-item a:hover{text-decoration:underline;}
+
+/* Functional todo checkboxes */
+.todo-item{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:#d1d5db;line-height:1.5;cursor:pointer;align-items:flex-start;}
+.todo-item:last-child{border-bottom:none;}
+.todo-item.checked{opacity:0.45;}
+.todo-item.checked .todo-text{text-decoration:line-through;color:var(--dim);}
+.todo-checkbox{width:18px;height:18px;flex-shrink:0;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:transparent;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px;transition:all 0.15s;}
+.todo-item.checked .todo-checkbox{background:rgba(34,197,94,0.3);border-color:rgba(34,197,94,0.6);color:#4ade80;}
+.todo-text{flex:1;}
+/* Collapsible suggestion cities */
+.sugg-city-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:8px 0;user-select:none;}
+.sugg-city-header:hover .sugg-city{color:#c4b5fd;}
+.sugg-city-chevron{font-family:'DM Mono',monospace;font-size:12px;color:var(--dim);transition:transform 0.2s;}
+.sugg-city-section.collapsed .sugg-city-chevron{transform:rotate(-90deg);}
+.sugg-city-content{overflow:hidden;transition:max-height 0.3s ease;}
+.sugg-city-section.collapsed .sugg-city-content{max-height:0!important;}
+/* Print mode */
+@media print{
+  body{background:white!important;color:#111!important;}
+  .header{background:white!important;border-bottom:2px solid #333!important;color:#111!important;}
+  .header h1,.header-eyebrow,.header-names,.header-sub{color:#111!important;}
+  .tabs,.city-filter,.legend,
+  .tab-content{display:block!important;}
+  .tab-content:not(#tab-itinerary){page-break-before:always;}
+  .day-card,.det-card{border:1px solid #ccc!important;background:white!important;margin-bottom:6px!important;break-inside:avoid;}
+  .day-header,.det-header{background:#f5f5f5!important;}
+  .day-body,.det-body{display:block!important;background:white!important;}
+  .day-title,.day-date,.day-note,.day-item{color:#111!important;}
+  .city-tag{background:#eee!important;color:#333!important;}
+  .popo-box,.parallel-box,.warning-box,.standing-note,.day-suggestions{background:#f9f9f9!important;border:1px solid #ddd!important;color:#333!important;}
+  .popo-label,.parallel-label,.warning-label,.day-suggestions-label{color:#555!important;}
+  .section-card{background:white!important;border:1px solid #ccc!important;}
+  .section-title,.hotel-section-label{color:#333!important;}
+  .section-row,.hotel-row{color:#111!important;border-bottom:1px solid #eee!important;}
+  .hotel-card{background:white!important;border:1px solid #ccc!important;}
+  .hotel-why{background:#f9f9f9!important;border-left:3px solid #aaa!important;color:#333!important;}
+  .footer{background:#f5f5f5!important;color:#333!important;}
+  .alert{background:#fff3f3!important;border:1px solid #f00!important;}
+  .alert p,.alert-title{color:#c00!important;}
+  h1,.header-eyebrow{color:#111!important;}
+  .cad-ref{background:#f5f5f5!important;color:#111!important;}
+  .cad-item{color:#333!important;}
+  .jem-onsen-box{background:#f0f0ff!important;border:2px solid #99a!important;}
+  .jem-letter{color:#333!important;}
+}
+
+.day-dist{font-family:'DM Mono',monospace;font-size:11px;color:#c4b5fd;margin-top:4px;background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.25);border-radius:4px;padding:2px 8px;display:inline-block;}
+.day-chevron{color:var(--dim);font-size:12px;flex-shrink:0;margin-top:4px;}
+.day-body{padding:0 16px 16px;background:rgba(0,0,0,0.2);display:none;}
+.day-card.open .day-body{display:block;}
+.day-note{font-size:13px;color:var(--muted);line-height:1.75;margin-bottom:12px;padding-top:4px;}
+.popo-box{background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#c4b5fd;line-height:1.6;}
+.popo-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;display:block;margin-bottom:4px;color:#7c3aed;}
+.parallel-box{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#86efac;line-height:1.6;}
+.parallel-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;display:block;margin-bottom:4px;color:#4ade80;}
+.warning-box{background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:12px;color:#fca5a5;line-height:1.6;}
+.warning-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;display:block;margin-bottom:4px;color:#f87171;}
+.day-items{display:flex;flex-direction:column;gap:6px;}
+.day-item{display:flex;gap:10px;font-size:13px;color:#d1d5db;line-height:1.5;}
+.item-icon{flex-shrink:0;margin-top:2px;}
+.nursing-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;color:#f9a8d4;background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2);border-radius:4px;padding:1px 6px;margin-top:8px;}
+.standing-note{background:rgba(167,139,250,0.07);border-left:2px solid var(--accent);padding:8px 12px;margin-bottom:10px;border-radius:0 6px 6px 0;font-size:12px;color:#c4b5fd;line-height:1.6;}
+.section-card{margin-bottom:12px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.section-card.urgent{background:rgba(220,38,38,0.06);border-color:rgba(220,38,38,0.25);}
+.section-card.done{background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.2);}
+.section-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--accent);margin-bottom:12px;}
+.section-title.red{color:#f87171;}.section-title.green{color:#4ade80;}
+.section-row{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:#d1d5db;line-height:1.5;}
+.section-row:last-child{border-bottom:none;}
+.row-icon{flex-shrink:0;}
+.phrase-card{margin-bottom:8px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.phrase-top{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px;}
+.phrase-roman{font-size:15px;color:var(--text);}
+.phrase-native{font-size:16px;}
+.phrase-meaning{font-size:13px;color:var(--muted);margin-bottom:4px;}
+.phrase-tip{font-size:12px;color:var(--dim);font-style:italic;}
+.phrase-urgent{background:rgba(220,38,38,0.08);border-color:rgba(220,38,38,0.3);}
+.phrase-sh{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--accent);margin:16px 0 10px;}
+.sugg-city{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--accent);margin:20px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.sugg-card{margin-bottom:10px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.sugg-card.anchor-item{border-color:rgba(251,191,36,0.3);background:rgba(251,191,36,0.04);}
+.sugg-card.highlight{border-color:rgba(167,139,250,0.35);}
+.sugg-name{font-size:15px;color:var(--text);margin-bottom:4px;}
+.sugg-anchor-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:999px;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);color:#fbbf24;margin-left:8px;vertical-align:middle;}
+.sugg-highlight-badge{font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:999px;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:#c4b5fd;margin-left:8px;vertical-align:middle;}
+.sugg-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:8px;}
+.sugg-meta{display:flex;gap:16px;flex-wrap:wrap;}
+.sugg-meta span{font-family:'DM Mono',monospace;font-size:10px;color:var(--dim);}
+.sugg-meta span strong{color:var(--accent);}
+.hotel-card{margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.hotel-header{padding:16px 18px 12px;border-bottom:1px solid var(--border);}
+.hotel-city-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;padding:2px 10px;border-radius:999px;margin-bottom:8px;display:inline-block;}
+.hotel-name{font-size:17px;color:var(--text);margin-bottom:3px;line-height:1.3;}
+.hotel-sub{font-size:12px;color:var(--dim);font-family:'DM Mono',monospace;}
+.hotel-body{padding:16px 18px;}
+.hotel-section{margin-bottom:14px;}
+.hotel-section:last-child{margin-bottom:0;}
+.hotel-section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:8px;}
+.hotel-section-label.green{color:#34d399;}.hotel-section-label.red{color:#f87171;}
+.hotel-row{display:flex;gap:10px;padding:5px 0;font-size:13px;color:#d1d5db;line-height:1.5;border-bottom:1px solid rgba(255,255,255,0.04);}
+.hotel-row:last-child{border-bottom:none;}
+.hotel-why{font-size:13px;color:var(--muted);line-height:1.75;font-style:italic;background:rgba(167,139,250,0.07);border-left:2px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:12px;}
+.hotel-status-tbd{display:inline-block;padding:2px 10px;border-radius:999px;background:rgba(251,191,36,0.12);border:1px solid rgba(251,191,36,0.3);color:#fbbf24;font-family:'DM Mono',monospace;font-size:10px;margin-left:8px;}
+.hotel-dates{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);margin-top:2px;}
+.jem-letter{font-size:13px;color:#fce7f3;font-style:italic;line-height:1.8;margin-bottom:14px;}
+.jem-onsen-box{background:rgba(99,102,241,0.1);border:2px solid rgba(99,102,241,0.4);border-radius:10px;padding:14px 16px;margin-bottom:16px;}
+.jem-onsen-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;color:#818cf8;margin-bottom:10px;display:block;}
+.nap-box{background:rgba(251,191,36,0.07);border:1px solid rgba(251,191,36,0.2);border-radius:8px;padding:10px 12px;margin-top:10px;}
+.nap-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;color:#fbbf24;display:block;margin-bottom:4px;}
+.cad-ref{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:12px 14px;margin-bottom:16px;}
+.cad-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:#4ade80;margin-bottom:10px;display:block;}
+.cad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px;}
+.cad-item{font-family:'DM Mono',monospace;font-size:11px;color:#d1d5db;}
+.footer{margin-top:28px;padding:20px;background:var(--surface);border-radius:10px;border:1px solid var(--border);text-align:center;font-size:12px;color:var(--dim);line-height:2;}
+.footer-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-eyebrow">FINAL ITINERARY &middot; OCT 3&ndash;30 &middot; 2026</div>
+  <h1>Hong Kong &middot; Shenzhen &middot; Japan</h1>
+  <div class="header-names">Micheal &middot; Becca &middot; Jem &middot; Popo &middot; Goong Goong</div>
+  <div class="header-sub">28 days &middot; 5 people &middot; 1 very lucky baby</div>
+  <div class="legend">
+    <span class="legend-pill" style="background:rgba(100,116,139,0.15);border:1px solid rgba(100,116,139,0.35);color:#94a3b8">Travel</span>
+    <span class="legend-pill" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong</span>
+    <span class="legend-pill" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.35);color:#c4b5fd">Shenzhen</span>
+    <span class="legend-pill" style="background:rgba(234,88,12,0.15);border:1px solid rgba(234,88,12,0.35);color:#fb923c">Osaka</span>
+    <span class="legend-pill" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.35);color:#4ade80">Kyoto</span>
+    <span class="legend-pill" style="background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.35);color:#f87171">Tokyo</span>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('itinerary',this)">&#128197; Itinerary</button>
+    <button class="tab-btn" onclick="switchTab('suggestions',this)">&#127775; Suggestions</button>
+    <button class="tab-btn" onclick="switchTab('jem',this)">&#128118; Jem</button>
+    <button class="tab-btn" onclick="switchTab('phrases',this)">&#128483; Phrases</button>
+    <button class="tab-btn" onclick="switchTab('tips',this)">&#128161; Tips</button>
+    <button class="tab-btn" onclick="switchTab('packing',this)">&#127960; Packing</button>
+    <button class="tab-btn" onclick="switchTab('todo',this)">&#9989; To-Do</button>
+    <button class="tab-btn" onclick="switchTab('hotels',this)">&#127970; Hotels</button>
+  </div>
+</div>
+<div class="content">
+
+<div id="tab-itinerary" class="tab-content active">
+  <div class="alert"><div class="alert-title">CRITICAL &mdash; DO THESE NOW</div><p>&#8594; <strong>Nintendo Museum lottery: July 31</strong> &mdash; all 5 accounts at museum-tickets.nintendo.com<br/>&#8594; <strong>Book Head Spa Kuu Omotesando</strong> for Oct 27 &mdash; sells out fast<br/>&#8594; <strong>🔴 Book rental crib for Osaka NOW</strong> &mdash; Hinode Hotel has NO cribs. Use momomamajp.com or lileo.com<br/>&#8594; Call Hinode Hotel to ask about onsen spring water mineral type (for Jem)<br/>&#8594; <strong>WeChat Pay</strong> set up and tested before Shenzhen<br/>&#8594; <strong>TeamLab Borderless</strong> timed entry: teamlab.art &mdash; sells out</p></div>
+  <div class="city-filter">
+    <button class="city-btn active" onclick="filterCity('All',this)">All</button>
+    <button class="city-btn" onclick="filterCity('Travel',this)">Travel</button>
+    <button class="city-btn" onclick="filterCity('Hong Kong',this)">Hong Kong</button>
+    <button class="city-btn" onclick="filterCity('Shenzhen',this)">Shenzhen</button>
+    <button class="city-btn" onclick="filterCity('Osaka',this)">Osaka</button>
+    <button class="city-btn" onclick="filterCity('Kyoto',this)">Kyoto</button>
+    <button class="city-btn" onclick="filterCity('Tokyo',this)">Tokyo</button>
+  </div>
+  <div id="days-container"></div>
+</div>
+
+<div id="tab-suggestions" class="tab-content">
+  
+<div class="sugg-city-section" id="sugg-hong-kong">
+  <div class="sugg-city-header" onclick="toggleSuggCity(this)">
+    <div class="sugg-city">HONG KONG</div>
+    <span class="sugg-city-chevron">▼</span>
+  </div>
+  <div class="sugg-city-content">
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Symphony of Lights<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 9 &amp; Oct 12</span></div>
+    <div class="sugg-desc">Free nightly laser and light show at 8pm from the TST waterfront promenade. The entire HK Island skyline lights up with synchronised music and lasers sweeping the harbour for 15 minutes. One of the best free shows anywhere in the world. Arrive by 7:45pm for a good spot.</div>
+    <div class="sugg-meta"><span><strong>From Holiday Inn Golden Mile:</strong> 10-min walk east</span><span><strong>Time needed:</strong> 30 min</span><span><strong>Best day:</strong> Oct 9 or Oct 12</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">The Peak &amp; Peak Tram<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 9</span></div>
+    <div class="sugg-desc">Victoria Peak via the historic Peak Tram &mdash; one of the steepest funicular railways in the world. The views over HK Island and Kowloon are extraordinary. Book tram tickets in advance at thepeak.com.hk to avoid long walk-up queues. Free viewing at Peak Galleria; paid Sky Terrace 428 for elevated views.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> MTR to Central then 10-min walk, ~25 min total</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Oct 9</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Kowloon Walled City Park<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 8</span></div>
+    <div class="sugg-desc">A peaceful, beautifully landscaped park on the site of the former Kowloon Walled City &mdash; one of the most densely populated places in human history. The exhibition hall inside tells the full story with maps, photographs and scale models. Completely flat, entirely stroller-friendly.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> MTR Kwun Tong Line to Lok Fu, 10-min walk south, ~25 min total</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 8</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Mong Kok Markets<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 11</span></div>
+    <div class="sugg-desc">The Flower Market Road, Goldfish Market (Tung Choi Street North), and Ladies Market (Tung Choi Street South) form a continuous flat walkable strip through one of Kowloon&apos;s most characterful neighbourhoods. Cantonese bargaining is the sport here. Langham Place for a nursing room break.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> MTR to Mong Kok, ~5 min</span><span><strong>Time needed:</strong> Half day</span><span><strong>Best day:</strong> Oct 11</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Sham Shui Po</div>
+    <div class="sugg-desc">One of HK&apos;s most local and undervisited neighbourhoods. Apliu Street flea market (old electronics, cameras, gadgets), fabric and trimming markets on Ki Lung Street, and excellent cheap dai pai dong lunch spots throughout. Completely flat, very stroller-friendly.</div>
+    <div class="sugg-meta"><span><strong>From Kowloon Walled City Park:</strong> MTR ~10 min</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> After Oct 8 anchor</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">1881 Heritage</div>
+    <div class="sugg-desc">The former Marine Police Headquarters beautifully converted into a heritage precinct with luxury shops and restaurants. Free to wander the colonial-era buildings and grounds. Very close to the hotel and the waterfront.</div>
+    <div class="sugg-meta"><span><strong>From Holiday Inn Golden Mile:</strong> 10-min walk</span><span><strong>Time needed:</strong> 30&ndash;45 min</span><span><strong>Best day:</strong> Any HK day</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">HK Museum of History</div>
+    <div class="sugg-desc">100 Chatham Road South, TST. One of the best city history museums in Asia &mdash; the permanent exhibition covers 400 million years of HK history from geology to the 1997 handover. Stroller-friendly inside. Air conditioned &mdash; excellent on a warm afternoon.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> 10-min walk</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Any HK day</span></div>
+  </div>
+
+  </div>
+</div>
+
+<div class="sugg-city-section" id="sugg-shenzhen">
+  <div class="sugg-city-header" onclick="toggleSuggCity(this)">
+    <div class="sugg-city">SHENZHEN</div>
+    <span class="sugg-city-chevron">▼</span>
+  </div>
+  <div class="sugg-city-content">
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Nanyou Fashion Market<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 6</span></div>
+    <div class="sugg-desc">One of China&apos;s largest wholesale fashion hubs &mdash; 20+ buildings, 4,000+ merchants, medium to high-end original Chinese designer brands. Buildings 107/108 (Tairong) are the sweet spot. Hours 9:30am&ndash;8pm (some buildings to 10pm). WeChat Pay only. No trying on clothes. No photography. ~70% retail-friendly. WeChat Translate is essential.</div>
+    <div class="sugg-meta"><span><strong>From Holiday Inn Donghua:</strong> 5-min walk</span><span><strong>Time needed:</strong> Full day</span><span><strong>Best day:</strong> Oct 6</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Costco Shenzhen</div>
+    <div class="sugg-desc">A genuine Costco experience in Shenzhen. Best visited before 11am before it gets crowded. Worth it for a browse and bulk supplies. WeChat Pay accepted.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Metro Line 4 to Shenzhen North</span><span><strong>Time needed:</strong> 1.5 hrs</span><span><strong>Best day:</strong> Oct 6 secondary or Oct 7 morning</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Huaqiangbei Electronics Market</div>
+    <div class="sugg-desc">The largest electronics market in the world &mdash; components, gadgets, retro electronics, and secondhand finds across multiple buildings. More fun to browse than to buy. Excellent for Micheal.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Metro Line 1 or 7, Huaqiangbei Station</span><span><strong>Time needed:</strong> 2 hrs</span><span><strong>Best day:</strong> Oct 7 morning before crossing back</span></div>
+  </div>
+
+  </div>
+</div>
+
+<div class="sugg-city-section" id="sugg-osaka">
+  <div class="sugg-city-header" onclick="toggleSuggCity(this)">
+    <div class="sugg-city">OSAKA</div>
+    <span class="sugg-city-chevron">▼</span>
+  </div>
+  <div class="sugg-city-content">
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Den Den Town (でんでんタウン)<span class="sugg-highlight-badge">STANDING DAILY NOTE</span></div>
+    <div class="sugg-desc">Osaka&apos;s otaku and electronics district &mdash; 15-min walk from Hinode Hotel every single evening. Multiple floors of retro games, trading cards, anime figures, and Book-Off. The mood will always strike. Never needs to be a scheduled anchor &mdash; just go when the evening is right.</div>
+    <div class="sugg-meta"><span><strong>From Hinode Hotel:</strong> 15-min walk</span><span><strong>Time needed:</strong> 1&ndash;3 hrs</span><span><strong>Best day:</strong> Any Osaka evening</span></div>
+  </div>
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Private Family Onsen (家族風呂)<span class="sugg-highlight-badge">STANDING NIGHTLY NOTE</span></div>
+    <div class="sugg-desc">Natural hot spring private family bath at Hinode Hotel &mdash; available every night, book your slot at check-in. All five including Jem can go together. Private room means no rules about tattoos or other guests. The nightly wind-down of the Osaka leg. Pre-book 2 recurring evening slots when you call ahead to confirm. Especially stress Oct 16 as the onsen evening.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> In the hotel</span><span><strong>Time needed:</strong> 50-min slot</span><span><strong>Best day:</strong> Every Osaka night</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Osaka Castle<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 14</span></div>
+    <div class="sugg-desc">17th century shogun&apos;s castle in a beautiful park. Museum inside (¥600 / ~CAD $6) with a lift to the top floor for panoramic views over Osaka. Free to wander the grounds and moats. The natural pairing with Kuromon Market in the morning makes for one of the best full days of the trip.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Subway Tanimachi Line to Tanimachi 4-chome, ~15 min</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 14</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Sumo Exhibition<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 15 evening</span></div>
+    <div class="sugg-desc">A private sumo experience &mdash; bout demonstration, photo with wrestlers, explanation of rules and history. Book via Airbnb Experiences or Voyagin (search &ldquo;sumo Osaka&rdquo;). Most run evenings 6&ndash;8pm. Book well in advance &mdash; these sell out.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Varies by venue, typically 15&ndash;25 min</span><span><strong>Time needed:</strong> 2 hrs</span><span><strong>Best day:</strong> Oct 15 evening</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Shinsekai (新世界)<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 16</span></div>
+    <div class="sugg-desc">A retro 1950s neighbourhood built in 1912 to mimic Paris and New York, now frozen in its own delightful time warp. Neon signs, old-school restaurants, Tsutenkaku Tower (¥1,000 / ~CAD $9.50) rising above it all. The home of kushikatsu &mdash; no double-dipping in the shared sauce. One of the most atmospheric neighbourhoods in Japan.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Subway Sakaisuji Line to Ebisucho, Exit 3, ~10 min</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Oct 16</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Pok&eacute;mon Center Osaka DX<span class="sugg-anchor-badge">ANCHOR NOTE &mdash; Oct 15 ad hoc</span></div>
+    <div class="sugg-desc">Life-sized Articuno, Zapdos and Moltres statues at the entrance. Osaka-exclusive merchandise not sold anywhere else in Japan. Daimaru Shinsaibashi Main Building 9F &mdash; directly connected to Shinsaibashi subway. Go if the mood strikes on Oct 15 before sumo evening.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Subway to Shinsaibashi, ~20 min</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 15 daytime</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Shinsaibashi-suji Shopping Arcade</div>
+    <div class="sugg-desc">600m covered shopping arcade &mdash; flat, wide, stroller-perfect. Everything from 100-yen shops to Apple to boutiques. One of the most famous shopping streets in Osaka. Good for a relaxed morning browse before heading elsewhere.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Subway to Shinsaibashi, ~20 min</span><span><strong>Time needed:</strong> 1&ndash;2 hrs</span><span><strong>Best day:</strong> Any Osaka morning</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Kuromon Ichiba Market (黒門市場)</div>
+    <div class="sugg-desc">580m covered market arcade with 130+ stalls &mdash; fresh seafood, tuna on sticks, grilled oysters, tamagoyaki, crab legs. Wide central aisle, stroller fine. Arrive by 9am when vendors are at their best. The natural morning pairing with Osaka Castle on Oct 14.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> Subway to Nipponbashi, Exit 10, ~10 min</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 14 morning</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Tennoji Zoo</div>
+    <div class="sugg-desc">One of Japan&apos;s oldest zoos &mdash; 15-min walk from the hotel. Animals at 6 months is genuinely entertaining for Jem. Flat, stroller-friendly, good for a slow morning or the Oct 17 buffer day.</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> 15-min walk</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 17</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Spa World (スパワールド)</div>
+    <div class="sugg-desc">A massive multi-floor onsen theme park with baths themed around different world cultures. Very different from the private hotel onsen experience &mdash; this is a full day out. Note: public bath rules apply for Jem (under-1 generally not recommended for public baths).</div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> 0.6km walk</span><span><strong>Time needed:</strong> 3&ndash;5 hrs</span><span><strong>Best day:</strong> Oct 17</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Wagyu Lunch &mdash; Osaka</div>
+    <div class="sugg-desc">Osaka is next to Kobe &mdash; the best value wagyu moment of the whole trip. Look for 黒毛和牛 (Kuroge Wagyu) + A4/A5 on restaurant windows in the Namba/Nipponbashi area. Sit-down yakiniku lunch set ~¥3,000&ndash;5,000 (~CAD $29&ndash;48) per person. Lunch is 30&ndash;50% cheaper than dinner for the same beef. Walk in, ask for the lunch teishoku. Do not go for market skewers &mdash; locals never eat there.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Namba/Nipponbashi area, near Kuromon Market</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 14 after Kuromon, Oct 15 backup</span></div>
+  </div>
+
+  </div>
+</div>
+
+<div class="sugg-city-section" id="sugg-kyoto">
+  <div class="sugg-city-header" onclick="toggleSuggCity(this)">
+    <div class="sugg-city">KYOTO</div>
+    <span class="sugg-city-chevron">▼</span>
+  </div>
+  <div class="sugg-city-content">
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Nishiki Market + Pok&eacute;mon Center Kyoto<span class="sugg-highlight-badge">STANDING DAILY NOTE</span></div>
+    <div class="sugg-desc">These two are effectively one outing &mdash; 5-min walk from MIMARU. Nishiki Market: 400m covered arcade, 130+ stalls, tofu skewers, matcha mochi, pickles, tamagoyaki. Pok&eacute;mon Center Kyoto: SUINA Muromachi 2F, Ho-Oh statue flanked by Maiko Pikachu at entrance, Kyoto-exclusive merchandise. 3-min walk between them. Go any morning on any Kyoto day &mdash; they&apos;re right there.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> 5-min walk</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs combined</span><span><strong>Best day:</strong> Any Kyoto morning</span></div>
+  </div>
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Gion (祇園)<span class="sugg-highlight-badge">STANDING EVENING NOTE</span></div>
+    <div class="sugg-desc">Kyoto&apos;s most famous geisha district &mdash; wooden machiya townhouses, stone-paved lanes, paper lanterns from 4pm. Hanamikoji Street is the main strip, best atmosphere 4&ndash;6pm. Free to wander. If you see a geiko or maiko, keep distance &mdash; they&apos;re working. Becca: excellent independent tea shops and small bookstores in the side lanes. 10-min walk from hotel any evening.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> 10-min walk east</span><span><strong>Time needed:</strong> 1&ndash;2 hrs</span><span><strong>Best day:</strong> Any Kyoto evening</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Fushimi Inari at Dusk<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 18</span></div>
+    <div class="sugg-desc">Thousands of vermilion torii gates tunnelling up a forested mountain. Arriving at dusk is the best possible timing &mdash; crowds thin dramatically, the gates glow orange in the fading light. Lower section only for the group &mdash; the magic is in the first 20 minutes. Carrier for Jem.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> JR Nara Line to Inari Station, 5 min, ¥150 (~CAD $1.50)</span><span><strong>Time needed:</strong> 1.5 hrs</span><span><strong>Best day:</strong> Oct 18 arrival evening</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Nijo Castle Private Tour<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 19 afternoon</span></div>
+    <div class="sugg-desc">17th century shogun&apos;s palace with the famous &ldquo;nightingale floors&rdquo; that squeak when walked on to detect intruders. Private English guided tour via Magical Trip or Viator &mdash; book well ahead, mention baby in carrier and senior guests. Flat grounds, stroller accessible throughout. Entry ¥1,300 (~CAD $12.50).</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> Subway Tozai Line to Nijojo-mae, ~15 min</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 19 afternoon</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Nintendo Museum &mdash; Uji<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 20</span></div>
+    <div class="sugg-desc">135 years of Nintendo history in an interactive museum in Uji City. Each visitor gets play tokens. Game Boy and Famicom multiplayer exhibits most popular. Museum shop: Nintendo Museum-exclusive merchandise not sold anywhere else. Cannot re-enter. Stroller note: underground passageway at Ogura Station has stairs only &mdash; use alternative blue route on official map.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> JR Nara Line to Ogura Station, ~25 min, ¥360 (~CAD $3.50)</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Oct 20</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Arashiyama<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 21</span></div>
+    <div class="sugg-desc">A whole neighbourhood on the western edge of Kyoto: bamboo grove (flat 200m path, best before 9am or after 3:30pm but Jem sets the pace), Tenryu-ji UNESCO garden (¥500 / ~CAD $5, flat, stroller accessible), Togetsukyo Bridge with October foliage on the hills, and the ryokan lane (free beautiful walk). Tofu kaiseki lunch sets on the main street ~¥2,000&ndash;3,500 (~CAD $19&ndash;33). Note: Arashiyama in rain is genuinely beautiful.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> Bus 59 from central Kyoto, ~30–40min</span><span><strong>Time needed:</strong> Half day</span><span><strong>Best day:</strong> Oct 21</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Kinkaku-ji (金閣寺)</div>
+    <div class="sugg-desc">The Golden Pavilion &mdash; a zen temple whose top two floors are covered in gold leaf, reflected perfectly in the still pond below. One of the most photographed buildings in Japan. A single circular path, best light in the morning. Entry ¥500 (~CAD $5). Note: on the Bus 59 route to Arashiyama &mdash; natural first stop Oct 21 if morning energy allows.</div>
+    <div class="sugg-meta"><span><strong>From MIMARU:</strong> Bus 101 or 205 from Kyoto Station, ~40 min</span><span><strong>Time needed:</strong> 45 min&ndash;1 hr</span><span><strong>Best day:</strong> Oct 21 morning en route to Arashiyama</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Tsuen Tea (通圓茶屋) &mdash; Uji</div>
+    <div class="sugg-desc">Open since 1160 &mdash; one of the oldest tea shops in the world. Near Uji Bridge with a beautiful river view. Best matcha soft serve in Japan. Everyone meets here after the Nintendo Museum &mdash; 1 train stop from Ogura to Uji (2 min, ¥150 / ~CAD $1.50).</div>
+    <div class="sugg-meta"><span><strong>From Nintendo Museum:</strong> 1 train stop, 2 min</span><span><strong>Time needed:</strong> 45 min</span><span><strong>Best day:</strong> Oct 20 after Nintendo Museum</span></div>
+  </div>
+
+  </div>
+</div>
+
+<div class="sugg-city-section" id="sugg-tokyo">
+  <div class="sugg-city-header" onclick="toggleSuggCity(this)">
+    <div class="sugg-city">TOKYO</div>
+    <span class="sugg-city-chevron">▼</span>
+  </div>
+  <div class="sugg-city-content">
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Nakano Broadway (中野ブロードウェイ)<span class="sugg-highlight-badge">NAP-TIME SPECIAL</span></div>
+    <div class="sugg-desc">10-minute JR Chuo train ride from Shinjuku. Multiple floors of retro games, vintage Pok&eacute;mon cards, Mandarake, anime figures. This is serious card hunting territory, not casual browsing. The whole point of Keio Plaza being in Nishi-Shinjuku is that this is a lace-up-and-go destination during Jem&apos;s nap times &mdash; no transit planning required. Not a scheduled item. Just go when the window opens.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> JR Chuo from Shinjuku to Nakano, 10 min</span><span><strong>Time needed:</strong> 1&ndash;3 hrs</span><span><strong>Best day:</strong> Any Tokyo day, especially Oct 28</span></div>
+  </div>
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Shimokitazawa (下北沢)<span class="sugg-highlight-badge">BECCA&apos;S TERRITORY &mdash; MAY GO MULTIPLE TIMES</span></div>
+    <div class="sugg-desc">Village-like neighbourhood 10 minutes from Shinjuku on the Odakyu Line. No cars on the main shopping streets. The best vintage and thrift shopping in Tokyo &mdash; Flamingo, New York Joe Exchange, Ragla Mugla all have multiple floors of curated secondhand clothing. Disk Union for vinyl. Independent cafes and live music venues everywhere. The group may well return here more than once &mdash; it&apos;s that close and that good.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> Odakyu Line from Shinjuku, ~10 min, ¥150 (~CAD $1.50)</span><span><strong>Time needed:</strong> 2&ndash;4 hrs</span><span><strong>Best day:</strong> Oct 27 afternoon or any free window</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Tsutaya Books, Ginza Six<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 22</span></div>
+    <div class="sugg-desc">One of the most beautiful bookstores in the world &mdash; 6F of Ginza Six, art books, design, architecture, travel, Japanese literature. The curation is extraordinary. Feels more like a gallery that happens to sell books. Very Becca. A slow, beautiful browse.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> Subway to Ginza, ~20 min</span><span><strong>Time needed:</strong> 1&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 22 arrival afternoon</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Akihabara<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 23</span></div>
+    <div class="sugg-desc">The holy land for retro gaming and vintage Pok&eacute;mon cards. Super Potato (3F&ndash;5F, every retro console), Mandarake Complex (8 floors, vintage Pok&eacute;mon TCG), Card Rush (Pok&eacute;mon singles), Book-Off Akihabara (cheap secondhand games and cards). Most stores open 11am. Many cash only. Loud, bright, overwhelming &mdash; and completely worth it.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> JR Chuo-Sobu from Shinjuku, ~25 min</span><span><strong>Time needed:</strong> Half day</span><span><strong>Best day:</strong> Oct 23</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">TeamLab Borderless<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 25</span></div>
+    <div class="sugg-desc">Immersive digital art experience at Azabudai Hills &mdash; no map, you wander between interconnected rooms of infinite moving light. Fully dry. Stroller manageable. Don&apos;t-miss: Forest of Resonating Lamps, Infinite Crystal Universe. Adults ¥3,200 (~CAD $30.50), under 15 free. Timed entry &mdash; book well in advance at teamlab.art.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> Subway Hibiya Line to Kamiyacho, Exit 5, ~25 min</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Oct 25</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Senso-ji (浅草寺)<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 26</span></div>
+    <div class="sugg-desc">Tokyo&apos;s oldest temple &mdash; the iconic Kaminarimon Gate with the giant red lantern, Nakamise-dori shopping street (200m, best souvenir shopping of the trip). Free, open 24 hours. Best before 9am for light and crowds &mdash; though Jem sets the pace so go when you can.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> Subway Ginza Line to Asakusa, ~30 min</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 26</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Pok&eacute;mon Center Skytree Town<span class="sugg-anchor-badge">SECONDARY &mdash; Oct 26</span></div>
+    <div class="sugg-desc">Solamachi East Yard 4F &mdash; 10-min walk from Senso-ji across the Sumida River. No queues like the DX location. 50+ restaurants at Solamachi for lunch. Optional: Skytree observation deck ¥2,100 (~CAD $20) at 350m. Natural continuation of the Oct 26 morning.</div>
+    <div class="sugg-meta"><span><strong>From Senso-ji:</strong> 10-min walk</span><span><strong>Time needed:</strong> 1&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 26</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Head Spa Kuu Omotesando<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 27</span></div>
+    <div class="sugg-desc">Tokyo&apos;s premier head spa experience &mdash; private rooms, scalp cleanse, oil treatment, full massage, blow dry. 120-min course. ~¥8,000&ndash;15,000 (~CAD $76&ndash;143). Men welcome. Google Translate works perfectly for communication. 3-min walk from Omotesando Station Exit B1. Book well in advance &mdash; likely to sell out.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> Subway to Omotesando, ~20 min</span><span><strong>Time needed:</strong> 2 hrs</span><span><strong>Best day:</strong> Oct 27</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Isetan Shinjuku Depachika<span class="sugg-anchor-badge">SECONDARY ANCHOR &mdash; Oct 28 evening</span></div>
+    <div class="sugg-desc">One of the finest food environments in the world. Isetan Shinjuku&apos;s basement food hall has hundreds of prepared foods, wagyu, sushi, bento, regional specialties, and beautifully packaged confectionery. The right place to pick up dinner, the best Japanese food gifts to take home, and the Shinkansen snacks for Oct 30. Also noted as a standing suggestion &mdash; go any evening the mood strikes throughout the Tokyo leg.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> 10-min walk</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 28 evening or any Tokyo evening</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Shibuya Crossing + PARCO<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 29 morning</span></div>
+    <div class="sugg-desc">Shibuya Scramble Crossing &mdash; 2,500+ people crossing simultaneously when the light changes. Stand in the middle or watch from Starbucks 2F Tsutaya Building above for the overhead view. Shibuya PARCO 6F: Nintendo TOKYO (exclusive merchandise) + Pok&eacute;mon Center Shibuya (life-sized Mewtwo, Pok&eacute;mon Design Lab custom t-shirt printed same day ~30 min, Graffiti Art Pikachu exclusive to this location).</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> JR Yamanote or subway to Shibuya, ~15 min</span><span><strong>Time needed:</strong> Half morning</span><span><strong>Best day:</strong> Oct 29 morning</span></div>
+  </div>
+
+  <div class="sugg-card anchor-item">
+    <div class="sugg-name">Zojoji Temple + Tokyo Tower<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 29 afternoon</span></div>
+    <div class="sugg-desc">Zojoji Temple (増上寺): ancient wooden Sangedatsumon gate with the orange tower rising directly behind it. Free. Garden of ~1,300 small Jizo statues each wearing a red knitted hat &mdash; prayers made by parents for children. A quiet, moving place to bring Jem on the last day. Tokyo Tower Main Deck (150m, ¥1,200 / ~CAD $11.50): go ~1hr before sunset for daylight, golden hour, dusk and the lit city in one visit.</div>
+    <div class="sugg-meta"><span><strong>From Shibuya:</strong> Subway Hibiya Line to Kamiyacho, ~10 min</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Oct 29 afternoon</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Don Quijote &mdash; Shinjuku</div>
+    <div class="sugg-desc">24-hour discount paradise &mdash; 40,000+ items across multiple floors: snacks, cosmetics, electronics, souvenirs, alcohol, anime goods, fresh fruit, and everything in between. Tax-free shopping with passport. The Kabukicho store is the closest to the hotel.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> 10-min walk, 5-min walk from Shinjuku Station</span><span><strong>Time needed:</strong> 30 min&ndash;2 hrs</span><span><strong>Best day:</strong> Any evening, open 24hrs</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Don Quijote &mdash; Akihabara</div>
+    <div class="sugg-desc">On the main Chuo-dori strip. Electronics, anime goods, cosplay section on 5F, AKB48 theatre on 8F. Distinctly Akihabara in character. Natural stop on Oct 23.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Akihabara main street</span><span><strong>Time needed:</strong> 30 min&ndash;1 hr</span><span><strong>Best day:</strong> Oct 23</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">MEGA Don Quijote &mdash; Shibuya</div>
+    <div class="sugg-desc">The largest Don Quijote in Tokyo &mdash; 8 floors, widest aisles, best for a relaxed browse. Near Shibuya Station. Natural stop on Oct 29.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> 5-min walk from Shibuya Station</span><span><strong>Time needed:</strong> 1 hr</span><span><strong>Best day:</strong> Oct 29</span></div>
+  </div>
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Loft (ロフト) &mdash; Shibuya Flagship<span class="sugg-highlight-badge">HIGHLIGHT</span></div>
+    <div class="sugg-desc">Japan&apos;s design-forward lifestyle chain &mdash; 6 floors of stationery (100+ pen varieties, Hobonichi planners, washi tape), cosmetics, kitchen goods, seasonal items, and Japanese character goods. Their stationery section alone deserves an hour. Best gift shopping of the trip for people back home. The Shibuya flagship is the best location.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Near Shibuya Station</span><span><strong>Time needed:</strong> 1&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 29 or any Shibuya day</span></div>
+  </div>
+
+  <div class="sugg-card highlight">
+    <div class="sugg-name">Book-Off (ブックオフ)<span class="sugg-highlight-badge">HIGHLIGHT</span></div>
+    <div class="sugg-desc">Japan&apos;s beloved secondhand chain for books, games, CDs, and trading cards including vintage Pok&eacute;mon. Prices are often surprisingly low. Multiple relevant locations: Akihabara (Oct 23, on the main strip), Nakano (near the hotel, 10 min, good for nap-time runs), Shimokitazawa (Oct 27 area). A serious hunting ground, not casual browsing.</div>
+    <div class="sugg-meta"><span><strong>Key locations:</strong> Akihabara, Nakano, Shimokitazawa</span><span><strong>Time needed:</strong> 30 min&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 23 / Oct 27 / Oct 28</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">GU (ジーユー)</div>
+    <div class="sugg-desc">Uniqlo&apos;s younger, cheaper sibling brand &mdash; trendy Japanese basics at very low prices. The cuts and sizing are different from what you&apos;d find at home. Good for picking up a few pieces without spending much. Found near most Uniqlo locations.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Near any Uniqlo</span><span><strong>Time needed:</strong> 30&ndash;45 min</span><span><strong>Best day:</strong> Any Tokyo day</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Akachan Honpo (赤ちゃん本舗) &mdash; Kinshicho</div>
+    <div class="sugg-desc">Japan&apos;s most beloved baby chain &mdash; one-stop shop for everything from diapers and formula to carriers and strollers. The Kinshicho location is on the 5F of Arcakit mall, 1-min from JR Kinshicho Station. Natural add-on to the Oct 26 day: Kinshicho is 1 stop east of Ryogoku on JR Sobu Line. If you want to browse Japanese baby goods, this is the place.</div>
+    <div class="sugg-meta"><span><strong>From Ryogoku (Oct 26):</strong> 1 stop east on JR Sobu, 1-min walk</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 26 as a Ryogoku add-on</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Izakaya Evening (居酒屋)</div>
+    <div class="sugg-desc">Japan&apos;s version of the pub &mdash; small plates, yakitori skewers, edamame, sake, beer, casual and noisy. One of the most enjoyable social experiences Japan offers as a group. Osaka izakaya culture is the strongest &mdash; go one evening in Osaka. With Becca&apos;s Cantonese and Google Translate you can navigate any izakaya. Goong Goong: grilled protein and vegetables are fine everywhere.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Everywhere. Ask hotel concierge for the nearest.</span><span><strong>Time needed:</strong> 2&ndash;3 hrs</span><span><strong>Best day:</strong> Any Osaka evening &mdash; Oct 16 or 17</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Ueno Park (上野公園) &mdash; Popo &amp; Goong Goong Parallel Path</div>
+    <div class="sugg-desc">A large flat park with a lake, Toshogu Shrine, and zoo &mdash; 10-min walk from Akihabara. On Oct 23 this is the suggested parallel activity for Popo and Goong Goong while the rest of the group is in the stores. Also serves as the Jem transfer/handoff point if the group wants to pass the baby back and forth throughout the day. They are comfortable navigating independently.</div>
+    <div class="sugg-meta"><span><strong>From Akihabara:</strong> 10-min walk</span><span><strong>Time needed:</strong> 2&ndash;4 hrs of independent exploration</span><span><strong>Best day:</strong> Oct 23</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Pok&eacute;mon Center Tokyo DX &mdash; Nihonbashi</div>
+    <div class="sugg-desc">Nihonbashi Takashimaya East Building 5F. Life-sized Snorlax photo op with Jem &mdash; read his mood before committing. Natural stop on Oct 22 arrival afternoon if the group has energy after the Shinkansen.</div>
+    <div class="sugg-meta"><span><strong>From Ginza/Tsutaya:</strong> 15-min walk or 2 subway stops</span><span><strong>Time needed:</strong> 1 hr</span><span><strong>Best day:</strong> Oct 22</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Wagyu Lunch &mdash; Ginza</div>
+    <div class="sugg-desc">Ginza Chuo-dori is lined with A5 wagyu restaurants. Oct 22 arrival-day pace is relaxed enough for a proper sit-down lunch. Walk the boulevard, look for 黒毛和牛 + A5 in the window, walk in and ask for the lunch teishoku. Walk-in lunch sets ¥4,000&ndash;8,000 (~CAD $38&ndash;76) per person. No advance booking needed for lunch.</div>
+    <div class="sugg-meta"><span><strong>Location:</strong> Ginza Chuo-dori</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 22</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Ryogoku &mdash; Sumo Culture</div>
+    <div class="sugg-desc">The spiritual home of sumo in Tokyo. Sumo Museum inside Kokugikan arena (free). Edo Noren in the old Ryogoku Station building &mdash; small sumo ring inside, restaurants, walk in no booking. JR Sobu Line from near Skytree, ~10 min.</div>
+    <div class="sugg-meta"><span><strong>From Skytree:</strong> JR Sobu Line ~10 min</span><span><strong>Time needed:</strong> 1&ndash;1.5 hrs</span><span><strong>Best day:</strong> Oct 26 afternoon</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Tokyo Metropolitan Government Building</div>
+    <div class="sugg-desc">Free observation deck at 202m &mdash; 1-min walk from Keio Plaza Hotel. Open until 10:30pm (South Tower). One of the best free views in Tokyo. Go spontaneously any evening after dinner.</div>
+    <div class="sugg-meta"><span><strong>From Keio Plaza:</strong> 1-min walk</span><span><strong>Time needed:</strong> 45 min</span><span><strong>Best day:</strong> Any clear Tokyo evening</span></div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<div id="tab-phrases" class="tab-content">
+  <div class="phrase-sh">JAPANESE &mdash; ESSENTIAL</div>
+
+  <div class="phrase-card phrase-urgent">
+    <div class="phrase-top"><span class="phrase-roman">Mayo nashi de onegaishimasu</span><span class="phrase-native" style="color:#f87171">マヨネーズなしでお願いします</span></div>
+    <div class="phrase-meaning">No mayonnaise please &mdash; Becca&apos;s critical phrase</div>
+    <div class="phrase-tip">&#128680; Say before ordering ANYTHING in Japan. Kewpie mayo is hidden in: takoyaki, okonomiyaki, convenience store sandwiches, potato salad, many sauces. Non-negotiable.</div>
+  </div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Sumimasen</span><span class="phrase-native" style="color:#f87171">すみません</span></div><div class="phrase-meaning">Excuse me / Sorry &mdash; use constantly</div><div class="phrase-tip">Opens every door. Say before asking anyone anything.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Arigatou gozaimasu</span><span class="phrase-native" style="color:#f87171">ありがとうございます</span></div><div class="phrase-meaning">Thank you (formal)</div><div class="phrase-tip">Say with a slight bow. People genuinely light up.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Junyuushitsu wa arimasu ka?</span><span class="phrase-native" style="color:#f87171">授乳室はありますか？</span></div><div class="phrase-meaning">Is there a nursing room?</div><div class="phrase-tip">Every department store has one. Staff will lead you immediately. Look for 赤ちゃん休憩室 signs.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kore wa ikura desu ka?</span><span class="phrase-native" style="color:#f87171">これはいくらですか？</span></div><div class="phrase-meaning">How much is this?</div><div class="phrase-tip">Point at the item. Works anywhere.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Toire wa doko desu ka?</span><span class="phrase-native" style="color:#f87171">トイレはどこですか？</span></div><div class="phrase-meaning">Where is the toilet?</div><div class="phrase-tip">Japan has the best toilets on earth. Ask freely.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Watashi wa tounyoubyou desu</span><span class="phrase-native" style="color:#f87171">私は糖尿病です</span></div><div class="phrase-meaning">I am diabetic &mdash; Goong Goong&apos;s card phrase</div><div class="phrase-tip">Print on a small card. Show at restaurants and clinics. Japanese medical staff will respond immediately and helpfully.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kuroge Wagyu / A5</span><span class="phrase-native" style="color:#f87171">黒毛和牛 / A5</span></div><div class="phrase-meaning">Black wagyu / highest grade &mdash; look for on restaurant windows</div><div class="phrase-tip">Walk in and ask for the lunch teishoku set. Best value of the trip.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kusushon wa arimasu ka?</span><span class="phrase-native" style="color:#f87171">クッションはありますか？</span></div><div class="phrase-meaning">Do you have a cushion? (for Jem at restaurants)</div><div class="phrase-tip">Most Japanese restaurants have booster cushions for babies. Just ask.</div></div>
+
+  <div class="phrase-sh" style="margin-top:24px">CANTONESE &mdash; ESSENTIAL</div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">M&agrave;h-g&#333;i</span><span class="phrase-native" style="color:#facc15">唔該</span></div><div class="phrase-meaning">Excuse me / Thank you for service</div><div class="phrase-tip">Most used phrase in HK. Say it constantly.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">D&#333;-jeh</span><span class="phrase-native" style="color:#facc15">多謝</span></div><div class="phrase-meaning">Thank you for gifts or compliments</div><div class="phrase-tip">Different from m&agrave;h-g&#333;i &mdash; for receiving something.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Gei d&#333; ch&iacute;n?</span><span class="phrase-native" style="color:#facc15">幾多錢？</span></div><div class="phrase-meaning">How much?</div><div class="phrase-tip">Markets love this. Cantonese speakers in the group handle the bargaining.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">H&oacute;u sihk!</span><span class="phrase-native" style="color:#facc15">好食！</span></div><div class="phrase-meaning">Delicious!</div><div class="phrase-tip">Say at any meal. Locals beam with pride.</div></div>
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">N&iacute; h&oacute;</span><span class="phrase-native" style="color:#c4b5fd">你好</span></div><div class="phrase-meaning">Hello &mdash; Mandarin, use in Shenzhen</div><div class="phrase-tip">HK: use Cantonese. Shenzhen: Mandarin is the norm.</div></div>
+</div>
+
+<div id="tab-tips" class="tab-content">
+  <div class="cad-ref">
+    <span class="cad-title">CAD QUICK REFERENCE &mdash; ¥1,000 &asymp; CAD $9.50</span>
+    <div class="cad-grid">
+      <span class="cad-item">¥500 &asymp; CAD $4.75</span>
+      <span class="cad-item">¥1,000 &asymp; CAD $9.50</span>
+      <span class="cad-item">¥2,000 &asymp; CAD $19</span>
+      <span class="cad-item">¥3,000 &asymp; CAD $28.50</span>
+      <span class="cad-item">¥5,000 &asymp; CAD $47.50</span>
+      <span class="cad-item">¥10,000 &asymp; CAD $95</span>
+      <span class="cad-item">¥13,820 &asymp; CAD $131 (Shinkansen)</span>
+      <span class="cad-item">HK$100 &asymp; CAD $18</span>
+    </div>
+  </div>
+
+  <div class="section-card"><div class="section-title">MONEY</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tax-free shopping Japan:</strong> Purchases over ¥5,500 (~CAD $52) get 10% back. Bring passports everywhere. Works at Don Quijote, Uniqlo, Muji, Loft, Hands, most department stores. Present passport at the tax-free counter.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Hong Kong:</strong> Octopus Card for all transit. Buy at HKG arrivals. Cards accepted everywhere.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shenzhen:</strong> Cashless &mdash; WeChat Pay essential. Set up and test before crossing. Download WeChat and link a Canadian credit card beforehand.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japan:</strong> Cash still widely used. Carry ¥30,000 (~CAD $285) at all times. 7-Eleven ATMs accept international cards reliably.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Suica:</strong> Load on Apple/Google Wallet before landing. Covers all Japan trains, convenience stores, and vending machines. Tap to pay everywhere.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>JR Pass:</strong> Calculate value at japan-guide.com/e/e2361.html before buying. Nozomi Shinkansen NOT covered &mdash; use Hikari if on a pass.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">KONBINI (CONVENIENCE STORES) &#9733;</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>7-Eleven, FamilyMart, and Lawson in Japan are extraordinary &mdash; nothing like back home. Hot food, fresh onigiri, beautiful sandwiches, pastries, ramen, hot soup, beer, sake, wine.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>For Jem:</strong> Merries diapers (メリーズ) available at virtually every konbini &mdash; the best diaper in the world. Formula, baby food, wet wipes all stocked.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Services:</strong> ATM (7-Eleven accepts international cards), Suica top-up, luggage forwarding (takuhaibin), package pickup, ticket printing, photocopying.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>There is a konbini within 50 metres of wherever you are at all times in Japan. Use them constantly. You will spend a lot of time in these.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">VENDING MACHINES (自動販売機)</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Japan has 5 million vending machines. Hot coffee, cold coffee, cold drinks, hot soup, green tea, beer, snacks, umbrellas &mdash; all from machines on every corner.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>BOSS canned coffee (hot) and Georgia canned coffee are iconic. ¥130&ndash;160 (~CAD $1.25&ndash;1.50). The hot can in your hands on a cold Kyoto morning is a genuine pleasure.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>If you want a drink, look left or right &mdash; there is a machine within 50 metres.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">LUGGAGE FORWARDING (宅配便 / TAKUHAIBIN)</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Send bags between hotels overnight &mdash; ~¥1,500&ndash;2,500 (~CAD $14&ndash;24) per bag. Arrives next day before you do.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Essential on Oct 21 evening:</strong> Send heavy bags from MIMARU Kyoto to Keio Plaza Tokyo before the Oct 22 Shinkansen. Travel light on the train.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Before Oct 30:</strong> Send large/heavy bags to Haneda Airport (HND) on Oct 29 &mdash; they arrive before you do on Oct 30 departure day.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Book at hotel front desk or any konbini. Yamato Transport (黒猫) and Sagawa are the main services. Japan Post also works.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">DEPACHIKA (デパ地下) &mdash; DEPARTMENT STORE BASEMENTS &#9733;</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>The most extraordinary food environments in the world. Department store basement food halls have hundreds of prepared foods, A5 wagyu, sushi, regional bento, confectionery, and beautifully packaged Japanese food gifts.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Isetan Shinjuku:</strong> 10-min walk from Keio Plaza. Considered one of the finest depachika in Japan. Secondary anchor for Oct 28 evening &mdash; pick up dinner and the best food gifts to take home.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Kyoto Station basement:</strong> Where to buy ekiben before the Oct 22 Shinkansen &mdash; one of the great small pleasures of Japan travel.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">WAGYU 黒毛和牛</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Look for 黒毛和牛 (Kuroge Wagyu) + A4/A5 on restaurant windows. Walk in and ask for the lunch teishoku. No advance booking needed for lunch at most spots.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Lunch is 30&ndash;50% cheaper than dinner for the same beef. Sit-down yakiniku lunch set ~¥3,000&ndash;8,000 (~CAD $29&ndash;76) per person depending on restaurant.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Do NOT go for market skewers at Nishiki, Asakusa, Kuromon etc &mdash; tourist-priced (¥3,000&ndash;6,000 per skewer). Locals never eat there.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Best opportunity:</strong> Osaka Oct 14 after Kuromon Market (Kobe is next door). Also noted Ginza Oct 22.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">&#127798; BECCA &mdash; MAYO AVOIDANCE</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Say before EVERY order:</strong> &ldquo;Mayo nashi de onegaishimasu&rdquo; (マヨネーズなしでお願いします)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>High risk:</strong> Takoyaki, okonomiyaki, convenience store sandwiches, potato salad, many yakisoba dishes, tartar sauce</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Safe:</strong> Sushi, most ramen, yakitori, udon, soba, wagyu yakiniku, most sashimi, grilled fish</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span>HK and Shenzhen: no mayo issue &mdash; Cantonese cuisine doesn&apos;t use it</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">&#127793; GOONG GOONG</div>
+    <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Carry glucose tablets and medications in carry-on at all times. Print Japanese medical card: 私は糖尿病です</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Travel insurance: confirm condition is declared on the policy.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">&#9928; OCTOBER WEATHER</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Hong Kong (Oct 4&ndash;13):</strong> Warm and humid, ~28&deg;C. No jacket needed during the day. Light layers for evening air conditioning.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Osaka / Kyoto (Oct 13&ndash;22):</strong> Cooling. ~18&ndash;22&deg;C days, 13&ndash;16&deg;C evenings. Light jacket essential. Some rain likely &mdash; pack a compact umbrella.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tokyo (Oct 22&ndash;30):</strong> Genuinely cool by late October. ~15&ndash;18&deg;C days, 10&ndash;13&deg;C evenings. Layers essential. One warmer layer (light puffer or fleece) needed for evenings.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Rain:</strong> October Osaka/Kyoto can bring rain. Arashiyama and Fushimi Inari in rain are genuinely beautiful &mdash; the atmosphere changes, crowds thin, the colour is extraordinary. Rain is not a reason to cancel anything. Covered arcades on most major shopping streets.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>For Jem:</strong> October Japan evenings are cool enough to need an extra layer for a baby. Carry a light blanket or warm layer for stroller use in the evenings.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">GETTING AROUND</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>HK MTR:</strong> World-class. Octopus Card covers everything. Stroller-friendly elevators at most stations.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shenzhen Metro:</strong> Excellent. WeChat Pay for fares. NordVPN active before crossing.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shinkansen Oct 22:</strong> LEFT side going east for Mt Fuji, ~40 min after Kyoto departure. Buy ekiben in Kyoto Station basement first.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tokyo Suica:</strong> One card covers every subway and JR line. Load on Apple/Google Wallet.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shoes:</strong> Slip-on throughout Japan &mdash; off at restaurants, temples, ryokans, onsen.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">EARLY MORNINGS</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Senso-ji, Fushimi Inari, and Arashiyama Bamboo Grove are all best before 9am for light and smallest crowds. This is the ideal timing. Jem sets the actual pace &mdash; go when you can and enjoy it regardless.</span></div>
+  </div>
+  <div class="section-card"><div class="section-title">EARTHQUAKES</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Japan averages several small tremors per month. Keio Plaza, MIMARU, and Hinode Hotel are all modern buildings with excellent seismic engineering &mdash; no real concern.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>If a tremor happens:</strong> Stay indoors. Get under a sturdy table. Do not run outside. Motion stops within 30&ndash;60 seconds in most cases.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>J-Alert:</strong> Japan's earthquake early warning system sends an alarm to every phone in the area before shaking starts. It is extremely loud and startling if you've never heard it — now you know. Don't panic. Follow the instructions above.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>For Jem: hold him close and get under the table together. Japanese hotels have earthquake protocols &mdash; follow any instructions from hotel staff.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">CONNECTIVITY</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>HK SIM:</strong> Buy at 7-Eleven in HKG arrivals hall on landing.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>NordVPN:</strong> Connect on HK side BEFORE crossing into Shenzhen. Cannot configure inside China.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japan SIM / pocket WiFi:</strong> Buy at KIX arrivals counter before leaving the airport.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>WeChat Pay:</strong> Set up on HK side. Test before the Shenzhen border.</span></div>
+  </div>
+</div>
+
+<div id="tab-packing" class="tab-content">
+  <div class="section-card"><div class="section-title">JEM (BABY ESSENTIALS)</div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>~20 diapers for the flights &mdash; buy Merries (メリーズ) at any Japanese konbini on arrival. Best diaper in the world.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Baby carrier (Ergobaby or similar) &mdash; essential for temples, stairs, narrow markets, crowds</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Portable white noise machine or downloaded app &mdash; same sleep environment every night</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Travel blackout blind (Slumberpod, SnoozeShade, or black bin bags + gaffer tape) &mdash; Japan in October has sunrise ~5:45am. Japanese hotel curtains are often thin. Makes a real difference to nap quality.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Sleep sack &mdash; familiar sleep cue across every hotel</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>2+ changes of clothes per day accessible in carry-on, not buried in checked bags</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Formula/baby food: enough for flights + 1-day buffer. Buy locally after.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Stroller rain cover &middot; Baby Tylenol, Advil, thermometer &middot; Nursing cover</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Extra warm layer for Jem for Tokyo evenings (10&ndash;13&deg;C)</span></div>
+  </div>
+  <div class="section-card"><div class="section-title">CLOTHES (EACH ADULT)</div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>7 tops, 3 bottoms &mdash; coin laundry everywhere in Japan (~¥500/load / ~CAD $5)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>1 smart outfit for wagyu / nicer restaurants</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Comfortable walking shoes &mdash; 20,000+ steps daily</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Slip-on shoes &mdash; off at temples, restaurants, onsen throughout Japan</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Rain jacket &mdash; October Osaka/Kyoto can be rainy</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Warm layer for Tokyo evenings &mdash; light puffer or fleece. 10&ndash;13&deg;C at night.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Light layers for Osaka/Kyoto transition (18&ndash;22&deg;C days, 13&ndash;16&deg;C evenings)</span></div>
+  </div>
+  <div class="section-card"><div class="section-title">HEALTH &amp; DOCUMENTS</div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>All prescriptions &mdash; double the trip length in supply</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Goong Goong: glucose tablets, medication, doctor&apos;s note in English, printed Japanese diabetes card</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Travel insurance for all 5 &mdash; Goong Goong&apos;s diabetes noted on application</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Passports for all 5 including Jem &mdash; scanned copies emailed to yourself</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>HK/Shenzhen adapter: Type G (UK 3-pin). Japan: Type A &mdash; same as Canada, no adapter needed.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#3fb950">&#9744;</span><span>Portable battery pack &middot; Noise-cancelling headphones &middot; Google Photos auto-backup enabled</span></div>
+  </div>
+</div>
+
+<div id="tab-todo" class="tab-content">
+  <div class="section-card done"><div class="section-title green">DONE</div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-0"><div class="todo-checkbox">✓</div><span class="todo-text">Nintendo Accounts created &mdash; all 5 (Micheal, Becca, Popo, Goong Goong, Jem)</span></div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-1"><div class="todo-checkbox">✓</div><span class="todo-text">NordVPN &mdash; installed and ready</span></div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-2"><div class="todo-checkbox">✓</div><span class="todo-text">China visa &mdash; not required for Canadians under 30 days</span></div>
+  </div>
+
+  <div class="section-card urgent"><div class="section-title red">DO THIS NOW</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-3"><div class="todo-checkbox"></div><span class="todo-text"><strong>Book Head Spa Kuu Omotesando</strong> for Oct 27 &mdash; private rooms, sells out. Book for all who want one. headspatokyo.com or search &ldquo;Kuu Omotesando&rdquo;</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-4"><div class="todo-checkbox"></div><span class="todo-text"><strong>🔴 Book rental crib for Osaka</strong> &mdash; Hinode Hotel does not provide cribs. Book via momomamajp.com or lileo.com for Oct 13–18. Also call hotel to ask about onsen spring water mineral type for Jem.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-5"><div class="todo-checkbox"></div><span class="todo-text"><strong>Set up WeChat Pay</strong> &mdash; link Canadian credit card, test before Shenzhen crossing</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">JULY 31 &mdash; NINTENDO MUSEUM LOTTERY</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-6"><div class="todo-checkbox"></div><span class="todo-text"><strong>All 5 accounts submit lottery entries</strong> at museum-tickets.nintendo.com on July 31. Target quiet weekday afternoon slots for Oct 20. Results arrive August 1.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-7"><div class="todo-checkbox"></div><span class="todo-text">If unsuccessful: monitor for cancellation tickets daily from September onward</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">AUGUST &mdash; BOOKING MONTH</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-8"><div class="todo-checkbox"></div><span class="todo-text">Book all flights: YYZ&rarr;HKG (Oct 3), HKG&rarr;KIX (Oct 13), HND&rarr;YYZ (Oct 30). Popo &amp; Goong Goong: LHR&rarr;HKG arriving before Oct 4.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-bassinet"><div class="todo-checkbox"></div><span class="todo-text"><strong>Immediately after booking each flight:</strong> Call the airline directly to request bassinet seats (front bulkhead row) for Jem. Cannot be done through third-party booking sites — must call or use the airline's Manage Booking portal. Cathay Pacific: 1-800-268-6868. Confirm weight limit for Jem (typically ~10kg).</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-9"><div class="todo-checkbox"></div><span class="todo-text">Book all hotels &mdash; 2 rooms each, request cribs, request connecting/same-floor rooms. Bassinet seats on all flights for Jem.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-10"><div class="todo-checkbox"></div><span class="todo-text"><strong>Hinode Hotel Osaka:</strong> Call to pre-book 2 recurring private onsen slots for 5-night stay. 1 guaranteed minimum, 2 ideally. Confirm crib and water mineral type.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-11"><div class="todo-checkbox"></div><span class="todo-text"><strong>Keio Plaza Tokyo:</strong> Request Happy Baby Stay Package at booking — mention Jem&apos;s age (born April 17 2026, arrives at 6 months). Request crib at booking. Jem is well within the under-10-months policy.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-12"><div class="todo-checkbox"></div><span class="todo-text"><strong>TeamLab Borderless:</strong> teamlab.art &mdash; timed entry, sells out. Book for Oct 25.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-13"><div class="todo-checkbox"></div><span class="todo-text"><strong>Nijo Castle private guided tour (Oct 19):</strong> Magical Trip or Viator &mdash; mention baby in carrier and senior guests</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-14"><div class="todo-checkbox"></div><span class="todo-text"><strong>Shinkansen Oct 22:</strong> Reserved seats Kyoto&rarr;Tokyo via smart-ex.jp. LEFT side going east for Fuji views.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-15"><div class="todo-checkbox"></div><span class="todo-text"><strong>Sumo experience Osaka (Oct 15):</strong> Airbnb Experiences or Voyagin &mdash; search &ldquo;sumo Osaka&rdquo;, book evening slot</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-16"><div class="todo-checkbox"></div><span class="todo-text">Travel insurance all 5 &mdash; note Goong Goong&apos;s diabetes on application</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-17"><div class="todo-checkbox"></div><span class="todo-text">Calculate JR Pass value at japan-guide.com/e/e2361.html</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">OCTOBER &mdash; JAPAN SERIES TICKETS</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-18"><div class="todo-checkbox"></div><span class="todo-text">Monitor from Oct 10 when Climax Series starts. Japan Series participants known by ~Oct 18.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-19"><div class="todo-checkbox"></div><span class="todo-text">Buy tickets via ticketsinjapan.com or StubHub as soon as finalists known. Move fast. Budget CAD $70&ndash;185/person resale.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-20"><div class="todo-checkbox"></div><span class="todo-text"><strong>If Tigers win CL:</strong> Likely skip Games 1&amp;2 at Koshien. Watch for Game 3 &mdash; if Pacific League finalist is Lions (Saitama, 50 min) or Marines (Chiba, 60 min), Game 3 near Tokyo is worth going for.</span></div>
+  </div>
+
+  <div class="section-card"><div class="section-title">BEFORE YOU GO</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-vjw"><div class="todo-checkbox"></div><span class="todo-text"><strong>Visit Japan Web:</strong> Register all 5 travellers at vjw-lp.digital.go.jp before flying to KIX. Digital arrival card — replaces the paper form. Complete in the airport lounge or on the plane before landing.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-21"><div class="todo-checkbox"></div><span class="todo-text">Download Google Maps offline: HK, Osaka, Kyoto, Tokyo</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-22"><div class="todo-checkbox"></div><span class="todo-text">Download Google Translate offline packs: Japanese + Cantonese</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-23"><div class="todo-checkbox"></div><span class="todo-text"><strong>Suica setup:</strong> Android users — open Google Pay → + → Transit card → Suica. No region switching needed. iPhone users — easiest to buy physical Suica cards at KIX arrivals (¥500 deposit each, load ¥3,000–5,000) rather than dealing with App Store region switching. Physical cards work on every train, bus, and konbini in Japan.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-24"><div class="todo-checkbox"></div><span class="todo-text">Print Goong Goong&apos;s Japanese diabetes card: 私は糖尿病です</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-25"><div class="todo-checkbox"></div><span class="todo-text">Confirm crib at every Japan hotel 2 weeks before arrival</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-26"><div class="todo-checkbox"></div><span class="todo-text">Notify banks of travel dates for all 3 countries</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-27"><div class="todo-checkbox"></div><span class="todo-text">Test NordVPN. Connect before stepping into Shenzhen.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-28"><div class="todo-checkbox"></div><span class="todo-text">Keep Jem&apos;s passport accessible at every border for stamps</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-29"><div class="todo-checkbox"></div><span class="todo-text">Carry passports everywhere in Japan for tax-free shopping</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="todo-30"><div class="todo-checkbox"></div><span class="todo-text">Google Photos auto-backup enabled on all phones</span></div>
+  </div>
+</div>
+
+<div id="tab-hotels" class="tab-content">
+<style>
+.hotel-card{margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.hotel-header{padding:16px 18px 12px;border-bottom:1px solid var(--border);}
+.hotel-city-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;padding:2px 10px;border-radius:999px;margin-bottom:8px;display:inline-block;}
+.hotel-name{font-size:17px;color:var(--text);margin-bottom:3px;line-height:1.3;}
+.hotel-sub{font-size:12px;color:var(--dim);font-family:'DM Mono',monospace;}
+.hotel-body{padding:16px 18px;}
+.hotel-section-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);display:block;margin-bottom:8px;}
+.hotel-section-label.green{color:#34d399;}.hotel-section-label.red{color:#f87171;}
+.hotel-why{font-size:13px;color:var(--muted);line-height:1.75;font-style:italic;background:rgba(167,139,250,0.07);border-left:2px solid var(--accent);padding:10px 14px;border-radius:0 6px 6px 0;margin-bottom:12px;}
+</style>
+
+  <!-- HK NIGHT 1 -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong &mdash; Night 1</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">Budget Hotel &mdash; Mong Kok / Yau Ma Tei</div>
+      <div class="hotel-sub">Near MTR Mong Kok East Station / East Rail Line &middot; Oct 4 only &middot; 1 night</div>
+      <div class="hotel-dates">Check-in: typically 3:00pm &middot; Check-out: 12:00pm &middot; Varies by property — confirm when booking</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">One night, sleeping only. The entire point of this location is the East Rail Line &mdash; Mong Kok East Station is directly on the line to Lo Wu border crossing for Shenzhen the next morning. Any clean, reasonably priced hotel near the MTR works. Options: iclub Mong Kok Hotel (cribs available, well-reviewed), Metropark Hotel Mongkok (Cross-Boundary Coach Terminal next door, 2-min to Prince Edward MTR). Book whatever is cheapest and available.</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Request crib for Jem at whichever hotel you book</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Must be near MTR East Rail Line for easy Lo Wu crossing Oct 5 morning</span></div>
+    </div>
+  </div>
+
+  <!-- SHENZHEN -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.35);color:#c4b5fd">Shenzhen</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">Holiday Inn Shenzhen Donghua by IHG</div>
+      <div class="hotel-sub">No. 2307 Donghua Park, Nanhai Road, Nanshan District &middot; ~CAD $61/night &middot; Oct 5&ndash;7 &middot; 2 nights</div>
+      <div class="hotel-dates">Check-in: 2:00pm &middot; Check-out: 12:00pm</div>
+      <div class="hotel-dates">Oct 5 &rarr; Oct 7 &middot; 2 nights</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">5-minute walk from Nanyou Fashion Market &mdash; the main reason you&apos;re staying in Shenzhen. IHG brand means reliable English-friendly booking, confirmed crib availability, and no surprises. Indoor heated pool and sauna are a genuine bonus for a family with a baby and grandparents. Atour Light Hotel is slightly cheaper and literally inside the market district, but does not have cribs &mdash; Holiday Inn is the right call with Jem.</div>
+      <div class="hotel-section-label">AMENITIES</div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Indoor heated swimming pool &middot; children&apos;s pool area &middot; sauna and steam room</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Cribs available on request &mdash; confirm at booking</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>3 on-site restaurants (Chinese and Western) &middot; free WiFi &middot; gym</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Metro Line 9 at hotel entrance &middot; Metro Lines 11 &amp; 12 at Nanshan Station, 550m walk</span></div>
+      <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nanyou Fashion Market: 5-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shenzhen Bay Port: 10-min drive &middot; Shekou Ferry Terminal: 15-min drive</span></div>
+      <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at ihg.com &middot; Accepts WeChat Pay on-site &middot; Request cribs at booking</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Declare all 5 guests including Jem &mdash; required by Chinese law</span></div>
+    </div>
+  </div>
+
+  <!-- HK MAIN -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">Holiday Inn Golden Mile &mdash; recommended</div>
+      <div class="hotel-sub">50 Nathan Road, Tsim Sha Tsui, Kowloon &middot; Tel: +852 2369 3111 &middot; holidayinn.com</div>
+      <div class="hotel-dates">Oct 7 &rarr; Oct 13 &middot; 6 nights &middot; 2 rooms &middot; Check-in: 3:00pm &middot; Check-out: 12:00pm</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">Right on Nathan Road &mdash; Temple Street Night Market 5 minutes on foot, TST waterfront and Symphony of Lights promenade 10 minutes, Jordan MTR directly below for every day trip. Solid mid-range international brand with no surprises, crib available on request. You&apos;re not spending much time in the room in HK &mdash; the neighbourhood is what counts, and this location delivers it.</div>
+      <div class="hotel-section-label">AMENITIES</div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Harbour-view and city-view rooms &mdash; request harbour-view at booking</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Crib available on request for Jem &mdash; confirm at booking and again 2 weeks before</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Restaurant &middot; Room service &middot; Concierge &middot; IHG One Rewards points</span></div>
+      <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Temple Street Night Market: 5-min walk north</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>TST waterfront / Symphony of Lights: 10-min walk east</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Jordan MTR Station: 2-min walk &middot; Harbour City (nursing room): 15-min walk</span></div>
+      <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book 2 rooms: Micheal, Becca &amp; Jem / Popo &amp; Goong Goong &mdash; request same floor or connecting</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at holidayinn.com or IHG app</span></div>
+    </div>
+  </div>
+
+  <!-- OSAKA -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(234,88,12,0.15);border:1px solid rgba(234,88,12,0.35);color:#fb923c">Osaka</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">Hot Spring Hinode Hotel Nipponbashi</div>
+      <div class="hotel-sub">1-7-16 Nipponbashi, Naniwa-ku, Osaka &middot; Tel: +81 6-6641-0303 &middot; hinode-hotel.com</div>
+      <div class="hotel-dates">Oct 13 &rarr; Oct 18 &middot; 5 nights &middot; Check-in: 3:00pm &middot; Check-out: 11:00am</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">Chosen specifically for the private family onsen (家族風呂) &mdash; a natural hot spring bath you book by the hour as a completely private room. All five including Jem can go together, tattoo rules don&apos;t apply, and you control everything. The hotel sits directly in Shinsekai, one of the most atmospheric and local neighbourhoods in Osaka, with Den Den Town a 15-minute walk for casual evenings. Complimentary ramen nightly and free drinks all day are genuinely useful with a baby and grandparents in tow.</div>
+      <div class="hotel-section-label">AMENITIES</div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Private family onsen (家族風呂 / Kazoku Buro):</strong> Natural hot spring. Private rooms by the hour. All 5 including Jem. Book at check-in &mdash; slots go fast. Pre-book by calling ahead.</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Complimentary ramen 9&ndash;11pm nightly &middot; Free alcohol, coffee, tea, juice all day &middot; Daily cultural activity</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>🔴 CRIB: Booking.com lists no cribs available at this property.</strong> Book a rental crib via momomamajp.com or lileo.com immediately after confirming your Osaka dates — BabyBjörn travel crib delivered directly to the hotel. Do not rely on the hotel for this.</span></div>
+      <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shinsekai neighbourhood: right outside &middot; Den Den Town: 15-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nipponbashi Subway Station: 2-min walk &middot; Dotonbori/Namba: 15-min walk or 5-min subway</span></div>
+      <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Call ahead to: (1) confirm crib availability, (2) ask water mineral type for Jem, (3) pre-book 2 recurring onsen slots for 5-night stay (1 guaranteed min, 2 ideally)</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at hinode-hotel.com or Booking.com &middot; Declare all 5 guests including Jem</span></div>
+    </div>
+  </div>
+
+  <!-- KYOTO -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.35);color:#4ade80">Kyoto</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">MIMARU Kawaramachi</div>
+      <div class="hotel-sub">Kawaramachi area, Shimogyo-ku, Kyoto &middot; mimaru.net/en &middot; Tel: +81 75-353-0003</div>
+      <div class="hotel-dates">Oct 18 &rarr; Oct 22 &middot; 4 nights &middot; Check-in: 3:00pm–10:00pm &middot; Check-out: 11:00am</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">Apartment-style rooms with a separate living area and kitchenette &mdash; significantly more practical for a family of 5 with a baby than standard hotel rooms. MIMARU guarantees cribs for children under 24 months chain-wide, removing the biggest logistical uncertainty. The Kawaramachi location puts Nishiki Market and Pok&eacute;mon Center Kyoto within a 5-minute walk and gives subway access to everything else. A washing machine in-unit is extremely useful over a 4-night stay with a baby.</div>
+      <div class="hotel-section-label">AMENITIES</div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Crib guaranteed for children under 24 months</strong> &mdash; confirmed chain-wide policy. Request at booking.</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Apartment-style rooms with kitchenette &middot; Washing machine in-unit (select room types) &middot; Separate living area</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Free coffee 7&ndash;11am &middot; Free soft drinks 3&ndash;9pm &middot; Small play area in lobby</span></div>
+      <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nishiki Market: 5-min walk &middot; Pok&eacute;mon Center Kyoto (SUINA Muromachi): 5-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Gion: 10-min walk east &middot; Kyoto Station (for Nintendo Museum / Shinkansen): 15-min subway</span></div>
+      <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Request crib at booking (policy guarantees it &mdash; still confirm in writing) &middot; Select room type with washing machine</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at mimaru.net for best rate &middot; Send bags here from Hinode Hotel Osaka the day before</span></div>
+    </div>
+  </div>
+
+  <!-- TOKYO -->
+  <div class="hotel-card">
+    <div class="hotel-header">
+      <div><span class="hotel-city-tag" style="background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.35);color:#f87171">Tokyo</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div class="hotel-name">Keio Plaza Hotel Tokyo</div>
+      <div class="hotel-sub">2-2-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo &middot; keioplaza.com &middot; Tel: +81 3-5322-8000</div>
+      <div class="hotel-dates">Oct 22 &rarr; Oct 30 &middot; 8 nights &middot; Check-in: 3:00pm &middot; Check-out: 11:00am</div>
+    </div>
+    <div class="hotel-body">
+      <div class="hotel-why">Same Nishi-Shinjuku neighbourhood as the Hyatt &mdash; Nakano Broadway is still a 10-minute walk, making spontaneous solo runs during Jem&apos;s nap times genuinely practical. Meaningfully cheaper than the Hyatt. The <strong>Happy Baby Stay Package</strong> is a genuine draw: designed by hotel staff with childcare experience since 2012, it includes a baby bottle sanitizing kit, baby bath equipment, and special unscented/additive-free toiletries for both parents and Jem. In-house childcare (~¥7,776 / ~CAD $74 for 2.5hrs) if a rare adults-only evening comes up. Sky Plaza Ibasho soft play area inside the hotel. The Tokyo Metropolitan Government Building free observation deck is a 1-minute walk.</div>
+      <div class="hotel-section-label">AMENITIES</div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Happy Baby Stay Package:</strong> baby bottle sanitizing kit, baby bath equipment, unscented/additive-free toiletries. Request explicitly at booking &mdash; mention Jem&apos;s age (0&ndash;2 years).</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>In-house childcare:</strong> ~¥7,776 (~CAD $74) for 2.5hrs &middot; Sky Plaza Ibasho soft play area (¥2,000 / ~CAD $19 entry)</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>9 restaurants &middot; 45F breakfast highly reviewed &middot; Coin laundry &middot; 7-Eleven inside the building &middot; Concierge &middot; Free WiFi</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Crib note:</strong> Under-10-months policy. Jem arrives at ~9.5 months &mdash; borderline. Call +81 3-5322-8000 to confirm, or book rental crib: momomamajp.com or lileo.com</span></div>
+      <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nakano Broadway: 10-min walk (lace-up-and-go during nap times)</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Tokyo Metropolitan Government Building (free observation deck): 1-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shinjuku Station (all lines): 5-min walk &middot; Shinjuku Gyoen: 10-min walk &middot; Isetan Shinjuku depachika: 10-min walk</span></div>
+      <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Request Happy Baby Stay Package &middot; Request 2 rooms, connecting or same floor &middot; Confirm crib or book rental backup</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Confirm Keikyu Line route to HND before departure: JR Yamanote to Shinagawa, then Keikyu Airport Express to HND International Terminal (~35min total)</span></div>
+      <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at keioplaza.com &middot; Declare all 5 guests including Jem</span></div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-jem" class="tab-content">
+  <div class="jem-onsen-box">
+    <span class="jem-onsen-title">&#128705; JEM&apos;S FIRST ONSEN &mdash; READ BEFORE YOU GO</span>
+    <p style="font-size:13px;color:#c7d2fe;line-height:1.75;margin-bottom:10px">6 months is the right age for a private family bath. The private room at Hinode Hotel means no hygiene concerns and you control everything. The warmth and sensory experience will likely fascinate him completely.</p>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span style="font-size:13px;color:#e0e7ff"><strong>Cool the water to ~37&ndash;38&deg;C before Jem enters.</strong> Standard onsen runs 40&ndash;43&deg;C which is too hot for his skin. Ask staff to run it cooler, or add cold water on arrival.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span style="font-size:13px;color:#e0e7ff">Maximum <strong>5&ndash;10 minutes</strong> in the water. Don&apos;t let the relaxation extend his time in.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span style="font-size:13px;color:#e0e7ff">No face or head in the water. Rinse with fresh water after.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span style="font-size:13px;color:#e0e7ff">When calling Hinode Hotel: confirm the spring mineral type is mild (sodium chloride type is fine &mdash; avoid high sulphur or strong acidity).</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#818cf8">&#8594;</span><span style="font-size:13px;color:#e0e7ff">No diapers or swim diapers allowed in the bath water &mdash; remove before entering. Rinse Jem thoroughly beforehand.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.2)">
+    <div class="section-title green">JEM &mdash; QUICK REFERENCE</div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Diapers:</strong> ~20 on the plane. Buy Merries (メリーズ) at any Japanese konbini on arrival &mdash; best diaper in the world. Local brands in HK and Shenzhen on arrival.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Nursing rooms Japan:</strong> Say 授乳室はありますか？ &mdash; every department store has one. Look for 赤ちゃん休憩室 signs. Staff will lead you immediately.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Nursing rooms HK:</strong> Harbour City (TST), Langham Place (Mong Kok), IFC (Central) all have dedicated rooms.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Crib backup Japan:</strong> momomamajp.com or lileo.com &mdash; BabyBjörn travel cribs delivered to any Japan hotel. Book ahead.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Stroller vs carrier:</strong> Stroller for flat city days. Carrier for temples, shrines, narrow markets, crowds, stairs.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Nap windows:</strong> MTR/subway rides, waterfront walks, parks, and stroller pushes between anchors are natural nap opportunities. Build one in per day.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Temperature:</strong> Tokyo evenings 10&ndash;13&deg;C &mdash; carry an extra layer for Jem in the stroller at night.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Passport stamps:</strong> Jem&apos;s passport out at every border &mdash; HKG, Lo Wu both ways, KIX, HND, YYZ return. He earns every one.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Japan is extraordinary with babies:</strong> Strangers will stop to help, hold doors, and admire Jem constantly. He will be a celebrity everywhere he goes.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Baseball game (Oct 24):</strong> Jem sits this one out. A good hotel evening with a regular routine.</span></div>
+  </div>
+
+  <div id="jem-container"></div>
+</div>
+
+
+  <div class="section-card" style="background:rgba(99,102,241,0.07);border-color:rgba(99,102,241,0.3);margin-top:20px">
+    <div class="section-title" style="color:#818cf8">&#128241; SAVE AS OFFLINE APP</div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span>This document works as an offline app — save it to your home screen and it opens without internet.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span><strong>iPhone (Safari):</strong> Tap the Share button → "Add to Home Screen" → Add. Opens like a native app.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#818cf8">&#8594;</span><span><strong>Android (Chrome):</strong> Tap the 3-dot menu → "Add to Home Screen" or "Install App." Opens like a native app.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#818cf8">&#8594;</span><span><strong>Also:</strong> Email this file to everyone in the group before departure — it loads fully offline from the email attachment. No internet needed on the ground.</span></div>
+  </div>
+<div class="footer"><div class="footer-title">HAVE AN INCREDIBLE TRIP</div>Micheal &middot; Becca &middot; Jem &middot; Popo &middot; Goong Goong<br/>October 3 &ndash; 30, 2026<br/>Hong Kong &middot; Shenzhen &middot; Osaka &middot; Kyoto &middot; Tokyo</div>
+</div>
+
+<script>
+const CC={
+  "Travel":   {bg:"rgba(100,116,139,0.15)",br:"rgba(100,116,139,0.4)",tx:"#94a3b8"},
+  "Hong Kong":{bg:"rgba(202,138,4,0.15)",  br:"rgba(202,138,4,0.4)",  tx:"#facc15"},
+  "Shenzhen": {bg:"rgba(124,58,237,0.15)", br:"rgba(124,58,237,0.4)", tx:"#c4b5fd"},
+  "Osaka":    {bg:"rgba(234,88,12,0.15)",  br:"rgba(234,88,12,0.4)",  tx:"#fb923c"},
+  "Kyoto":    {bg:"rgba(22,163,74,0.15)",  br:"rgba(22,163,74,0.4)",  tx:"#4ade80"},
+  "Tokyo":    {bg:"rgba(220,38,38,0.15)",  br:"rgba(220,38,38,0.4)",  tx:"#f87171"},
+};
+
+const days=[
+ {date:"Sat Oct 3",suggs:[],city:"Travel",emoji:"✈️",title:"Departure — Toronto → Hong Kong",dist:"YYZ Airport — leave home by 3hrs before departure",
+  note:"YYZ→HKG ~16hrs direct. Cathay Pacific, Air Canada, and Korean Air all fly this route. Bassinet seat must be pre-booked — front bulkhead row, confirm with the airline before departure day. Popo & Goong Goong fly LHR→HKG separately and will be waiting in arrivals when you land.",
+  items:[
+    "🎫 TICKETS & CHECK-IN: Check in online 24hrs before departure. Print or download boarding passes for all 5 — Jem needs his own ticket (infant on lap, or purchased seat). At the airport: use the family / priority check-in lane. Jem's stroller checks at the gate, not with baggage — it comes back at the jet bridge on arrival in HK.",
+    "🧳 BAGGAGE: Check bags at the counter. Keep one carry-on per adult with: 20+ diapers, 2 changes of clothes for Jem, formula/food buffer, white noise device, nursing cover, familiar toy. Everything else goes in the hold.",
+    "🛡️ SECURITY: Family security lanes at YYZ — ask any agent to direct you. Stroller goes through the X-ray folded. Carrier worn through the body scanner then patted down. Goong Goong: declare all medications if asked — carry the English doctor's note.",
+    "🍼 BOARDING: Families with infants board before general boarding — listen for the announcement or ask gate staff. Once seated, request the bassinet from a flight attendant. Weight limit ~10kg, Jem is well under.",
+    "✈️ IN FLIGHT: Feed Jem at takeoff and landing — sucking equalises ear pressure on ascent and descent. Set all watches to HKT (UTC+8) immediately — 12 hours ahead of Toronto. Try to keep Jem on HK time from the moment you board.",
+    "🩺 Goong Goong: medications in carry-on, not checked bags. Doctor's note in English accessible."
+  ]},
+
+ {date:"Sun Oct 4",suggs:["Temple Street Night Market (廟街夜市) — 5min walk from hotel, opens 6pm. Food stalls, fortune tellers, great atmosphere.","TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade with views across to HK Island.","1881 Heritage — 10min walk from hotel. Former Marine Police HQ, beautiful colonial buildings, free to wander."],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong — All Five Together",dist:"Hotel: MTR Airport Express ~24min from HKG",
+  note:"Land mid-afternoon. Popo and Goong Goong will be waiting in arrivals. Buy Octopus Cards and HK SIM before leaving the airport. One easy first night in Mong Kok.",
+  items:["Buy Octopus Cards (all 5) at HKG Customer Service Centre in arrivals — load HK$200 (~CAD $36) each. This card covers every MTR, bus, and tram in HK.","Buy HK SIM at 7-Eleven in arrivals hall — data SIM, cheap and fast","MTR Airport Express to Kowloon Station (~24min, HK$90 / ~CAD $16). Stroller fits in the designated carriage space.","Hotel near Mong Kok East MTR — one night, sleeping only. East Rail Line here goes directly to Lo Wu border crossing for Shenzhen tomorrow.","Buy diapers tonight: Watson's or Mannings near any Mong Kok hotel"]},
+
+ {date:"Mon Oct 5",suggs:["Shenzhen Metro Line 1 — see the city from the train on the way to the hotel"],city:"Shenzhen",emoji:"🏠",title:"Cross to Shenzhen — Family Time",dist:"Lo Wu Border: MTR East Rail Line from Mong Kok East, ~40min",
+  note:"MTR East Rail Line to Lo Wu (last stop). Cross the border on foot. Settle in for a quiet family evening — the market is tomorrow.",
+  warn:"🔴 Connect NordVPN BEFORE crossing. WeChat Pay must be active and tested. Once inside Shenzhen: Google, Instagram, WhatsApp blocked without VPN.",
+  items:[
+    "🚆 TO LO WU BORDER: MTR East Rail Line from Mong Kok East Station — Lo Wu (羅湖) is the last stop, ~40min. Tap Octopus Cards. Trains run every 5–8min.",
+    "🧳 BAGGAGE: Pack light for Shenzhen — you're only here 2 nights. One bag per adult through the border is easier than multiple. Jem's stroller: fold it through immigration, easier than navigating with it open.",
+    "🛂 CROSSING: HK immigration out (queue, stamp, done). Walk across the bridge. China immigration in — all 5 passports presented, Jem needs his own. No China visa required for Canadians under 30 days. Allow 20–40min total through both sides. Carrier for Jem through the queues — the halls are crowded.",
+    "📱 BEFORE YOU STEP THROUGH: NordVPN must be connected on the HK side before crossing. Once inside China: Google Maps, Instagram, WhatsApp, and Gmail are all blocked without it. WeChat Pay must be tested and working.",
+    "🚇 SHENZHEN METRO: Lo Wu Station is directly connected to the border crossing. Shenzhen Metro Line 1 — tap WeChat Pay or buy a single-journey ticket at the machine. Lifts available at most stations for the stroller.",
+    "🏨 CHECK IN: Holiday Inn Shenzhen Donghua — 5-min walk from Nanyou Fashion Market. Confirm crib on arrival.",
+    "🛒 TONIGHT: Buy diapers — Pampers China and Merries both excellent and very cheap. Family evening, no agenda."
+  ]},
+
+ {date:"Tue Oct 6",suggs:["Costco Shenzhen — Metro Line 4 to Shenzhen North, ~20min from hotel. Go before 11am before crowds hit.","Huaqiangbei electronics market — Metro Line 1 or 7, ~15min from hotel. World's largest electronics market, good for a browse."],city:"Shenzhen",emoji:"🛒",title:"⚓ Nanyou Fashion Centre",dist:"📍 5-min walk from Holiday Inn Donghua",
+  note:"The main Shenzhen mission. 20+ buildings of medium to high-end original Chinese designer brands. Allow the full day.",
+  warn:"No trying on clothes. No photography. ~70% of stores open to retail. WeChat Pay only. WeChat Translate camera function essential — limited English.",
+  items:["Hours: 9:30am–8pm (some buildings to 10pm) — arrive early for best selection","Buildings 107/108 (Tairong): the sweet spot for Chinese designer brands and boutique fashion. Start here.","WeChat Pay only throughout — have the app open and ready","Use WeChat Translate camera function on price tags and signs in real time","Last Shenzhen evening — restock baby supplies at a pharmacy before crossing back tomorrow"]},
+
+ {date:"Wed Oct 7",suggs:["Huaqiangbei electronics market — Metro Line 1 or 7, ~15min from Holiday Inn Donghua. Good for a Shenzhen morning browse before the afternoon crossing.","1881 Heritage — 10min walk from Holiday Inn Golden Mile TST. Former Marine Police HQ, free to wander.","Harbour City mall — 15min walk from hotel. Nursing room inside, flat, good for an easy arrival afternoon."],city:"Hong Kong",emoji:"🔄",title:"Cross Back to HK — Settle into TST",dist:"Lo Wu Border back to Kowloon: MTR ~40min",
+  note:"Loose morning in Shenzhen — Costco or Huaqiangbei if not done, or a slow family morning. Cross back to HK in the afternoon and check into Holiday Inn Golden Mile, TST.",
+  items:["Shenzhen Metro back to Lo Wu — reverse the crossing, same process","HK Immigration back in, Octopus Card tapped, MTR East Rail Line to Kowloon (~40min)","Check into Holiday Inn Golden Mile, Nathan Road, TST — main HK base for 6 nights","Refund leftover Shenzhen yuan at HSBC or Bank of China before they become hard to exchange"]},
+
+ {date:"Thu Oct 8",suggs:["Apliu Street flea market (鴨寮街) — 5min walk from Walled City Park via MTR (~10min to Sham Shui Po). Old electronics, cameras, gadgets. Very Micheal.","Fabric and trimming markets, Ki Lung Street — same Sham Shui Po neighbourhood, 5min walk from Apliu Street.","Dai pai dong lunch — open-air Cantonese food stalls scattered throughout Sham Shui Po. Very local, very cheap. Becca and Popo will navigate."],city:"Hong Kong",emoji:"🏰",title:"⚓ Kowloon Walled City Park",dist:"📍 MTR Kwun Tong Line to Lok Fu, 10-min walk south — ~25min from hotel",
+  note:"The site of the original Walled City — a lawless, densely packed enclave home to 33,000 people before demolition in 1994. Now a beautiful Jiangnan-style garden with a full exhibition hall. Free, flat, stroller-friendly throughout.",
+  popo:"Popo & Goong Goong: completely flat and accessible throughout. The exhibition hall is worth 45–60 minutes — it gives real context to a remarkable place.",
+  items:["Free, open 6:30am–11pm. MTR Kwun Tong Line to Lok Fu, 10-min walk south.","Exhibition hall inside: full Walled City story through photographs, scale models, and maps. Allow 45–60 minutes.","Nursing: shaded park benches throughout — one of the nicest nursing spots of the HK leg"]},
+
+ {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade. Good afternoon wander on the return from the Peak.","Temple Street Night Market — 5min walk from hotel. Opens 6pm. Food stalls, fortune tellers, great atmosphere.","Symphony of Lights — 10min walk from hotel, same TST promenade. FREE at 8pm. 15 minutes of lasers across the entire skyline. Arrive 7:45pm."],city:"Hong Kong",emoji:"⛰️",title:"⚓ The Peak",dist:"📍 Peak Tram terminal: MTR to Central Exit J2, 10-min walk — ~25min from hotel",
+  note:"Victoria Peak via the historic Peak Tram — one of the steepest funicular railways in the world. Extraordinary views over HK Island and Kowloon.",
+  warn:"🔴 Book Peak Tram tickets in advance at thepeak.com.hk — walk-up queues can be 45min+.",
+  popo:"Popo & Goong Goong: very steep on the tram — hold on. Free viewing area at Peak Galleria faces Kowloon.",
+  items:["Peak Tram lower terminal: Garden Road, Central. MTR to Central Exit J2, 10-min walk. Very steep going up — hold Jem securely in the carrier.","Parallel tracks: tram up with Jem (8min) OR Lugard Road Morning Trail hike (~50min paved) — meet at the top","Free viewing at Peak Galleria. Paid Sky Terrace 428 (HK$228 / ~CAD $41) for 360° views.","Nursing: Peak Galleria has a nursing room. Hotel is close for a midday reset if Jem needs it."]},
+
+ {date:"Sat Oct 10",suggs:["1881 Heritage — 10min walk from hotel. Free, beautiful colonial-era buildings and courtyards. No agenda required.","HK Museum of History — 10min walk from hotel. 100 Chatham Rd South. Stroller-friendly inside, air conditioned, one of the best city history museums in Asia.","Kowloon Park — 10min walk from hotel. Flat, green, aviary, sculpture garden. Good for Jem to move around."],city:"Hong Kong",emoji:"🚶",title:"Open Wandering Day",dist:"All options within walking distance of hotel",
+  note:"A genuinely open day with no anchor. Stay close to TST, follow the energy. This is the buffer before the Mong Kok and Symphony days.",
+  items:["Harbour City (海港城): HK's largest mall on the TST waterfront. Air conditioned, nursing room well-signposted, good for a slow morning browse.","Evening: TST has restaurants in every direction — no plan needed"]},
+
+ {date:"Sun Oct 11",suggs:["Langham Place mall — at Mong Kok MTR, right at the anchor. Nursing room on upper floors. Good for a midday break and escape from the market heat.","Egg waffles (雞蛋仔) — from the market strip itself, stalls on Tung Choi Street. Iconic HK street snack, crispy outside, soft inside."],city:"Hong Kong",emoji:"🌸",title:"⚓ Mong Kok Markets",dist:"📍 MTR from Jordan to Mong Kok — 5min",
+  note:"The Flower Market, Goldfish Market, and Ladies Market form a continuous flat walkable strip through one of Kowloon's most characterful neighbourhoods.",
+  popo:"Popo & Goong Goong: all markets are flat, street-level, and easy to navigate. The Flower Market is especially beautiful.",
+  items:["Flower Market Road (花墟道): 100+ stalls, flat, wide — very photogenic. The fragrance is extraordinary.","Goldfish Market (金魚街): Tung Choi Street North — hundreds of fish in hanging bags. One of the most surreal streets in HK.","Ladies Market (女人街): Tung Choi Street South — clothing, souvenirs, Cantonese bargaining. The group's Cantonese speakers will be formidable here."]},
+
+ {date:"Mon Oct 12",suggs:["Temple Street Night Market — 5min walk from hotel, opens 6pm. Good for a last HK dinner before the 8pm show.","1881 Heritage — 10min walk from hotel. Free wander before the evening, beautiful colonial buildings.","HK Museum of History — 10min walk from hotel. If not done yet, good for a slow afternoon before the show."],city:"Hong Kong",emoji:"🌆",title:"⚓ Symphony of Lights",dist:"📍 TST waterfront: 10-min walk from hotel",
+  note:"A slow final day in HK. No agenda until the evening. Symphony of Lights at 8pm is the anchor — one of the best free shows in the world.",
+  items:["Slow morning — hotel breakfast, no rush. Last HK day.","Symphony of Lights: 8pm sharp from the TST promenade. Stand facing HK Island. 15 minutes of choreographed lasers across the entire skyline. Arrive by 7:45pm for a good spot.","Harbour City for any final HK shopping — nursing room inside, well signposted","Pack bags tonight. Fly to Japan tomorrow."]},
+
+ {date:"Tue Oct 13",suggs:["Dotonbori (道頓堀) — 15min walk from Hinode Hotel. Canal walk, Glico Running Man neon, easy first Osaka evening. No pressure.","Den Den Town (でんでんタウン) — 15min walk from hotel. Retro games, cards, anime. Always open in the evenings — go if the energy is there."],city:"Travel",emoji:"✈️",title:"Hong Kong → Osaka (KIX)",dist:"HKG Airport: MTR Airport Express ~24min from Kowloon Station",
+  note:"Fly HKG→KIX ~3hr 45min. Cathay Pacific, HK Express, and Hong Kong Airlines all fly this route daily. Arrive Osaka mid-afternoon. Settling-in night only — short Dotonbori walk and done.",
+  items:[
+    "🎫 CHECK-IN: Online check-in opens 24hrs before. Use HKG Terminal 1 (most carriers). Family check-in lane. Stroller tags at the gate — ask the ground staff as you board.",
+    "🧳 BAGGAGE AT HKG: Before heading to departures, stop at HKG Customer Service Centre in arrivals and refund remaining Octopus Card balances — you won't need them again. Checked bags go through normally.",
+    "✈️ FLIGHT: ~3hr 45min. Short enough that Jem doesn't need a bassinet seat — but if available, request it. Feed at takeoff and landing.",
+    "🛬 KIX ARRIVALS — DO THIS BEFORE ANYTHING ELSE: Walk past baggage claim to the arrivals hall carrier/SIM counters. Buy a Japan pocket WiFi or data SIM here — IIJmio, Softbank, or any counter. This is your connectivity for the next 17 days. Do not skip this step.",
+    "🚆 KIX TO NAMBA: Nankai Rapi:t (ラピート) express from KIX Platform 2 (follow signs in arrivals — it's signposted clearly). Namba Station (難波), ~45min, ¥1,430 (~CAD $14). The distinctive iron robot-shaped train — reserved seats, buy at the Nankai ticket counter or machine in arrivals. Stroller in the end carriage space.",
+    "🏨 CHECK IN: Walk or short subway from Namba to Hinode Hotel Nipponbashi. At the front desk: book your first private onsen slot immediately — family bath rooms go fast.",
+    "🛒 TONIGHT: Buy Merries diapers (メリーズ) at the konbini right next to the hotel. Best diaper in the world. Available at every konbini from here on."
+  ]},
+
+ {date:"Wed Oct 14",suggs:["Wagyu A5 lunch near Kuromon/Namba — same neighbourhood as the morning market, 5min walk. Look for 黒毛和牛 + A5 on the window. Walk in, ask for lunch teishoku. ~¥3,000–5,000 (~CAD $29–48). Best value wagyu of the trip.","Dotonbori (道頓堀) evening — 15min walk from hotel, or 5min subway from Osaka Castle. Canal walk, Glico Running Man, takoyaki, kushikatsu.","Den Den Town — 15min walk from hotel. After dinner, always available. No mission needed."],city:"Osaka",emoji:"🏯",title:"⚓ Osaka Castle",dist:"📍 Subway Tanimachi Line to Tanimachi 4-chome — ~15min from hotel",
+  note:"Kuromon Market in the morning on the way, Osaka Castle in the afternoon. A perfect first full Osaka day.",
+  popo:"Popo & Goong Goong: Osaka Castle has a lift inside the tower. Kuromon Market has a wide central aisle — stroller fine throughout.",
+  stand:"🍶 Den Den Town: 15-min walk every evening. 🛁 Private family onsen available every night — book your slot at the front desk.",
+  items:["Kuromon Ichiba Market (黒門市場): on the way — Subway to Nipponbashi, Exit 10. Arrive 9am. Tuna on sticks, grilled oysters, tamagoyaki, crab. Wide aisle, stroller fine.","Osaka Castle (大阪城): 17th century shogun's castle in a beautiful park. Museum ¥600 (~CAD $6), lift to the top floor for panoramic views. Grounds free. Allow 1.5hrs.","Nursing: Takashimaya Namba nursing room on upper floors"]},
+
+ {date:"Thu Oct 15",suggs:["Pokémon Center Osaka DX — Subway to Shinsaibashi, ~20min from hotel. Daimaru Shinsaibashi 9F. Life-sized Articuno, Zapdos & Moltres. Osaka-exclusive merch. Go ad hoc in the daytime if the mood strikes.","Den Den Town — 15min walk from hotel. Retro games, cards, anime. Natural way to fill the afternoon before the sumo evening."],city:"Osaka",emoji:"🥊",title:"⚓ Sumo Exhibition",dist:"📍 Venue varies — check booking confirmation. Typically 15–25min from hotel.",
+  note:"Sumo in the evening — the anchor for the day. Daytime is genuinely free.",
+  stand:"🍶 Den Den Town: 15-min walk every evening. 🛁 Private family onsen available every night.",
+  items:["Sumo exhibition: book via Airbnb Experiences or Voyagin (search 'sumo Osaka'). Typically 6–8pm. Bout demonstration, photo with wrestlers, history and rules explained. Pre-booking essential — sells out.","Arrive 15min early to take in the atmosphere before the demonstration begins"]},
+
+ {date:"Fri Oct 16",suggs:["Shinsaibashi-suji arcade — Subway to Shinsaibashi, ~20min from hotel. 600m covered shopping arcade, flat, wide, stroller perfect. Good morning browse before heading south to Shinsekai.","Tsutenkaku Tower — inside Shinsekai, right at the anchor. ¥1,000 (~CAD $9.50) lift to the top. Views over southern Osaka."],city:"Osaka",emoji:"🌃",title:"⚓ Shinsekai + Private Family Onsen",dist:"📍 Subway Sakaisuji Line to Ebisucho — ~10min from hotel",
+  note:"Shinsekai in the afternoon, private family onsen in the evening. Tonight is the night to really lean into the onsen.",
+  stand:"🍶 Den Den Town: 15-min walk. 🛁 Tonight is the onsen night — all five, warm water cooled for Jem.",
+  items:["Shinsekai (新世界): a retro 1950s neighbourhood — neon signs, old-school restaurants, the Tsutenkaku Tower rising above it all. Subway Sakaisuji Line to Ebisucho, Exit 3.","Kushikatsu: the dish of Shinsekai — battered deep-fried skewers of meat and vegetables. Sacred rule: NO DOUBLE-DIPPING in the shared sauce.","🛁 Private family onsen tonight: book your slot at the front desk. Cool water to ~37–38°C for Jem before he enters. All five together in a private room. Natural hot spring.","Nursing: Daimaru and Sogo at either end of Shinsaibashi arcade have nursing rooms. Onsen private room is a wonderful, warm, quiet nursing environment."]},
+
+ {date:"Sat Oct 17",suggs:["Tennoji Zoo — 15min walk from hotel. Animals at 6 months genuinely entertaining for Jem. Flat, stroller-friendly.","Spa World — 0.6km walk from hotel. Massive multi-floor onsen theme park themed around world cultures. Note: public bath rules apply for Jem.","Sumiyoshi Taisha — 20min by Nankai Line subway from hotel. One of Japan's oldest Shinto shrines, completely untouristy and local.","Hotel onsen + complimentary ramen — in the hotel. Sometimes the best day is not leaving."],city:"Osaka",emoji:"🌿",title:"Slow Day — No Agenda",dist:"All options within 15-min of hotel",
+  note:"A genuinely open day. The pressure valve. Sleep in, follow the energy. Nothing is mandatory.",
+  stand:"🍶 Den Den Town: 15-min walk. 🛁 Hotel onsen: go again if you want it.",
+  items:["Hotel complimentary ramen opens 9pm. Free drinks all day. The hotel itself is a completely valid activity today.","Den Den Town (15-min walk): casual retro gaming and card browse — no mission, just look"]},
+
+ {date:"Sun Oct 18",suggs:["Gion (祇園) — 10min walk from MIMARU any evening. Hanamikoji Street, lanterns from 4pm, best 5–6pm. Quiet enough after Fushimi Inari to be a gentle wander.","Nishiki Market + Pokémon Center Kyoto — 5min walk from MIMARU any morning. Effectively one outing, right outside the door."],city:"Kyoto",emoji:"⛩️",title:"⚓ Fushimi Inari at Dusk",dist:"📍 JR Nara Line from Kyoto Station to Inari Station — 5min, ¥150 (~CAD $1.50)",
+  note:"Arriving at dusk is the best possible timing — crowds thin dramatically, the thousands of vermilion torii gates glow orange in the fading light. One of the most visually extraordinary places in Japan.",
+  popo:"Popo & Goong Goong: lower gates only — the magic is in the first 20 minutes. Flat paved path, no need to climb.",
+  stand:"🌸 Nishiki + Pokémon: 5-min walk from MIMARU any morning. 🏮 Gion: 10-min walk any evening, best 5–6pm.",
+  items:["Osaka→Kyoto: JR Special Rapid (新快速) from JR Osaka Station, ~75min, ¥570 (~CAD $5.50). Or Hankyu from Osaka-Umeda to Kawaramachi, ~45min, ¥410 (~CAD $4) — closer to MIMARU.","Check into MIMARU Kawaramachi. Confirm crib. Drop bags.","Arrive Fushimi Inari ~4:30–5pm. Carrier for Jem. Lower torii gate tunnels (千本鳥居) are 5-min walk from the station entrance.","Nursing: quiet stone benches in the lower shrine area — one of the more peaceful nursing spots of the Japan leg"]},
+
+ {date:"Mon Oct 19",suggs:["Gion (祇園) evening — 10min walk from MIMARU, 15min from Nijo Castle by subway. Lanterns from 4pm, best 5–6pm. Go if energy allows — can always slide to tomorrow or Oct 21.","Nishiki + Pokémon Center Kyoto — 5min walk from MIMARU, any morning. Already covered today but noted as standing daily option."],city:"Kyoto",emoji:"⛩️",title:"Nishiki + Pokémon (morning) ⚓ Nijo Castle (afternoon)",dist:"📍 Nishiki/Pokémon: 5-min walk. Nijo Castle: Subway Tozai Line ~15min.",
+  note:"Morning close to home — Nishiki Market and Pokémon Center Kyoto are a 5-min walk and effectively one outing. Hotel reset at midday. Nijo Castle in the afternoon with a private guide.",
+  popo:"Popo & Goong Goong: Nishiki Market is a lovely covered morning wander. Nijo Castle is flat throughout and the guide paces to the group.",
+  stand:"🌸 Nishiki + Pokémon: 5-min walk, any morning. 🏮 Gion: 10-min walk, any evening.",
+  items:["Nishiki Market (錦市場): 5-min walk from hotel. 400m covered arcade, 130+ stalls — Kyoto's Kitchen. Carrier better than stroller in the crowds. Tofu skewers, pickles, matcha mochi.","Pokémon Center Kyoto: SUINA Muromachi 2F, 3-min walk from Nishiki west end. Ho-Oh statue + Maiko Pikachu entrance. Kyoto-exclusive merchandise.","Hotel reset at midday: Jem naps in the crib. MIMARU's apartment space makes this genuinely practical — protect this reset.","🔴 Nijo Castle private tour (book ahead): Subway Tozai Line to Nijojo-mae. Entry ¥1,300 (~CAD $12.50). Shogun's palace with famous nightingale floors — boards that squeak to detect intruders. Flat throughout.","Nursing: SUINA Muromachi building has facilities. Nijo Castle has benches throughout."]},
+
+ {date:"Tue Oct 20",suggs:["Uji riverside — 5min walk from Ogura Station (right at the museum). Flat, stroller-perfect, peaceful. Popo & Goong Goong base while museum group is inside.","Tsuen Tea (通圓茶屋) — 1 train stop from museum, 2min, ¥150 (~CAD $1.50). Near Uji Bridge. Open since 1160. Best matcha soft serve in Japan. The whole group meets here after.","Uji Shrine — 5min walk from Tsuen Tea. Short, quiet, beautiful.","Gion evening — 10min walk from MIMARU on return to Kyoto. Always an option any evening."],city:"Kyoto",emoji:"🎮",title:"⚓ Nintendo Museum — Uji",dist:"📍 JR Nara Line from Kyoto Station to Ogura Station — ~25min, ¥360 (~CAD $3.50)",
+  note:"135 years of Nintendo history in an interactive museum in Uji City. Lottery tickets required. Everyone meets at Tsuen Tea after.",
+  warn:"Stroller note: underground passageway at Ogura Station has stairs only — use the alternative blue route on the official Nintendo Museum map.",
+  stand:"🌸 Nishiki + Pokémon: 5-min walk this morning before the train if there's time. 🏮 Gion: 10-min walk this evening.",
+  items:["Leave hotel by 9:15am for a morning slot. JR Nara Line: Kyoto Station → Ogura Station (~25min, ¥360 / ~CAD $3.50).","Entry: QR code + passport at security gate. Each visitor gets 10 play tokens. Cannot re-enter once you leave.","Prioritise: Game Boy exhibit and Famicom multiplayer are most popular. Museum shop: Nintendo Museum-exclusive merchandise only — budget accordingly.","Allow 2–3 hours inside."]},
+
+ {date:"Wed Oct 21",suggs:["Kinkaku-ji (金閣寺) — on the Bus 59 route from central Kyoto to Arashiyama. 40min from hotel by bus, natural first stop before continuing to the anchor. Entry ¥500 (~CAD $5). Allow 45min.","Gion evening — 10min walk from MIMARU on return to Kyoto. Lanterns from 4pm, best 5–6pm."],city:"Kyoto",emoji:"🌸",title:"⚓ Arashiyama",dist:"📍 Bus 59 from central Kyoto to Arashiyama — ~30–40min.",
+  note:"A whole neighbourhood on the western edge of Kyoto. Bamboo grove, Tenryu-ji garden, Togetsukyo Bridge, the ryokan lane, tofu kaiseki lunch. One of the most beautiful places in Japan. Note: Arashiyama in rain is genuinely beautiful — don't cancel if the weather turns.",
+  popo:"Popo & Goong Goong: Tenryu-ji garden is flat and peaceful. Bamboo grove is a 200m flat paved path. October foliage on the hills.",
+  stand:"🌸 Nishiki + Pokémon: 5-min walk this morning before the bus. 🏮 Gion: 10-min walk this evening.",
+  items:["Bamboo Grove (竹林の小径): flat 200m path through towering bamboo. Best before 9am or after 3:30pm. Jem in the carrier here is extraordinary.","Tenryu-ji Garden (天龍寺): UNESCO zen garden, ¥500 (~CAD $5). Flat, stroller accessible. Allow 45min.","Togetsukyo Bridge (渡月橋): the iconic bridge over the Oi River with forested hills behind. October foliage. Free.","Ryokan lane: walk west of Tenryu-ji — wooden facades, stone gardens, yukata-clad staff. Free.","Tofu kaiseki lunch on Arashiyama main street: ~¥2,000–3,500 (~CAD $19–33) set menu","Pack bags tonight. 🧳 Send heavy bags via takuhaibin to Keio Plaza Tokyo this evening."]},
+
+ {date:"Thu Oct 22",suggs:["Pokémon Center Tokyo DX — 15min walk or 2 subway stops from Ginza/Tsutaya. Nihonbashi Takashimaya East Building 5F. Life-sized Snorlax photo op with Jem. Read his mood before committing on arrival day.","Tokyo Metropolitan Government Building — 1-min walk from Keio Plaza Hotel. Free observation deck, open until 10:30pm. Go any clear Tokyo evening spontaneously."],city:"Travel",emoji:"🚄",title:"Shinkansen to Tokyo + ⚓ Tsutaya Books, Ginza",dist:"📍 Nozomi from Kyoto Station — ~2hr 15min to Tokyo Station",
+  note:"The Shinkansen is one of the great travel experiences in the world. Bags were sent ahead last night and arrive at Keio Plaza before you do. Travel completely light. Arrive Tokyo by midday, check in, Ginza for the afternoon anchor.",
+  popo:"Popo & Goong Goong: LEFT side of the train going east for Mt Fuji views ~40min after departure near Shin-Fuji Station. One of the most iconic views in Japan.",
+  items:[
+    "🧳 TAKUHAIBIN: bags sent from MIMARU last night are already at Keio Plaza. Bring only a small daypack on the train — this is the whole point.",
+    "🎫 SHINKANSEN TICKETS: Book via smart-ex.jp (English available) — reserved seats, Kyoto Station to Tokyo Station. ¥13,820 (~CAD $132) per adult, children under 6 free. Print or show QR code at the platform gate. Nozomi is NOT covered by JR Pass — use Hikari if on a pass. When booking: request Car 16 (quietest car, closest to the door — easiest boarding with a stroller). Seats A and B on the LEFT side for Mt Fuji views.",
+    "🛤️ TO KYOTO STATION: Subway Karasuma Line from Shijo-Karasuma (5-min walk from MIMARU) to Kyoto Station, ~5min, ¥220 (~CAD $2). Allow 30min at the station before departure.",
+    "🍱 EKIBEN: Kyoto Station basement has one of the best ekiben (駅弁) selections in Japan — beautifully packaged regional bento boxes. Buy before boarding. One of the great Shinkansen traditions.",
+    "🚄 ON THE TRAIN: Platform indicated on your ticket — follow Shinkansen signs from the main concourse. Reserved seats: find your car number on the platform signage, board at your marked door. Stroller: fold and store in the overhead rack or the space behind the last row of seats. LEFT side going east for Mt Fuji ~40min after departure near Shin-Fuji Station.",
+    "🤱 Nursing on the Shinkansen: Car 11 has a multi-purpose room (多目的室) — a small private room designed for nursing, medical needs, and settling a baby. Ask the conductor or check the carriage display board.",
+    "🏨 TOKYO ARRIVAL: Tokyo Station → Keio Plaza Hotel Nishi-Shinjuku. JR Chuo Line from Tokyo Station to Shinjuku Station (~25min, ¥220 / ~CAD $2), then 5-min walk west from Shinjuku Station's west exit. At the hotel: request Happy Baby Stay Package explicitly. Confirm crib or arrange rental backup (momomamajp.com).",
+    "📚 GINZA AFTERNOON: Subway Marunouchi Line from Shinjuku to Ginza (~20min, ¥210 / ~CAD $2). Tsutaya Books at Ginza Six (蔦屋書店) 6F — art, design, architecture, Japanese literature. The curation feels like a gallery that sells books. Allow at least an hour. Wagyu A5 lunch on Ginza Chuo-dori — look for 黒毛和牛 + A5, walk in for the lunch teishoku. ¥4,000–8,000 (~CAD $38–76)."
+  ]},
+
+ {date:"Fri Oct 23",suggs:["Pokémon Center Ikebukuro — 20min from Akihabara by JR Yamanote Line. Largest Pokémon Center in Tokyo. Worth adding if the group has energy.","Ueno Park (上野公園) — 10min walk from Akihabara anchor. Popo & Goong Goong parallel path: park, lake, Toshogu Shrine, zoo. Also the suggested Jem handoff point if splitting up throughout the day."],city:"Tokyo",emoji:"🎮",title:"⚓ Akihabara",dist:"📍 JR Chuo-Sobu from Shinjuku — ~25min. Electric Town Exit.",
+  note:"The holy land for retro gaming and vintage Pokémon cards. Most stores open 11am. Many cash only. Popo and Goong Goong have their own parallel day at Ueno Park with Ueno as the Jem transfer point.",
+  parallel:"Popo & Goong Goong + Jem: Ueno Park — 10-min walk from Akihabara. Large flat park with a lake, Toshogu Shrine, and zoo. Comfortable exploring independently. Ueno Park entrance is the suggested Jem handoff point if splitting up throughout the day.",
+  items:["Super Potato (スーパーポテト): 1-14-2 Soto-Kanda, 3F–5F. Every retro console and game. The most famous retro gaming store in Japan.","Mandarake Complex (まんだらけ): 3-11-12 Soto-Kanda, 8 floors. Vintage Pokémon TCG singles, original Base Set cards, Japanese exclusives. Serious hunting territory.","Card Rush (カードラッシュ): dedicated Pokémon TCG singles near Akihabara Station","Book-Off Akihabara: secondhand games and cards on the main Chuo-dori strip","Don Quijote Akihabara: on the main strip. Electronics, anime goods, cosplay on 5F. Tax-free with passport.","Nursing: Yodobashi Camera nursing room on the main street — ask at any information desk"]},
+
+ {date:"Sat Oct 24",suggs:["Sky Plaza Ibasho soft play — inside Keio Plaza Hotel. ¥2,000 (~CAD $19). Good for Jem's evening while others are at the game. In-hotel childcare also available (~¥7,776 / ~CAD $74 for 2.5hrs)."],city:"Tokyo",emoji:"⚾",title:"⚓ Japan Series — Game 1",dist:"📍 Venue TBD — depends on Central League winner",
+  note:"Japan Series Game 1. Jem sits this one out. Tickets via ticketsinjapan.com or StubHub as soon as the Series participants are known (~Oct 18).",
+  warn:"VENUE SCENARIOS: Giants (Tokyo Dome, ~30min) ✓ Dream. Swallows (Jingu, ~20min) ✓ Best atmosphere. BayStars (Yokohama, ~50min) ✓ Doable. Tigers (Koshien) ✗ Likely skip — watch for Game 3 if PL finalist is Lions (50min) or Marines (60min).",
+  items:["Arrive 45min early — merch, food stalls, the extraordinary NPB fan atmosphere builds before first pitch","Synchronized chanting, trumpets, cheer squads, umbrella sections — very welcoming of foreign fans","Stadium food: yakitori, edamame, beer. Better than you'd expect.","Buy Japan Series merchandise at the stadium shop before the game — limited edition goods only available during the Series"]},
+
+ {date:"Sun Oct 25",suggs:["Roppongi Hills — 15min walk from TeamLab Borderless, or 1 subway stop. Excellent restaurants at every price point. Good for lunch or dinner after."],city:"Tokyo",emoji:"🌊",title:"⚓ TeamLab Borderless",dist:"📍 Subway Hibiya Line to Kamiyacho, Exit 5 — ~25min from hotel, 5-min walk",
+  note:"TeamLab Borderless at Azabudai Hills — immersive digital art with no map, no walls between rooms. Fully dry. Genuinely one of the most extraordinary things you will show Jem on this trip.",
+  popo:"Popo & Goong Goong: no difficult terrain, no water sections — just walking through infinite moving light.",
+  items:["🔴 Book timed entry at teamlab.art — sells out. Adults ¥3,200 (~CAD $30.50), under 15 free. Book earliest available slot.","No map inside — you wander through interconnected rooms. Art responds to your presence and flows between spaces.","Don't-miss: Forest of Resonating Lamps, Infinite Crystal Universe, Massless Clouds. Allow 2–3 hours minimum.","Ask staff about baby facilities on arrival — they are experienced with families and very helpful"]},
+
+ {date:"Mon Oct 26",suggs:["Pokémon Center Skytree Town — 10min walk from Senso-ji anchor. Solamachi East Yard 4F, 30min from hotel. No queues. 50+ restaurants in Solamachi for lunch.","Tokyo Skytree observation deck — inside Solamachi, same destination as Pokémon Center. ¥2,100 (~CAD $20), 350m views over Tokyo.","Ryogoku sumo culture — 1 stop from Kinshicho on JR Sobu Line, ~30min from hotel. Sumo Museum (free, inside Kokugikan) + Edo Noren (walk-in sumo ring, restaurants).","Akachan Honpo Kinshicho — 1 stop east of Ryogoku on JR Sobu Line. Arcakit mall 5F, 1-min from station. Japan's best baby chain. Natural add-on to the Ryogoku visit."],city:"Tokyo",emoji:"🕌",title:"⚓ Senso-ji",dist:"📍 Subway Ginza Line from Shinjuku to Asakusa — ~30min",
+  note:"Tokyo's oldest temple — founded 645 AD. The Kaminarimon Gate with the giant red lantern is one of the most recognisable sights in Japan. Best before 9am for light and smallest crowds, though Jem sets the actual pace.",
+  popo:"Popo & Goong Goong: Asakusa is one of the most beautiful areas in Tokyo. Nakamise-dori is perfect for gift shopping.",
+  items:["Senso-ji (浅草寺): free, open 24hrs. Subway Ginza Line to Asakusa, Exit 1. The gate is 2 minutes straight ahead.","Nakamise-dori (仲見世通り): 200m of traditional snacks, fans, keychains — best souvenir shopping of the entire trip","Nursing: Asakusa Culture Tourist Information Center directly across from Kaminarimon Gate has a nursing room"]},
+
+ {date:"Tue Oct 27",suggs:["Shimokitazawa — Odakyu Line from Shinjuku ~10min, ¥150 (~CAD $1.50). From the head spa anchor (Omotesando), take the subway to Shibuya then Odakyu to Shimokitazawa (~20min total). Best vintage thrift in Tokyo — Flamingo, New York Joe Exchange, Ragla Mugla, Disk Union. The group may return more than once.","Shinjuku Gyoen — 10min walk from hotel. October maple leaves, flat, ¥500 (~CAD $5). Great for Jem in the stroller on the return if the day runs long."],city:"Tokyo",emoji:"🧖",title:"⚓ Head Spa Kuu Omotesando",dist:"📍 Subway to Omotesando, Exit B1, 3-min walk — ~20min from hotel",
+  note:"Head spa in the morning, Harajuku/Takeshita Street right next door, Shimokitazawa if there's afternoon energy.",
+  items:["🔴 Head Spa Kuu Omotesando (book well in advance — sells out): 120-min course. Private rooms. Foot bath, scalp check, oil spa, shampoo, cream spa, massage, blow dry, after drink. ~¥8,000–15,000 (~CAD $76–143). Men welcome. Google Translate works perfectly.","Harajuku/Takeshita Street (竹下通り): 3-min walk from Omotesando. 350m of wild Tokyo youth fashion. Best before 11am. Bail if Jem is having a tough morning — completely fine.","Omotesando (表参道): wide, tree-lined boulevard, flat, stroller perfect. Luxury brands, design stores, excellent cafes for lunch.","Nursing: Omotesando Hills mall has a nursing room"]},
+
+ {date:"Wed Oct 28",suggs:["Shimokitazawa — Odakyu from Shinjuku ~10min, ¥150. If the group wants more thrifting. Nakano Broadway and Shimokitazawa are both easy from the hotel today.","Shinjuku Gyoen — 10min walk from hotel. October foliage, flat, enormous, peaceful. ¥500 (~CAD $5). One of the best stroller mornings in Tokyo.","Isetan Shinjuku depachika (evening secondary anchor) — 10min walk from hotel. One of the finest food environments in the world. Hundreds of prepared foods, A5 wagyu, sushi, beautifully packaged confectionery. Pick up dinner here and buy the best Japanese food gifts to take home."],city:"Tokyo",emoji:"🌿",title:"Free Day",dist:"All options within 10-min of hotel",
+  note:"A genuinely open day. No anchor. Nakano Broadway is the primary suggestion for a nap-time run. Isetan Shinjuku depachika in the evening is the secondary anchor.",
+  items:["Nakano Broadway (中野ブロードウェイ): JR Chuo from Shinjuku, ~10min. Multiple floors of retro games, vintage Pokémon cards, several Mandarake floors. Go during Jem's nap window — lace up and go.","Slow morning if Jem needs it — Shinjuku Gyoen is 10min walk, beautiful in late October"]},
+
+ {date:"Thu Oct 29",suggs:["MEGA Don Quijote Shibuya — 5min walk from Shibuya Crossing anchor. 8 floors, everything, tax-free with passport. Good for a last Donki haul.","Loft Shibuya — 5min walk from Shibuya Crossing. Stationery, design goods, great for gifts. Best Loft in Tokyo.","Shiba Park — surrounds Zojoji Temple anchor, same location. Flat, green, October maple leaves. Free."],city:"Tokyo",emoji:"🗼",title:"⚓ Shibuya Crossing + PARCO (morning) + ⚓ Zojoji + Tokyo Tower (afternoon)",dist:"📍 Shibuya: JR Yamanote ~15min. Tokyo Tower: Subway Hibiya Line to Kamiyacho ~10min from Shibuya.",
+  note:"The last full day. Shibuya in the morning, Tokyo Tower area in the afternoon. Co-anchors that flow naturally together.",
+  popo:"Popo & Goong Goong: Shibuya Crossing is one of the most extraordinary sights in the world. Shiba Park is calm and flat in October.",
+  items:["Shibuya Scramble Crossing: Hachiko exit. 2,500+ people crossing simultaneously. Stand in the middle, then watch from Starbucks 2F Tsutaya Building above for the overhead view.","Shibuya PARCO 6F — Nintendo TOKYO: exclusive merchandise not sold at the Nintendo Museum or anywhere else.","Shibuya PARCO 6F — Pokémon Center Shibuya: life-sized Mewtwo, Pokémon Design Lab (custom t-shirt printed same day, ~30min), Graffiti Art Pikachu exclusive to this location.","Zojoji Temple (増上寺): ancient wooden gate with the orange tower rising directly behind it. Free. Garden of ~1,300 small Jizo statues in red knitted hats — prayers made by parents for their children. A quietly moving place to bring Jem on the last day.","Tokyo Tower Main Deck (150m, ¥1,200 / ~CAD $11.50): go ~1hr before sunset for daylight, golden hour, dusk, and the lit city in one visit.","Final dinner: back to Shinjuku. Pack bags tonight. 🧳 Send large bags to HND airport via takuhaibin tonight.","Nursing: Shibuya PARCO 6F nursing room. Tokyo Tower FootTown has baby facilities."]},
+
+ {date:"Fri Oct 30",suggs:[],city:"Travel",emoji:"✈️",title:"Fly Home — HND → Toronto",dist:"HND Airport: Keikyu Line via Shinagawa — ~35min total",
+  note:"Check out early. Budget 3 full hours before departure at HND. Jem now has passport stamps from Hong Kong, China, Japan, and Canada. You did something extraordinary together.",
+  items:[
+    "🧳 TAKUHAIBIN: heavy bags sent from Keio Plaza last night are already at HND. Travel light — just carry-on to the airport.",
+    "🚆 KEIO PLAZA → HANEDA (HND): Walk 5min to Shinjuku Station (west exit). JR Yamanote Line from Shinjuku to Shinagawa (南品川方面, ~20min, ¥220 / ~CAD $2). At Shinagawa: follow signs to Keikyu Line (京急線). Keikyu Airport Express (エアポート急行) to Haneda Airport International Terminal (羽田空港第3ターミナル), ~15min, ¥330 (~CAD $3). Runs every 10min. Total time: ~35min. Total cost: ~¥550 (~CAD $5.25) per person.",
+    "🎫 CHECK-IN: Arrive at HND 3 full hours before departure — do not cut this close with 5 people and an infant. International terminal is Terminal 3 (第3ターミナル). Check in at the airline counter. Stroller: gate-check at departure gate, returns at the jet bridge in Toronto.",
+    "🛡️ SECURITY & IMMIGRATION: HND has dedicated family lanes at security. Carrier through the body scanner. After check-in and security, Japan departure immigration — all 5 passports, Jem needs his own. Allow 30min for immigration.",
+    "✈️ THE FLIGHT HOME: ~13–14hrs HND to YYZ. Feed Jem at takeoff and landing for ear pressure. Let everyone sleep as much as possible — you have earned it.",
+    "🛬 ARRIVING AT YYZ: Canadian customs declaration — all 5 travellers including Jem each have a CAD $800 duty-free exemption (trips over 7 days). That's CAD $4,000 total across the group. Declare all goods honestly — gifts, clothing, food, souvenirs, anything purchased abroad. Goods over the individual limit are assessed at roughly 15–20% on the overage. NEXUS lane significantly faster if you have it.",
+    "You did it. All five of you."
+  ]}
+];
+
+const jemDays=[
+ {date:"Sat Oct 3",city:"Travel",emoji:"✈️",title:"Departure Day",
+  letter:"Today Jem boards his first ever flight. Sixteen hours over the Pacific — and he doesn't need to do anything except be held, fed, and kept comfortable. That is the whole job. He will be fine.",
+  logistics:["~20 diapers in carry-on — enough for the flight","2+ changes of clothes accessible without digging","Feed at takeoff and landing — sucking equalises ear pressure","White noise app ready in the bassinet","Bassinet: confirm at gate. Jem is well under the weight limit."],
+  nursing:"Feed on demand throughout. Cabin crew are experienced with nursing parents — ask for a privacy screen if needed.",
+  nap:"Long flight = long sleep opportunity. Let Jem nap freely — you want him arriving on HKT."},
+
+ {date:"Sun Oct 4",suggs:["Watson's / Mannings — buy diapers tonight", "Temple Street Night Market opens 6pm if energy allows", "TST waterfront — 10min walk, flat harbour promenade"],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong",
+  letter:"First soil, first stamp, first meeting with Popo and Goong Goong in person. He won't remember this day but everyone else will.",
+  logistics:["Buy diapers tonight — Watson's or Mannings within walking distance of any Mong Kok hotel","Stroller from the airport — TST is flat and accessible","Hotel room for nursing tonight — no dedicated room needed"],
+  nursing:"Hotel room. HK is very relaxed for breastfeeding in public.",
+  nap:"Let Jem sleep when he wants tonight. Don't fight the timezone — just respond."},
+
+ {date:"Mon Oct 5",suggs:["Shenzhen Metro Line 1 — the ride from Lo Wu to the hotel area passes through central Shenzhen. Window seat, watch the city unfold."],city:"Shenzhen",emoji:"🏠",title:"Border Crossing",
+  letter:"A big travel day for Jem — new country, unfamiliar smells, different sounds. The crossing itself is the hardest logistical moment. Keep him in the carrier through immigration.",
+  logistics:["Carrier through Lo Wu immigration queues — stroller awkward here","Have diapers easily accessible — border can take 30–40min","Buy diapers in Shenzhen tonight — Pampers China and Merries both excellent","Build in quiet time after crossing — Jem will need it"],
+  nursing:"Find a mall nursing room on arrival. Local family will navigate.",
+  nap:"Aim for a stroller nap on the Shenzhen Metro after crossing."},
+
+ {date:"Tue Oct 6",suggs:["Costco Shenzhen — Metro Line 4, Shenzhen North. Go before 11am.", "Huaqiangbei electronics market — Metro Line 1 or 7"],city:"Shenzhen",emoji:"🛒",title:"Nanyou Fashion Market",
+  letter:"Jem's first market. The colours, sounds, and movement of Nanyou will be a lot of input. Watch his cues — if he's overstimulated, step outside one of the buildings.",
+  logistics:["Stroller in the wider building corridors, carrier in denser sections","Build in a quiet break between buildings","Buy any Shenzhen baby supplies tonight before crossing back"],
+  nursing:"Shenzhen malls throughout the market district have nursing rooms.",
+  nap:"Market energy is stimulating — plan for a proper hotel nap in the afternoon."},
+
+ {date:"Wed Oct 7",suggs:["1881 Heritage — free, 5min walk from hotel", "Harbour City mall — nursing room, flat, easy afternoon"],city:"Hong Kong",emoji:"🔄",title:"Back to HK",
+  letter:"Another border, another stamp. Jem is getting good at this. TST is familiar territory now.",
+  logistics:["Carrier through immigration","Hotel reset on arrival — very good for Jem","Quiet afternoon near the hotel"],
+  nursing:"Hotel room or Harbour City mall.",
+  nap:"Post-crossing stroller nap on the MTR."},
+
+ {date:"Thu Oct 8",suggs:["Apliu Street flea market — old electronics and cameras, Sham Shui Po", "Fabric market, Ki Lung Street — Sham Shui Po"],city:"Hong Kong",emoji:"🏰",title:"Kowloon Walled City + Sham Shui Po",
+  letter:"A good day for Jem — the park is peaceful and genuinely calming. Green space at 6 months is wonderful sensory input at the right level.",
+  logistics:["Stroller throughout — both areas are flat","Park benches for nursing in shade","Carrier in dense Sham Shui Po market sections"],
+  nursing:"Kowloon Walled City Park has quiet shaded benches — one of the best nursing spots of the HK leg.",
+  nap:"Park is perfect for a stroller nap — quiet, shaded, green."},
+
+ {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel, flat", "Temple Street Night Market — Jordan MTR, opens 6pm", "Symphony of Lights — FREE, 8pm from TST promenade"],city:"Hong Kong",emoji:"⛰️",title:"The Peak + Symphony of Lights",
+  letter:"A full day. The Peak Tram is steep — hold Jem securely. The Symphony of Lights at 8pm will be his first laser show. He will stare.",
+  logistics:["Carrier on the Peak Tram — steep incline, secure grip on Jem","Peak Galleria nursing room at the top","Temple Street is loud — baby-safe earplugs or headphones if you have them"],
+  nursing:"Peak Galleria nursing room. Hotel is nearby for a midday reset if needed.",
+  nap:"TST waterfront promenade for a stroller nap — flat, scenic, sea breeze."},
+
+ {date:"Sat Oct 10",suggs:["1881 Heritage — free, 10min walk", "HK Museum of History — stroller-friendly, 100 Chatham Rd South", "Kowloon Park — flat, green, 10min walk"],city:"Hong Kong",emoji:"🚶",title:"Open Wandering Day",
+  letter:"A soft day. No pressure, no anchor. The best possible environment for Jem to just exist in a new place.",
+  logistics:["Stroller throughout the TST area — all flat","Harbour City nursing room","Back at hotel whenever Jem needs it"],
+  nursing:"Harbour City mall has an excellent nursing room.",
+  nap:"Follow Jem's lead today — no schedule."},
+
+ {date:"Sun Oct 11",suggs:["Langham Place mall — nursing room upper floors, midday break", "Egg waffles (雞蛋仔) — grab one on Tung Choi Street"],city:"Hong Kong",emoji:"🌸",title:"Mong Kok Markets",
+  letter:"Mong Kok is busy and loud. Manage the sensory load and use the carrier in the dense sections.",
+  logistics:["Carrier in Mong Kok markets — crowds are dense","Langham Place mall nursing room (upper floors)","Flower Market is stroller-workable — wide streets"],
+  nursing:"Langham Place mall, Mong Kok. Clean, well-signposted.",
+  nap:"Stroller nap between markets — the route from Flower Market to Ladies Market is long enough."},
+
+ {date:"Mon Oct 12",suggs:["Temple Street Night Market — 6pm, Jordan MTR, 5min walk", "1881 Heritage — free wander before the evening show"],city:"Hong Kong",emoji:"🌆",title:"Final HK Day",
+  letter:"Last night in HK. An easy day close to home base. Symphony of Lights at 8pm — 15 minutes outside, Jem will find the lights fascinating.",
+  logistics:["Harbour City nursing room for the day","Last chance to buy HK baby supplies before Japan","Symphony of Lights: outside, 15 minutes, manageable for a baby"],
+  nursing:"Harbour City nursing room. Hotel room throughout the day.",
+  nap:"Hotel nap in the afternoon before the evening out."},
+
+ {date:"Tue Oct 13",suggs:["Dotonbori canal walk — 15min from hotel, easy first Osaka evening", "Den Den Town — 15min walk, retro games and cards"],city:"Travel",emoji:"✈️",title:"HK → Osaka",
+  letter:"A shorter flight — only 3 hours 45 minutes. Jem is already a more experienced flyer than most adults. Japan starts today.",
+  logistics:["~10 diapers for this flight","Feed at takeoff and landing","Merries diapers at any konbini tonight on arrival in Osaka"],
+  nursing:"HKG has nursing rooms in every terminal. KIX arrivals hall also has a baby room.",
+  nap:"Flight nap if possible. Nankai train to Namba is a calm, easy journey."},
+
+ {date:"Wed Oct 14",suggs:["Dotonbori evening — canal walk, Glico Running Man, takoyaki", "Den Den Town — 15min walk after dinner"],city:"Osaka",emoji:"🏯",title:"Osaka Castle + Kuromon + Wagyu",
+  letter:"First full day in Japan. Kuromon Market is a sensory feast for a baby — smells, sounds, colour everywhere. Osaka Castle park is green and open. A good day.",
+  logistics:["Kuromon: wide aisle, stroller fine throughout","Osaka Castle: stroller throughout the park, carrier for the museum interior","Takashimaya Namba nursing room for the evening"],
+  nursing:"Kuromon Market: café at the far end. Osaka Castle park: shaded benches. Takashimaya Namba: nursing room on upper floors.",
+  nap:"Park stroller nap between Kuromon and the castle."},
+
+ {date:"Thu Oct 15",suggs:["Pokémon Center Osaka DX — Daimaru Shinsaibashi 9F (ad hoc, daytime)", "Den Den Town — 15min walk, always available"],city:"Osaka",emoji:"🥊",title:"Sumo Evening",
+  letter:"A lighter daytime for Jem before the sumo evening. The sumo experience itself — assess his energy before deciding if he comes. If he does, it will be extraordinary for him. If not, a quiet hotel evening.",
+  logistics:["Daimaru Shinsaibashi nursing room if doing Pokémon Center","Den Den Town: carrier inside stores — dense and bright","Sumo: if Jem comes, it's loud — have a carrier exit plan"],
+  nursing:"Daimaru 9F nursing room near the Pokémon Center.",
+  nap:"Schedule a solid nap before the sumo evening. 6pm start means he needs energy."},
+
+ {date:"Fri Oct 16",suggs:["Shinsaibashi-suji arcade — morning browse, flat, 600m covered", "Hotel private onsen — every night, stress it tonight"],city:"Osaka",emoji:"🌃",title:"Shinsekai + First Onsen",
+  letter:"Shinsekai is one of Osaka's most atmospheric neighbourhoods. And tonight — Jem's first onsen. Cool the water to 37–38°C. Hold him gently. Watch his face when he enters the warm water for the first time.",
+  logistics:["Shinsaibashi arcade: flat and wide, stroller perfect","Shinsekai: stroller on main strip, carrier in narrower sections","Onsen: see the JEM'S FIRST ONSEN callout at the top of this tab — read it before you go"],
+  nursing:"Shinsaibashi: Daimaru and Sogo at either end of the arcade both have nursing rooms. Onsen private room is a wonderfully warm, quiet nursing environment.",
+  nap:"Good onsen nap opportunity after the warm water — warmth and relaxation often trigger sleep."},
+
+ {date:"Sat Oct 17",suggs:["Tennoji Zoo — 15min walk, great for Jem", "Spa World — 0.6km, massive onsen theme park", "Sumiyoshi Taisha — 20min by subway, oldest Shinto shrine", "Hotel onsen + complimentary ramen — stay in"],city:"Osaka",emoji:"🌿",title:"Slow Day",
+  letter:"This day is for Jem as much as anyone. After 14 days of travel, a genuinely slow day is exactly what a 6-month-old needs. Follow his lead entirely.",
+  logistics:["No fixed plan. Respond to Jem's energy.","Tennoji Zoo (15-min walk): animals at 6 months genuinely entertaining","All options within 15-min radius — no long transit today"],
+  nursing:"Hotel room nursing whenever needed. Easiest nursing day of the entire trip.",
+  nap:"As many naps as Jem needs. No schedule today."},
+
+ {date:"Sun Oct 18",suggs:["Gion (祇園) — 10min walk from MIMARU, lanterns from 4pm, any evening", "Nishiki Market + Pokémon Center Kyoto — 5min walk, any morning"],city:"Kyoto",emoji:"🚄",title:"Move to Kyoto + Fushimi Inari",
+  letter:"Fushimi Inari at dusk with Jem in a carrier is going to be extraordinary. The orange gates glowing, the quiet, the filtered light. He will be mesmerised.",
+  logistics:["Carrier for Fushimi Inari — flat paved path but atmosphere calls for it","Leave stroller at MIMARU hotel on arrival","Train to Inari: stroller in the designated carriage space"],
+  nursing:"Quiet benches in the lower shrine area before heading back. MIMARU for the evening.",
+  nap:"Train journey is a good nap window. Carrier at Fushimi Inari — motion and atmosphere often induce sleep."},
+
+ {date:"Mon Oct 19",suggs:["Gion (祇園) — 10min walk, lanterns from 4pm. Go if energy allows after Nijo.", "Nishiki + Pokémon — 5min walk from hotel, any morning"],city:"Kyoto",emoji:"⛩️",title:"Nishiki + Pokémon + Nijo + Gion",
+  letter:"A full Kyoto day with a hotel reset in the middle. The reset is for Jem as much as for logistics — he gets a proper nap in the crib and everyone gets to reset for the afternoon.",
+  logistics:["Carrier in Nishiki Market — narrow and crowded","Stroller at Nijo Castle — flat grounds throughout","Hotel midday reset: this is the key logistical move of the day","Gion: stroller on Hanamikoji, carrier in narrower lanes"],
+  nursing:"SUINA Muromachi building has facilities near Pokémon Center. Nijo Castle: benches throughout. Gion: any café on the side streets for a quiet evening feed.",
+  nap:"Hotel crib nap at midday. This is the structural anchor of the day — protect it."},
+
+ {date:"Tue Oct 20",suggs:["Uji riverside — flat, stroller-perfect, peaceful (Popo & Goong Goong)", "Uji Shrine — short walk from Tsuen Tea", "Gion evening — 10min walk from MIMARU"],city:"Kyoto",emoji:"🎮",title:"Nintendo Museum — Uji",
+  letter:"Uji is a beautiful, quiet town. The river, the matcha, the ancient tea houses — one of the most calming environments Jem will experience on the whole trip. A genuinely peaceful day.",
+  logistics:["Nintendo Museum has baby facilities inside — ask staff on arrival","Uji riverside: flat stroller path along the river","Tsuen Tea has seating with river views — excellent for a feed"],
+  nursing:"Nintendo Museum baby facility. Tsuen Tea riverside seating.",
+  nap:"Riverside stroller nap in Uji. One of the most peaceful nap spots of the entire trip."},
+
+ {date:"Wed Oct 21",suggs:["Kinkaku-ji (金閣寺) — on Bus 59 route, natural first stop. Entry ¥500.", "Gion evening — 10min walk from MIMARU on return"],city:"Kyoto",emoji:"🌸",title:"Arashiyama",
+  letter:"The bamboo grove with Jem in a carrier is an otherworldly experience — towering green stalks, filtered light, the sound of wind through the bamboo. He will stare upward and be completely still.",
+  logistics:["Kinkaku-ji: stroller on flat gravel path if going","Bamboo Grove: carrier — narrow path, crowds","Tenryu-ji: stroller throughout the flat garden paths","Pack bags tonight. Send heavy bags via takuhaibin to Keio Plaza Tokyo."],
+  nursing:"Tenryu-ji garden: quiet benches away from the main paths — one of the best nursing spots of the trip. Arashiyama cafes every 50 metres.",
+  nap:"Bus ride to Arashiyama. Tenryu-ji garden is quiet enough for a carrier nap."},
+
+ {date:"Thu Oct 22",suggs:["Pokémon Center Tokyo DX — Nihonbashi Takashimaya East 5F, read Jem's mood", "Tokyo Metropolitan Government Building — 1min walk from hotel, free observation deck"],city:"Travel",emoji:"🚄",title:"Shinkansen to Tokyo",
+  letter:"Jem's first Shinkansen. 285km/h and he will be asleep within 20 minutes. Wake him up for Mt Fuji.",
+  logistics:["Feed Jem at the start of the journey — motion will do the rest","Stroller in designated carriage space or folded in overhead","Nihonbashi Takashimaya nursing room (5F) if doing Pokémon Center DX"],
+  nursing:"Kyoto Station Isetan nursing room before boarding. Shinkansen has changing facilities.",
+  nap:"The Shinkansen is a guaranteed nap. 2hrs 15min of smooth, quiet motion at 285km/h."},
+
+ {date:"Fri Oct 23",suggs:["Ueno Park — 10min walk from Akihabara (Popo & Goong Goong parallel path + Jem transfer point)", "Pokémon Center Ikebukuro — JR Yamanote ~20min, largest in Tokyo"],city:"Tokyo",emoji:"🎮",title:"Akihabara",
+  letter:"Akihabara is the most intensely stimulating environment of the whole trip. Manage Jem's exposure carefully and have a clear exit plan.",
+  logistics:["Yodobashi Camera nursing room on main street (ask at info desk)","Carrier inside stores — stroller on the main street only","Ueno Park with Popo & Goong Goong is a much calmer parallel option for Jem","Build in a quiet midday break — Ueno Park is 10-min walk away"],
+  nursing:"Yodobashi Camera nursing room. If Jem is with grandparents at Ueno: Ueno Park has quiet benches throughout.",
+  nap:"Ueno Park stroller nap with grandparents if Jem splits from the group. Side streets near Akihabara are much quieter than the main strip."},
+
+ {date:"Sat Oct 24",suggs:["Sky Plaza Ibasho soft play — in Keio Plaza hotel, ¥2,000, good for Jem"],city:"Tokyo",emoji:"⚾",title:"Japan Series — Jem Sits This One Out",
+  letter:"Jem gets a quiet evening. Regular bedtime, familiar routine, a proper sleep. Everyone benefits.",
+  logistics:["Whoever stays with Jem: hotel room, familiar white noise, regular bedtime","Good evening for a longer feeding session and calm wind-down","Sky Plaza Ibasho soft play area in the hotel (¥2,000 entry) if Jem needs movement"],
+  nursing:"Hotel room — quiet, familiar, easy.",
+  nap:"Normal evening schedule. Jem benefits from a night of routine after a busy week."},
+
+ {date:"Sun Oct 25",suggs:["Roppongi Hills — 15min walk from TeamLab, excellent restaurants"],city:"Tokyo",emoji:"🌊",title:"TeamLab Borderless",
+  letter:"TeamLab Borderless will be one of Jem's most extraordinary early experiences. Moving light, shifting colour, infinite environments. He will stare and stare and stare.",
+  logistics:["Ask staff about baby facilities on arrival — they are very helpful","Carrier for narrower corridor rooms","Azabudai Hills mall nursing room for before and after"],
+  nursing:"TeamLab baby area (ask staff on arrival). Azabudai Hills mall nursing rooms throughout.",
+  nap:"Early morning slot means Jem is well-rested going in. Allow for a post-TeamLab nap — the stimulation will tire him."},
+
+ {date:"Mon Oct 26",suggs:["Pokémon Center Skytree Town — 10min walk from Senso-ji", "Ryogoku sumo culture — Sumo Museum (free) + Edo Noren (walk-in)", "Akachan Honpo Kinshicho — 5F Arcakit, 1 stop east of Ryogoku"],city:"Tokyo",emoji:"🕌",title:"Senso-ji + Skytree + Ryogoku",
+  letter:"Asakusa is one of the most beautiful areas in Tokyo. Ancient, atmospheric, full of colour. Jem in a carrier through Nakamise-dori at 8am is a perfect moment.",
+  logistics:["Stroller after Kaminarimon — flat throughout Asakusa","Nursing room: Asakusa Culture Tourist Information Center (across from Kaminarimon)","Skytree Solamachi: multiple nursing rooms, well-signposted","Ryogoku: Edo Noren is calm and low-key — fine for a baby"],
+  nursing:"Asakusa Culture Tourist Information Center nursing room. Solamachi at Skytree.",
+  nap:"Solamachi lunch is a natural nap window — Jem in the stroller while you eat."},
+
+ {date:"Tue Oct 27",suggs:["Shimokitazawa — Odakyu Line from Shinjuku ~10min. Becca's thrifting paradise.", "Shinjuku Gyoen — 10min walk from hotel, great for Jem in the stroller"],city:"Tokyo",emoji:"🧖",title:"Head Spa Day",
+  letter:"A calmer day for Jem. Omotesando is wide, flat, and gentle. Shimokitazawa is village-like and quiet. No overwhelm today.",
+  logistics:["Carrier on Takeshita Street — crowds are dense and unpredictable","Stroller on Omotesando — wide boulevard, flat, perfect","Shimokitazawa: fold stroller at store entrances, carry Jem inside","Shinjuku Gyoen as an option if anyone wants quiet green space"],
+  nursing:"Omotesando Hills nursing room. Shimokitazawa cafes are welcoming. Shinjuku Gyoen has benches throughout.",
+  nap:"Shinjuku Gyoen stroller nap is outstanding — flat, quiet, October foliage. One of the best nap spots in Tokyo."},
+
+ {date:"Wed Oct 28",suggs:["Nakano Broadway — JR Chuo ~10min, nap-time solo runs", "Shimokitazawa again — Odakyu ~10min", "Isetan Shinjuku depachika — 10min walk, any evening (tonight's secondary anchor)"],city:"Tokyo",emoji:"🌿",title:"Free Day + Isetan",
+  letter:"If Jem has been struggling — and by day 26 he might be — this is the day to stay close to home. A morning walk in Shinjuku Gyoen, lunch nearby, afternoon nap, Isetan in the evening. That is a perfect day.",
+  logistics:["No pressure. Follow Jem's lead completely.","Nakano Broadway: 10-min, relatively calm for Jem if going","Shinjuku Gyoen: 10-min walk, beautiful in late October","Isetan evening: warm, calm environment — good for a tired baby in a carrier"],
+  nursing:"Hotel room. Gyoen park. Isetan has nursing rooms in the building.",
+  nap:"As many as needed. Absolutely no schedule today."},
+
+ {date:"Thu Oct 29",suggs:["MEGA Don Quijote Shibuya — 5min walk from Shibuya Station, 8 floors", "Loft Shibuya — stationery, design goods, great for gifts"],city:"Tokyo",emoji:"🗼",title:"Shibuya + Tokyo Tower — Last Full Day",
+  letter:"The last full day. Zojoji Temple's garden of Jizo statues — 1,300 small stone figures in red knitted hats, each one a prayer made by a parent for their child — is where you will want to sit quietly with Jem for a moment before you go home.",
+  logistics:["Shibuya Crossing: carrier or stroller, both work","Shibuya PARCO 6F nursing room","Tokyo Tower FootTown baby facilities","Zojoji Temple: quiet benches throughout — plan time here"],
+  nursing:"Shibuya PARCO 6F nursing room. Tokyo Tower FootTown baby facilities. Zojoji Temple benches are some of the most peaceful of the whole trip.",
+  nap:"Stroller nap between Shibuya and Tokyo Tower — the subway ride and walk are a natural window."},
+
+ {date:"Fri Oct 30",city:"Travel",emoji:"✈️",title:"Fly Home",
+  letter:"Jem has done it. Hong Kong, Shenzhen, Osaka, Kyoto, Tokyo. He has stamps from four countries, memories he cannot yet hold, and two grandparents who crossed the world to be with him. Feed him at takeoff and landing. Let him sleep. You all did something extraordinary together.",
+  logistics:["Bassinet seat confirmed on the return flight","Feed at takeoff and landing","NEXUS lane at Canadian customs","Declare all purchases including Pokémon cards"],
+  nursing:"HND has nursing facilities in the international terminal. Feed before boarding.",
+  nap:"The flight home is 13–14 hours. Let Jem sleep as much as he wants — you need rest too."}
+];
+
+let currentFilter="All";
+
+function cStyle(city){const c=CC[city]||CC["Travel"];return `background:${c.bg};border:1px solid ${c.br};color:${c.tx}`;}
+
+function buildDays(){
+  const ctr=document.getElementById("days-container");
+  ctr.innerHTML="";
+  const filtered=currentFilter==="All"?days:days.filter(d=>d.city===currentFilter);
+  filtered.forEach(day=>{
+    const c=CC[day.city]||CC["Travel"];
+    const itemsHtml=(day.items||[]).map(item=>{
+      const isRed=item.startsWith("🔴")||item.startsWith("🧳");
+      const isDia=item.startsWith("🩺");
+      const col=isRed?"#f87171":isDia?"#34d399":c.tx;
+      return `<div class="day-item"><span class="item-icon" style="color:${col}">→</span><span>${item}</span></div>`;
+    }).join("");
+    const popoHtml=day.popo?`<div class="popo-box"><span class="popo-label">👵👴 POPO & GOONG GOONG</span>${day.popo}</div>`:"";
+    const parallelHtml=day.parallel?`<div class="parallel-box"><span class="parallel-label">↔️ PARALLEL PATH — POPO, GOONG GOONG & JEM</span>${day.parallel}</div>`:"";
+    const warnHtml=day.warn?`<div class="warning-box"><span class="warning-label">⚠️ NOTE</span>${day.warn}</div>`:"";
+    const standHtml=day.stand?`<div class="standing-note">${day.stand}</div>`:"";
+    const card=document.createElement("div");
+    card.className="day-card";
+    card.innerHTML=`
+      <button class="day-header" onclick="toggleCard(this,'day-card')">
+        <div class="day-emoji">${day.emoji}</div>
+        <div class="day-meta">
+          <div class="day-top"><span class="day-date">${day.date}</span><span class="city-tag" style="${cStyle(day.city)}">${day.city}</span></div>
+          <div class="day-title">${day.title}</div>
+          ${day.dist?`<div class="day-dist">${day.dist}</div>`:""}
+        </div>
+        <div class="day-chevron">▼</div>
+      </button>
+      <div class="day-body">
+        ${standHtml}
+        <div class="day-note">${day.note}</div>
+        ${warnHtml}${popoHtml}${parallelHtml}
+        <div class="day-items">${itemsHtml}</div>
+        ${day.suggs && day.suggs.length ? `<div class="day-suggestions"><span class="day-suggestions-label">💡 NEARBY &amp; SECONDARY</span>${day.suggs.map(s=>`<div class="day-sugg-item"><span style="color:var(--dim);flex-shrink:0">→</span><span>${s}</span></div>`).join('')}</div>` : ''}
+      </div>`;
+    ctr.appendChild(card);
+  });
+}
+
+function buildJem(){
+  const ctr=document.getElementById("jem-container");
+  if(!ctr)return;
+  ctr.innerHTML="";
+  jemDays.forEach(day=>{
+    const card=document.createElement("div");
+    card.className="day-card";
+    const logHtml=(day.logistics||[]).map(l=>`<div class="section-row"><span class="row-icon" style="color:#4ade80">→</span><span style="font-size:13px;color:#d1d5db">${l}</span></div>`).join("");
+    card.innerHTML=`
+      <button class="day-header" onclick="toggleCard(this,'day-card')">
+        <div class="day-emoji">${day.emoji}</div>
+        <div class="day-meta">
+          <div class="day-top"><span class="day-date">${day.date}</span><span class="city-tag" style="${cStyle(day.city)}">${day.city}</span></div>
+          <div class="day-title">${day.title}</div>
+        </div>
+        <div class="day-chevron">▼</div>
+      </button>
+      <div class="day-body">
+        <p class="jem-letter">${day.letter}</p>
+        <div style="margin-bottom:10px">${logHtml}</div>
+        <div class="nursing-tag">🤱 NURSING: ${day.nursing}</div>
+        <div class="nap-box"><span class="nap-label">💤 NAP STRATEGY</span><p style="font-size:13px;color:#fef3c7">${day.nap}</p></div>
+      </div>`;
+    ctr.appendChild(card);
+  });
+}
+
+function toggleCard(btn,cardClass){
+  const card=btn.closest("."+cardClass);
+  const isOpen=card.classList.contains("open");
+  document.querySelectorAll("."+cardClass+".open").forEach(c=>{c.classList.remove("open");c.querySelector(".day-chevron").textContent="▼";});
+  if(!isOpen){card.classList.add("open");btn.querySelector(".day-chevron").textContent="▲";}
+}
+
+function filterCity(city,btn){
+  currentFilter=city;
+  document.querySelectorAll(".city-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  buildDays();
+}
+
+function switchTab(id,btn){
+  document.querySelectorAll(".tab-content").forEach(el=>el.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  btn.classList.add("active");
+}
+
+
+function toggleTodo(el){
+  el.classList.toggle('checked');
+  const cb = el.querySelector('.todo-checkbox');
+  if(el.classList.contains('checked')){cb.textContent='✓';}else{cb.textContent='';}
+  // Save state
+  try{const id=el.id;const checked=el.classList.contains('checked');const saved=JSON.parse(localStorage.getItem('todos')||'{}');saved[id]=checked;localStorage.setItem('todos',JSON.stringify(saved));}catch(e){}
+}
+function loadTodos(){
+  try{const saved=JSON.parse(localStorage.getItem('todos')||'{}');Object.entries(saved).forEach(([id,checked])=>{const el=document.getElementById(id);if(el&&checked){el.classList.add('checked');const cb=el.querySelector('.todo-checkbox');if(cb)cb.textContent='✓';}});}catch(e){}
+}
+function toggleSuggCity(header){
+  const section=header.closest('.sugg-city-section');
+  const content=section.querySelector('.sugg-city-content');
+  const chevron=header.querySelector('.sugg-city-chevron');
+  const isCollapsed=section.classList.contains('collapsed');
+  if(isCollapsed){
+    section.classList.remove('collapsed');
+    content.style.maxHeight=content.scrollHeight+'px';
+    chevron.textContent='▼';
+  }else{
+    content.style.maxHeight=content.scrollHeight+'px';
+    requestAnimationFrame(()=>{content.style.maxHeight='0px';});
+    section.classList.add('collapsed');
+    chevron.textContent='▼';
+  }
+}
+// Init suggestion city heights
+function initSuggCities(){
+  document.querySelectorAll('.sugg-city-content').forEach(c=>{c.style.maxHeight=c.scrollHeight+'px';});
+}
+
+buildDays();
+buildJem();
+loadTodos();
+setTimeout(initSuggCities, 100);
+</script>
+</body>
+</html>
