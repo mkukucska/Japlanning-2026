@@ -796,8 +796,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 </div>
 
 <div id="tab-todo" class="tab-content">
-  <div class="section-card done"><div class="section-title green">DONE</div>
-    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-0"><div class="todo-checkbox">✓</div><span class="todo-text">Nintendo Accounts created &mdash; all 5 (Micheal, Becca, Popo, Goong Goong, Jem)</span></div>
+      <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-0"><div class="todo-checkbox">✓</div><span class="todo-text">Nintendo Accounts created &mdash; all 5 (Micheal, Becca, Popo, Goong Goong, Jem)</span></div>
     <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-1"><div class="todo-checkbox">✓</div><span class="todo-text">NordVPN &mdash; installed and ready</span></div>
     <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-2"><div class="todo-checkbox">✓</div><span class="todo-text">China visa &mdash; not required for Canadians under 30 days</span></div>
   </div>
@@ -814,8 +813,8 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   </div>
 
   <div class="section-card"><div class="section-title">AUGUST &mdash; BOOKING MONTH</div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-8"><div class="todo-checkbox"></div><span class="todo-text">Flights booked: CX 805 YYZ&rarr;HKG (Oct 3, departs 3:45pm), CX 598 HKG&rarr;KIX (Oct 11, departs 1:20pm), AC 2 HND&rarr;YYZ (Oct 27, departs 6:05pm), HKG&rarr;KIX (Oct 11), HND&rarr;HKG (Oct 27), HKG&rarr;YYZ (Oct 28). Popo &amp; Goong Goong: LHR&rarr;HKG arriving before Oct 4.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-bassinet"><div class="todo-checkbox"></div><span class="todo-text"><strong>Immediately after booking each flight:</strong> Call the airline directly to request bassinet seats (front bulkhead row) for Jem. Cannot be done through third-party booking sites — must call or use the airline's Manage Booking portal. Cathay Pacific: 1-800-268-6868 (for CX 805 Oct 3 and CX 598 Oct 11). Confirm weight limit for Jem (typically ~10kg). AC 2 (Oct 27): Air Canada 1-888-247-2262 — request bassinet for the return flight too.</span></div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-8"><div class="todo-checkbox">✓</div><span class="todo-text">Flights booked &amp; bassinet seats confirmed: CX 805 YYZ&rarr;HKG (Oct 3, departs 3:45pm) &middot; CX 598 HKG&rarr;KIX (Oct 11, departs 1:20pm) &middot; AC 2 HND&rarr;YYZ (Oct 27, departs 6:05pm)</span></div><span class="todo-text">Flights booked: CX 805 YYZ&rarr;HKG (Oct 3, departs 3:45pm), CX 598 HKG&rarr;KIX (Oct 11, departs 1:20pm), AC 2 HND&rarr;YYZ (Oct 27, departs 6:05pm), HKG&rarr;KIX (Oct 11), HND&rarr;HKG (Oct 27), HKG&rarr;YYZ (Oct 28). Popo &amp; Goong Goong: LHR&rarr;HKG arriving before Oct 4.</span></div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-bassinet"><div class="todo-checkbox">✓</div><span class="todo-text"><strong>Immediately after booking each flight:</strong> Call the airline directly to request bassinet seats (front bulkhead row) for Jem. Cannot be done through third-party booking sites — must call or use the airline's Manage Booking portal. Cathay Pacific: 1-800-268-6868 (for CX 805 Oct 3 and CX 598 Oct 11). Confirm weight limit for Jem (typically ~10kg). AC 2 (Oct 27): Air Canada 1-888-247-2262 — request bassinet for the return flight too.</span></div>
     <div class="todo-item" onclick="toggleTodo(this)" id="todo-9"><div class="todo-checkbox"></div><span class="todo-text">Book all hotels &mdash; 2 rooms each, request cribs, request connecting/same-floor rooms. Bassinet seats on all flights for Jem.</span></div>
     <div class="todo-item" onclick="toggleTodo(this)" id="todo-10"><div class="todo-checkbox"></div><span class="todo-text"><strong>Hinode Hotel Osaka:</strong> Call to pre-book 2 recurring private onsen slots for 5-night stay. 1 guaranteed minimum, 2 ideally. Confirm crib and water mineral type.</span></div>
     <div class="todo-item" onclick="toggleTodo(this)" id="todo-11"><div class="todo-checkbox"></div><span class="todo-text"><strong>Keio Plaza Tokyo:</strong> Request Happy Baby Stay Package at booking — mention Jem&apos;s age (born April 17 2026, arrives at 6 months). Request crib at booking. Jem is well within the under-10-months policy.</span></div>
@@ -1062,7 +1061,7 @@ const days=[
  {date:"Sat Oct 3",suggs:[],city:"Travel",emoji:"✈️",title:"Departure — Toronto → Hong Kong",dist:"YYZ Terminal 3 — depart 3:45pm. Leave home by 12:30pm.",
   note:"YYZ→HKG ~16hrs direct. Cathay Pacific, Air Canada, and Korean Air all fly this route. Bassinet seat must be pre-booked — front bulkhead row, confirm with the airline before departure day. Popo & Goong Goong fly LHR→HKG separately and will be waiting in arrivals when you land.",
   items:[
-    "✈️ FLIGHT: CX 805. Departs YYZ Terminal 3 at 3:45pm. Arrives HKG Terminal 1 at 7:10pm on Oct 4. ~15hrs 25min. Airbus A350-1000. Operated by Cathay Pacific.",
+    "✈️ FLIGHT: CX 805 ✓ BOOKED. Departs YYZ Terminal 3 at 3:45pm. Arrives HKG Terminal 1 at 7:10pm on Oct 4. ~15hrs 25min. Airbus A350-1000. Bassinet seat confirmed.",
     "🎫 TICKETS & CHECK-IN: Check in online 24hrs before. Use the Cathay Pacific family / priority check-in lane at T3. Jem needs his own booking reference (infant on lap). Stroller checks gate-side — comes back at the jet bridge in HK.",
     "🧳 BAGGAGE: Check bags at the counter. Keep one carry-on per adult with: 20+ diapers, 2 changes of clothes for Jem, formula/food buffer, white noise device, nursing cover, familiar toy. Everything else goes in the hold.",
     "🛡️ SECURITY: Family security lanes at YYZ — ask any agent to direct you. Stroller goes through the X-ray folded. Carrier worn through the body scanner then patted down. Goong Goong: declare all medications if asked — carry the English doctor's note.",
@@ -1116,7 +1115,7 @@ const days=[
  {date:"Sat Oct 11",suggs:["Dotonbori (道頓堀) — 15min walk from Hinode Hotel. Canal walk, Glico Running Man neon, easy first Osaka evening. No pressure.","Den Den Town (でんでんタウン) — 15min walk from hotel. Retro games, cards, anime. Always open in the evenings — go if the energy is there."],city:"Travel",emoji:"✈️",title:"Hong Kong → Osaka (KIX)",dist:"CX 598 departs HKG T1 at 1:20pm — check out by 10am, Airport Express by 10:15am",
   note:"CX 598 — departs HKG Terminal 1 at 1:20pm, arrives KIX Terminal 1 at 6:10pm. Flight time ~3hrs 50min. Airbus A350-900. Check out of Holiday Inn by 10am for a stress-free run to the airport. Popo & Goong Goong are on a separate HKG→KIX flight — reconvene at Hinode Hotel Osaka this evening.",
   items:[
-    "✈️ FLIGHT: CX 598. Departs HKG Terminal 1 at 1:20pm. Arrives KIX Terminal 1 at 6:10pm. ~3hrs 50min. Airbus A350-900.",
+    "✈️ FLIGHT: CX 598 ✓ BOOKED. Departs HKG Terminal 1 at 1:20pm. Arrives KIX Terminal 1 at 6:10pm. ~3hrs 50min. Airbus A350-900. Bassinet seat confirmed.",
     "🕙 MORNING PLAN: Check out of Holiday Inn Golden Mile by 10am. Airport Express from Kowloon Station at 10:15am, at HKG by 10:40am. Check-in and security done by 11:30am — 1hr 50min buffer before departure. No rush.",
     "🎫 CHECK-IN: Online check-in opens 24hrs before. HKG Terminal 1, Cathay Pacific check-in counters. Family lane. Stroller gate-checks — comes back at the jet bridge in Osaka.",
     "🧳 BAGGAGE: Bags go through normally. Before heading to departures: stop at HKG Customer Service Centre and refund remaining Octopus Card balances — you won't need them again.",
@@ -1228,7 +1227,7 @@ const days=[
   note:"Check out of Keio Plaza and head to Haneda. Short flight HND→HKG ~4hrs. Back in familiar TST territory for one last night. Wander, find dinner, decompress.",
   items:[
     "🧳 CHECK OUT: Keio Plaza checkout by 11am. Store any bags with the hotel concierge if your flight is later in the day.",
-    "✈️ FLIGHT: AC 2. Departs HND Terminal 3 at 6:05pm. Arrives YYZ Terminal 1 at 5:30pm same day. ~12hrs 25min. Boeing 777-300ER. All five together. Codeshared with ANA as NH6820.",
+    "✈️ FLIGHT: AC 2 ✓ BOOKED. Departs HND Terminal 3 at 6:05pm. Arrives YYZ Terminal 1 at 5:30pm same day. ~12hrs 25min. Boeing 777-300ER. All five together. Bassinet seat confirmed.",
     "🕒 DAY PLAN: Checkout Keio Plaza by 11am. Store bags with the hotel concierge. Full day in Tokyo until ~3:30pm — then head to Haneda.",
     "🚆 KEIO PLAZA → HANEDA (HND): Walk 5min to Shinjuku Station (west exit). JR Yamanote Line to Shinagawa (~20min, ¥220 / ~CAD $2). Keikyu Airport Express to Haneda International Terminal T3, ~15min, ¥330 (~CAD $3). Total ~35min, ~¥550 (~CAD $5.25).",
     "✈️ FLIGHT: HND→HKG ~4hrs. Check in 2hrs before departure.",
