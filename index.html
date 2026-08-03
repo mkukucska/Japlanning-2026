@@ -191,6 +191,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   </div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('itinerary',this)">&#128197; Itinerary</button>
+    <button class="tab-btn" onclick="switchTab('travel',this)">&#9992;&#65039; Travel</button>
     <button class="tab-btn" onclick="switchTab('suggestions',this)">&#127775; Suggestions</button>
     <button class="tab-btn" onclick="switchTab('jem',this)">&#128118; Jem</button>
     <button class="tab-btn" onclick="switchTab('phrases',this)">&#128483; Phrases</button>
@@ -215,6 +216,71 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <div id="days-container"></div>
 </div>
 
+<div id="tab-travel" class="tab-content">
+
+  <div class="section-card" style="background:rgba(34,197,94,0.04);border-color:rgba(34,197,94,0.25)">
+    <div class="section-title green">✓ ALL FLIGHTS BOOKED</div>
+    <div class="section-row"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Bassinet seats confirmed</strong> on all three flights &mdash; CX 805, CX 598, AC 2</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#4ade80">&#8594;</span><span><strong>Popo &amp; Goong Goong</strong> on separate flights for YYZ&rarr;HKG and HKG&rarr;KIX legs. All five together on AC 2 home.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">✈️ FLIGHT 1 &mdash; CX 805 &middot; SAT OCT 3</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Route:</strong> Toronto (YYZ) &rarr; Hong Kong (HKG)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Departs:</strong> YYZ Terminal 3 at 3:45pm</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Arrives:</strong> HKG Terminal 1 at 7:10pm on Sunday Oct 4</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Duration:</strong> ~15hrs 25min &middot; <strong>Aircraft:</strong> Airbus A350-1000 &middot; <strong>Carrier:</strong> Cathay Pacific</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Passengers:</strong> Micheal, Becca &amp; Jem &middot; Bassinet seat confirmed</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Leave for airport:</strong> By 12:30pm &mdash; allow 3hrs before departure</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Popo &amp; Goong Goong:</strong> Separate LHR&rarr;HKG flight, arriving before Oct 4. Will be waiting in arrivals.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">✈️ FLIGHT 2 &mdash; CX 598 &middot; SAT OCT 11</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Route:</strong> Hong Kong (HKG) &rarr; Osaka Kansai (KIX)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Departs:</strong> HKG Terminal 1 at 1:20pm</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Arrives:</strong> KIX Terminal 1 at 6:10pm</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Duration:</strong> ~3hrs 50min &middot; <strong>Aircraft:</strong> Airbus A350-900 &middot; <strong>Carrier:</strong> Cathay Pacific</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Passengers:</strong> Micheal, Becca &amp; Jem &middot; Bassinet seat confirmed</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Morning plan:</strong> Check out of Holiday Inn Golden Mile by 10am &middot; Airport Express from Kowloon Station at 10:15am &middot; At HKG by 10:40am &middot; 1hr 40min buffer before departure</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>KIX arrival &mdash; do this first:</strong> Buy Japan pocket WiFi or data SIM at the arrivals hall before anything else. Your connectivity for the next 16 days.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>KIX &rarr; Namba:</strong> Nankai Rapi:t express from KIX Platform 2, ~45min, ¥1,430 (~CAD $14). Buy at the Nankai counter in arrivals.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Popo &amp; Goong Goong:</strong> Separate HKG&rarr;KIX flight. Reconvene at Hinode Hotel Osaka this evening.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🚄 SHINKANSEN &mdash; MON OCT 20</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Route:</strong> Kyoto &rarr; Tokyo (Nozomi)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Duration:</strong> ~2hrs 15min &middot; <strong>Fare:</strong> ¥13,820 (~CAD $132) per adult &middot; Children under 6 free</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Book via:</strong> smart-ex.jp (English available) &middot; Request Car 16, seats A &amp; B on the LEFT side for Mt Fuji views</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Note:</strong> Nozomi is NOT covered by JR Pass &mdash; use Hikari if on a pass (adds ~30min)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Mt Fuji:</strong> LEFT side seats A &amp; B, appears ~40min after departing Kyoto near Shin-Fuji Station</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Nursing:</strong> Car 11 has a multi-purpose room (多目的室) &mdash; private room designed for nursing, medical needs, and settling a baby</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Before boarding:</strong> Send heavy bags via takuhaibin from MIMARU to Keio Plaza the night before (Oct 19 evening) &mdash; they arrive before you do</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Buy ekiben</strong> in Kyoto Station basement before boarding &mdash; beautifully packaged regional bento. One of the great Shinkansen traditions.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">✈️ FLIGHT 3 &mdash; AC 2 &middot; MON OCT 27</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Route:</strong> Tokyo Haneda (HND) &rarr; Toronto (YYZ)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Departs:</strong> HND Terminal 3 at 6:05pm</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Arrives:</strong> YYZ Terminal 1 at 5:30pm same day (date line)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Duration:</strong> ~12hrs 25min &middot; <strong>Aircraft:</strong> Boeing 777-300ER &middot; <strong>Carrier:</strong> Air Canada</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Passengers:</strong> All five together &middot; Bassinet seat confirmed</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Day plan:</strong> Check out of Keio Plaza by 11am &middot; Store bags with concierge &middot; Full day in Tokyo until ~3:30pm</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Keio Plaza &rarr; HND:</strong> Walk 5min to Shinjuku Station (west exit) &middot; JR Yamanote to Shinagawa (~20min, ¥220) &middot; Keikyu Airport Express to HND T3 (~15min, ¥330) &middot; Total ~35min, ~¥550 (~CAD $5.25)</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Arrive YYZ T1:</strong> Canadian customs &mdash; all 5 travellers each have CAD $800 duty-free exemption (CAD $4,000 total). NEXUS lane significantly faster.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>🧳 Takuhaibin tip:</strong> Send large bags to HND on Oct 26 via luggage forwarding &mdash; they arrive at the airport before you do.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🛂 BORDER CROSSINGS</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Lo Wu (HK &rarr; Shenzhen, Oct 5):</strong> MTR East Rail Line from Mong Kok East to Lo Wu (~40min, last stop). Walk across. All 5 passports &mdash; Jem needs his own. No China visa required for Canadians under 30 days. Allow 20–40min. 🔴 NordVPN must be connected on the HK side before crossing.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Lo Wu (Shenzhen &rarr; HK, Oct 7):</strong> Reverse crossing. Same process. Reconnect to normal internet on the HK side. Exchange or refund remaining yuan at HSBC or Bank of China before leaving Kowloon.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>All borders:</strong> Jem's passport must be accessible at every crossing &mdash; HKG arrivals, Lo Wu both ways, KIX, HND, YYZ. He earns every stamp.</span></div>
+  </div>
+
+</div>
 <div id="tab-suggestions" class="tab-content">
   
 <div class="sugg-city-section" id="sugg-hong-kong">
@@ -530,7 +596,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 
   <div class="sugg-card highlight">
     <div class="sugg-name">Book-Off (ブックオフ)<span class="sugg-highlight-badge">HIGHLIGHT</span></div>
-    <div class="sugg-desc">Japan&apos;s beloved secondhand chain for books, games, CDs, and trading cards including vintage Pok&eacute;mon. Prices are often surprisingly low. Multiple relevant locations: Akihabara (Oct 23, on the main strip), Nakano (near the hotel, 10 min, good for nap-time runs), Shimokitazawa (Oct 27 area). A serious hunting ground, not casual browsing.</div>
+    <div class="sugg-desc">Japan&apos;s beloved secondhand chain for books, games, CDs, and trading cards including vintage Pok&eacute;mon. Prices are often surprisingly low. Multiple relevant locations: Akihabara (Oct 23, on the main strip), Nakano (~15min from hotel via JR Chuo from Shinjuku, good for nap-time runs), Shimokitazawa (Oct 27 area). A serious hunting ground, not casual browsing.</div>
     <div class="sugg-meta"><span><strong>Key locations:</strong> Akihabara, Nakano, Shimokitazawa</span><span><strong>Time needed:</strong> 30 min&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 23 / Oct 27 / Oct 28</span></div>
   </div>
 
@@ -870,13 +936,13 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <div class="hotel-card">
     <div class="hotel-header">
       <div><span class="hotel-city-tag" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong &mdash; Night 1</span><span class="hotel-status-tbd">TO BOOK</span></div>
-      <div class="hotel-name">Budget Hotel &mdash; Mong Kok / Yau Ma Tei</div>
-      <div class="hotel-sub">Near MTR Mong Kok East Station / East Rail Line &middot; Oct 4 only &middot; 1 night</div>
+      <div class="hotel-name">The Beacon Hong Kong ✓</div>
+      <div class="hotel-sub">88 Sai Yee Street, Mong Kok &middot; Tel: +852 2960 2888 &middot; thebeaconhotel.com.hk &middot; Oct 4 only &middot; 1 night</div>
       <div class="hotel-dates">Check-in: typically 3:00pm &middot; Check-out: 12:00pm &middot; Varies by property — confirm when booking</div>
       <div class="hotel-dates" style="margin-top:4px;color:#f87171;font-size:11px">Oct 4 only (1 night) &mdash; separate from the main HK stay</div>
     </div>
     <div class="hotel-body">
-      <div class="hotel-why">One night, sleeping only. The entire point of this location is the East Rail Line &mdash; Mong Kok East Station is directly on the line to Lo Wu border crossing for Shenzhen the next morning. Any clean, reasonably priced hotel near the MTR works. Options: iclub Mong Kok Hotel (cribs available, well-reviewed), Metropark Hotel Mongkok (Cross-Boundary Coach Terminal next door, 2-min to Prince Edward MTR). Book whatever is cheapest and available.</div>
+      <div class="hotel-why">The Beacon is at 88 Sai Yee Street, Mong Kok — a 5-min walk from Mong Kok MTR Station and well situated between Mong Kok Station and Mong Kok East Station. Ladies Market is a 3-min walk. One night, sleeping only — chosen for proximity to the East Rail Line for the Shenzhen crossing tomorrow morning.</div>
       <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Request crib for Jem at whichever hotel you book</span></div>
       <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Must be near MTR East Rail Line for easy Lo Wu crossing Oct 5 morning</span></div>
     </div>
@@ -910,8 +976,8 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <!-- HK MAIN -->
   <div class="hotel-card">
     <div class="hotel-header">
-      <div><span class="hotel-city-tag" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong</span><span class="hotel-status-tbd">TO BOOK</span></div>
-      <div class="hotel-name">Holiday Inn Golden Mile &mdash; recommended</div>
+      <div><span class="hotel-city-tag" style="background:rgba(202,138,4,0.15);border:1px solid rgba(202,138,4,0.35);color:#facc15">Hong Kong</span><span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 10px;border-radius:999px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.4);color:#4ade80;margin-left:8px">✓ BOOKED</span></div>
+      <div class="hotel-name">Holiday Inn Golden Mile</div>
       <div class="hotel-sub">50 Nathan Road, Tsim Sha Tsui, Kowloon &middot; Tel: +852 2369 3111 &middot; holidayinn.com</div>
       <div class="hotel-dates">Oct 7 &rarr; Oct 11 (4 nights) &middot; Oct 27 (1 night return stopover) &middot; 2 rooms &middot; Check-in: 3:00pm &middot; Check-out: 12:00pm</div>
     </div>
@@ -934,7 +1000,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <!-- OSAKA -->
   <div class="hotel-card">
     <div class="hotel-header">
-      <div><span class="hotel-city-tag" style="background:rgba(234,88,12,0.15);border:1px solid rgba(234,88,12,0.35);color:#fb923c">Osaka</span><span class="hotel-status-tbd">TO BOOK</span></div>
+      <div><span class="hotel-city-tag" style="background:rgba(234,88,12,0.15);border:1px solid rgba(234,88,12,0.35);color:#fb923c">Osaka</span><span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 10px;border-radius:999px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.4);color:#4ade80;margin-left:8px">✓ BOOKED</span></div>
       <div class="hotel-name">Hot Spring Hinode Hotel Nipponbashi</div>
       <div class="hotel-sub">1-7-16 Nipponbashi, Naniwa-ku, Osaka &middot; Tel: +81 6-6641-0303 &middot; hinode-hotel.com</div>
       <div class="hotel-dates">Oct 11 &rarr; Oct 16 &middot; 5 nights &middot; Check-in: 3:00pm &middot; Check-out: 11:00am</div>
@@ -946,8 +1012,8 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Complimentary ramen 9&ndash;11pm nightly &middot; Free alcohol, coffee, tea, juice all day &middot; Daily cultural activity</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>🔴 CRIB: Booking.com lists no cribs available at this property.</strong> Book a rental crib via momomamajp.com or lileo.com immediately after confirming your Osaka dates — BabyBjörn travel crib delivered directly to the hotel. Do not rely on the hotel for this.</span></div>
       <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shinsekai neighbourhood: right outside &middot; Den Den Town: 15-min walk</span></div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nipponbashi Subway Station: 2-min walk &middot; Dotonbori/Namba: 15-min walk or 5-min subway</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shinsekai: 3-4min walk south &middot; Den Den Town: right outside on the Nipponbashi strip &middot; Tsutenkaku Tower: 4-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Ebisucho Station (Sakaisuji Line): 1-min walk &middot; Spa World: 0.6km, 8-min walk &middot; Kuromon Market: 1.2km, 15-min walk or 2 stops by subway &middot; Dotonbori/Namba: 20-min walk or 10-min by subway</span></div>
       <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
       <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Call ahead to: (1) confirm crib availability, (2) ask water mineral type for Jem, (3) pre-book 2 recurring onsen slots for 5-night stay (1 guaranteed min, 2 ideally)</span></div>
       <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at hinode-hotel.com or Booking.com &middot; Declare all 5 guests including Jem</span></div>
@@ -957,9 +1023,9 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <!-- KYOTO -->
   <div class="hotel-card">
     <div class="hotel-header">
-      <div><span class="hotel-city-tag" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.35);color:#4ade80">Kyoto</span><span class="hotel-status-tbd">TO BOOK</span></div>
-      <div class="hotel-name">MIMARU Kawaramachi</div>
-      <div class="hotel-sub">Kawaramachi area, Shimogyo-ku, Kyoto &middot; mimaru.net/en &middot; Tel: +81 75-353-0003</div>
+      <div><span class="hotel-city-tag" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.35);color:#4ade80">Kyoto</span><span style="font-family:'DM Mono',monospace;font-size:10px;padding:2px 10px;border-radius:999px;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.4);color:#4ade80;margin-left:8px">✓ BOOKED</span></div>
+      <div class="hotel-name">MIMARU Kyoto Kawaramachi Gojo</div>
+      <div class="hotel-sub">17-1 Hiraicho, Shimogyo-ku, Kyoto &middot; mimaru.net/en &middot; Tel: +81 75-353-0003</div>
       <div class="hotel-dates">Oct 16 &rarr; Oct 20 &middot; 4 nights &middot; Check-in: 3:00pm–10:00pm &middot; Check-out: 11:00am</div>
     </div>
     <div class="hotel-body">
@@ -969,8 +1035,9 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Apartment-style rooms with kitchenette &middot; Washing machine in-unit (select room types) &middot; Separate living area</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Free coffee 7&ndash;11am &middot; Free soft drinks 3&ndash;9pm &middot; Small play area in lobby</span></div>
       <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nishiki Market: 5-min walk &middot; Pok&eacute;mon Center Kyoto (SUINA Muromachi): 5-min walk</span></div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Gion: 10-min walk east &middot; Kyoto Station (for Nintendo Museum / Shinkansen): 15-min subway</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nishiki Market: 15-min walk &middot; Kiyomizugojo Station (Keihan Line): 3-min walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Pok&eacute;mon Center Kyoto: Keihan Line 2 stops from Kiyomizugojo to Shijo, ~10min total &middot; Fushimi Inari: Keihan Line ~15min</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Gion: 20-min walk east &middot; Kyoto Station: 20-min walk or ~10min by Keihan then subway</span></div>
       <div class="hotel-section-label red" style="margin-top:10px">BOOK &amp; NOTE</div>
       <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Request crib at booking (policy guarantees it &mdash; still confirm in writing) &middot; Select room type with washing machine</span></div>
       <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Book at mimaru.net for best rate &middot; Send bags here from Hinode Hotel Osaka the day before</span></div>
@@ -1155,7 +1222,7 @@ const days=[
  {date:"Thu Oct 16",suggs:["Gion (祇園) — 20min walk from MIMARU any evening. Hanamikoji Street, lanterns from 4pm, best 5–6pm. Quiet enough after Fushimi Inari to be a gentle wander.","Nishiki Market + Pokémon Center Kyoto — 5min walk from MIMARU any morning. Effectively one outing, right outside the door."],city:"Kyoto",emoji:"⛩️",title:"⚓ Fushimi Inari at Dusk",dist:"📍 JR Nara Line from Kyoto Station to Inari Station — 5min, ¥150 (~CAD $1.50)",
   note:"Arriving at dusk is the best possible timing — crowds thin dramatically, the thousands of vermilion torii gates glow orange in the fading light. One of the most visually extraordinary places in Japan.",
   popo:"Popo & Goong Goong: lower gates only — the magic is in the first 20 minutes. Flat paved path, no need to climb.",
-  stand:"🌸 Nishiki + Pokémon: 15-min walk from MIMARU any morning. 🏮 Gion: 20-min walk any evening, best 5–6pm.",
+  stand:"🌸 Nishiki + Pokémon: 115-min walk from MIMARU any morning. 🏮 Gion: 20-min walk any evening, best 5–6pm.",
   items:["Osaka→Kyoto: JR Special Rapid (新快速) from JR Osaka Station, ~75min, ¥570 (~CAD $5.50). Or Hankyu from Osaka-Umeda to Kawaramachi, ~45min, ¥410 (~CAD $4) — closer to MIMARU.","Check into MIMARU Kawaramachi. Confirm crib. Drop bags.","Arrive Fushimi Inari ~4:30–5pm. Carrier for Jem. Lower torii gate tunnels (千本鳥居) are 5-min walk from the station entrance.","Nursing: quiet stone benches in the lower shrine area — one of the more peaceful nursing spots of the Japan leg"]},
 
  {date:"Fri Oct 17",suggs:["Gion (祇園) evening — 10min walk from MIMARU, 15min from Nijo Castle by subway. Lanterns from 4pm, best 5–6pm. Go if energy allows — can always slide to tomorrow or Oct 21.","Nishiki + Pokémon Center Kyoto — 5min walk from MIMARU, any morning. Already covered today but noted as standing daily option."],city:"Kyoto",emoji:"⛩️",title:"Nishiki + Pokémon (morning) ⚓ Nijo Castle (afternoon)",dist:"📍 Nishiki/Pokémon: 5-min walk. Nijo Castle: Subway Tozai Line ~15min.",
