@@ -203,8 +203,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 <div class="content">
 
 <div id="tab-itinerary" class="tab-content active">
-  <div class="alert"><div class="alert-title">CRITICAL &mdash; DO THESE NOW</div><p>&#8594; <strong>✓ Nintendo Museum booked</strong> &mdash; Oct 18 at 5:00pm &middot; Save QR codes somewhere accessible<br/>&#8594; <strong>Book Head Spa Kuu Omotesando</strong> for Oct 27 &mdash; sells out fast<br/>&#8594; <strong>🔴 Book rental crib for Osaka NOW</strong> &mdash; Hinode Hotel has NO cribs. Use momomamajp.com or lileo.com<br/>&#8594; Call Hinode Hotel to ask about onsen spring water mineral type (for Jem)<br/>&#8594; <strong>WeChat Pay</strong> set up and tested before Shenzhen<br/>&#8594; <strong>TeamLab Borderless</strong> timed entry: teamlab.art &mdash; sells out</p></div>
-  <div class="city-filter">
+    <div class="city-filter">
     <button class="city-btn active" onclick="filterCity('All',this)">All</button>
     <button class="city-btn" onclick="filterCity('Travel',this)">Travel</button>
     <button class="city-btn" onclick="filterCity('Hong Kong',this)">Hong Kong</button>
@@ -796,56 +795,62 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 </div>
 
 <div id="tab-todo" class="tab-content">
-      <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-0"><div class="todo-checkbox">✓</div><span class="todo-text">Nintendo Accounts created &mdash; all 5 (Micheal, Becca, Popo, Goong Goong, Jem)</span></div>
-    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-1"><div class="todo-checkbox">✓</div><span class="todo-text">NordVPN &mdash; installed and ready</span></div>
-    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-2"><div class="todo-checkbox">✓</div><span class="todo-text">China visa &mdash; not required for Canadians under 30 days</span></div>
+
+  <div class="section-card urgent">
+    <div class="section-title red">🔴 BOOK TONIGHT</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-1"><div class="todo-checkbox"></div><span class="todo-text"><strong>Mong Kok budget hotel</strong> — Oct 4 (1 night). Near Mong Kok East MTR. booking.com — iclub Mong Kok or Metropark Hotel Mongkok.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-2"><div class="todo-checkbox"></div><span class="todo-text"><strong>Holiday Inn Shenzhen Donghua</strong> — Oct 5–7 (2 nights). ihg.com. 2 rooms. Request crib for Jem. Note all 5 guests.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-3"><div class="todo-checkbox"></div><span class="todo-text"><strong>Holiday Inn Golden Mile, TST</strong> — Oct 7–11 (4 nights). ihg.com. 2 rooms. Request same floor or connecting. Crib for Jem. Harbour-view if available.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-4"><div class="todo-checkbox"></div><span class="todo-text"><strong>MIMARU Kawaramachi, Kyoto</strong> — Oct 16–20 (4 nights). mimaru.net/en. Request crib (guaranteed under 24 months) and room with washing machine.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-5"><div class="todo-checkbox"></div><span class="todo-text"><strong>Keio Plaza Hotel, Tokyo</strong> — Oct 20–27 (7 nights). Call +81 3-5322-8000 (English spoken). Request Happy Baby Stay Package by name. Mention Jem born April 17 2026. Request connecting or same-floor rooms. Confirm crib.</span></div>
   </div>
 
-  <div class="section-card urgent"><div class="section-title red">DO THIS NOW</div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-3"><div class="todo-checkbox"></div><span class="todo-text"><strong>Book Head Spa Kuu Omotesando</strong> for Oct 27 &mdash; private rooms, sells out. Book for all who want one. headspatokyo.com or search &ldquo;Kuu Omotesando&rdquo;</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-4"><div class="todo-checkbox"></div><span class="todo-text"><strong>🔴 Book rental crib for Osaka</strong> &mdash; Hinode Hotel does not provide cribs. Book via momomamajp.com or lileo.com for Oct 13–18. Also call hotel to ask about onsen spring water mineral type for Jem.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-5"><div class="todo-checkbox"></div><span class="todo-text"><strong>Set up WeChat Pay</strong> &mdash; link Canadian credit card, test before Shenzhen crossing</span></div>
+  <div class="section-card urgent">
+    <div class="section-title red">🔴 HINODE HOTEL OSAKA — CALL FIRST</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-6"><div class="todo-checkbox"></div><span class="todo-text"><strong>Email Hinode Hotel before booking</strong> — hinode-hotel.com. Ask: (1) crib availability, (2) onsen spring water mineral type (for Jem), (3) can you pre-book 2 recurring private onsen slots for 5 nights. English may be limited on the phone — email is safer.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-7"><div class="todo-checkbox"></div><span class="todo-text"><strong>Book rental crib for Osaka</strong> — Hinode Hotel has NO cribs. Book via momomamajp.com or lileo.com for Oct 11–16. BabyBjörn delivered to the hotel.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-8"><div class="todo-checkbox"></div><span class="todo-text"><strong>Book Hinode Hotel</strong> — Oct 11–16 (5 nights). hinode-hotel.com or Booking.com. 2 rooms. Note all 5 guests including Jem.</span></div>
   </div>
 
-  <div class="section-card"><div class="section-title">JULY 31 &mdash; NINTENDO MUSEUM LOTTERY</div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-6"><div class="todo-checkbox"></div><span class="todo-text"><strong>All 5 accounts submit lottery entries</strong> at museum-tickets.nintendo.com on July 31. Target quiet weekday afternoon slots for Oct 20. Results arrive August 1.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-7"><div class="todo-checkbox"></div><span class="todo-text">If unsuccessful: monitor for cancellation tickets daily from September onward</span></div>
+  <div class="section-card urgent">
+    <div class="section-title red">🔴 SELL OUT RISK — BOOK NOW</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-9"><div class="todo-checkbox"></div><span class="todo-text"><strong>TeamLab Borderless</strong> — Oct 22. teamlab.art — timed entry, sells out months in advance. Adults ¥3,200 (~CAD $30.50), under 15 free.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-10"><div class="todo-checkbox"></div><span class="todo-text"><strong>Head Spa Kuu Omotesando</strong> — Oct 25. headspatokyo.com or search "Kuu Omotesando". Private rooms. ~¥8,000–15,000 (~CAD $76–143). Men welcome. Book for all who want it.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-11"><div class="todo-checkbox"></div><span class="todo-text"><strong>Sumo experience Osaka</strong> — Oct 13 evening. Airbnb Experiences or Voyagin, search "sumo Osaka". Evening slot ~6–8pm. Sells out.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-12"><div class="todo-checkbox"></div><span class="todo-text"><strong>Nijo Castle private guided tour</strong> — Oct 17 afternoon. Magical Trip or Viator. Mention baby in carrier and senior guests when booking.</span></div>
   </div>
 
-  <div class="section-card"><div class="section-title">AUGUST &mdash; BOOKING MONTH</div>
-    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-8"><div class="todo-checkbox">✓</div><span class="todo-text">Flights booked &amp; bassinet seats confirmed: CX 805 YYZ&rarr;HKG (Oct 3, departs 3:45pm) &middot; CX 598 HKG&rarr;KIX (Oct 11, departs 1:20pm) &middot; AC 2 HND&rarr;YYZ (Oct 27, departs 6:05pm)</span></div><span class="todo-text">Flights booked: CX 805 YYZ&rarr;HKG (Oct 3, departs 3:45pm), CX 598 HKG&rarr;KIX (Oct 11, departs 1:20pm), AC 2 HND&rarr;YYZ (Oct 27, departs 6:05pm), HKG&rarr;KIX (Oct 11), HND&rarr;HKG (Oct 27), HKG&rarr;YYZ (Oct 28). Popo &amp; Goong Goong: LHR&rarr;HKG arriving before Oct 4.</span></div>
-    <div class="todo-item checked" onclick="toggleTodo(this)" id="todo-bassinet"><div class="todo-checkbox">✓</div><span class="todo-text"><strong>Immediately after booking each flight:</strong> Call the airline directly to request bassinet seats (front bulkhead row) for Jem. Cannot be done through third-party booking sites — must call or use the airline's Manage Booking portal. Cathay Pacific: 1-800-268-6868 (for CX 805 Oct 3 and CX 598 Oct 11). Confirm weight limit for Jem (typically ~10kg). AC 2 (Oct 27): Air Canada 1-888-247-2262 — request bassinet for the return flight too.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-9"><div class="todo-checkbox"></div><span class="todo-text">Book all hotels &mdash; 2 rooms each, request cribs, request connecting/same-floor rooms. Bassinet seats on all flights for Jem.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-10"><div class="todo-checkbox"></div><span class="todo-text"><strong>Hinode Hotel Osaka:</strong> Call to pre-book 2 recurring private onsen slots for 5-night stay. 1 guaranteed minimum, 2 ideally. Confirm crib and water mineral type.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-11"><div class="todo-checkbox"></div><span class="todo-text"><strong>Keio Plaza Tokyo:</strong> Request Happy Baby Stay Package at booking — mention Jem&apos;s age (born April 17 2026, arrives at 6 months). Request crib at booking. Jem is well within the under-10-months policy.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-12"><div class="todo-checkbox"></div><span class="todo-text"><strong>TeamLab Borderless:</strong> teamlab.art &mdash; timed entry, sells out. Book for Oct 25.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-13"><div class="todo-checkbox"></div><span class="todo-text"><strong>Nijo Castle private guided tour (Oct 19):</strong> Magical Trip or Viator &mdash; mention baby in carrier and senior guests</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-14"><div class="todo-checkbox"></div><span class="todo-text"><strong>Shinkansen Oct 22:</strong> Reserved seats Kyoto&rarr;Tokyo via smart-ex.jp. LEFT side going east for Fuji views.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-15"><div class="todo-checkbox"></div><span class="todo-text"><strong>Sumo experience Osaka (Oct 15):</strong> Airbnb Experiences or Voyagin &mdash; search &ldquo;sumo Osaka&rdquo;, book evening slot</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-16"><div class="todo-checkbox"></div><span class="todo-text">Travel insurance all 5 &mdash; note Goong Goong&apos;s diabetes on application</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-17"><div class="todo-checkbox"></div><span class="todo-text">Calculate JR Pass value at japan-guide.com/e/e2361.html</span></div>
+  <div class="section-card">
+    <div class="section-title">TRANSPORT</div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="td-13"><div class="todo-checkbox">✓</div><span class="todo-text"><strong>Flights booked &amp; bassinet seats confirmed:</strong> CX 805 YYZ→HKG (Oct 3, 3:45pm) &middot; CX 598 HKG→KIX (Oct 11, 1:20pm) &middot; AC 2 HND→YYZ (Oct 27, 6:05pm)</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-14"><div class="todo-checkbox"></div><span class="todo-text"><strong>Shinkansen reserved seats</strong> — Oct 20, Kyoto→Tokyo. smart-ex.jp (English available). Request Car 16, seats A &amp; B on the LEFT side for Mt Fuji views. ¥13,820 (~CAD $132) per adult. NOT JR Pass covered.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-15"><div class="todo-checkbox"></div><span class="todo-text"><strong>Suica setup:</strong> Android — Google Pay → + → Transit card → Suica. iPhone — buy physical Suica cards at KIX arrivals (¥500 deposit, load ¥3,000–5,000 each). Works on every train, bus, and konbini in Japan.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-16"><div class="todo-checkbox"></div><span class="todo-text"><strong>WeChat Pay</strong> — link Canadian credit card, test before the Shenzhen border crossing. Must be working before Oct 5.</span></div>
   </div>
 
-  <div class="section-card"><div class="section-title">OCTOBER &mdash; JAPAN SERIES TICKETS</div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-18"><div class="todo-checkbox"></div><span class="todo-text">Monitor from Oct 10 when Climax Series starts. Japan Series participants known by ~Oct 18.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-19"><div class="todo-checkbox"></div><span class="todo-text">Buy tickets via ticketsinjapan.com or StubHub as soon as finalists known. Move fast. Budget CAD $70&ndash;185/person resale.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-20"><div class="todo-checkbox"></div><span class="todo-text"><strong>If Tigers win CL:</strong> Likely skip Games 1&amp;2 at Koshien. Watch for Game 3 &mdash; if Pacific League finalist is Lions (Saitama, 50 min) or Marines (Chiba, 60 min), Game 3 near Tokyo is worth going for.</span></div>
+  <div class="section-card">
+    <div class="section-title">OCTOBER — JAPAN SERIES ⚾</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-17"><div class="todo-checkbox"></div><span class="todo-text"><strong>Monitor from Oct 10</strong> when Climax Series starts. Japan Series participants known by ~Oct 18. Buy tickets immediately via ticketsinjapan.com or StubHub. Budget CAD $70–185/person resale. Move fast.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-18"><div class="todo-checkbox"></div><span class="todo-text"><strong>Venue scenarios:</strong> Giants (Tokyo Dome, ~30min) ✓ &middot; Swallows (Jingu, ~20min) ✓ &middot; BayStars (Yokohama, ~50min) ✓ &middot; Tigers (Koshien) ✗ — watch for Game 3 if PL finalist is Lions (50min) or Marines (60min).</span></div>
   </div>
 
-  <div class="section-card"><div class="section-title">BEFORE YOU GO</div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-vjw"><div class="todo-checkbox"></div><span class="todo-text"><strong>Visit Japan Web:</strong> Register all 5 travellers at vjw-lp.digital.go.jp before flying to KIX. Digital arrival card — replaces the paper form. Complete in the airport lounge or on the plane before landing.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-21"><div class="todo-checkbox"></div><span class="todo-text">Download Google Maps offline: HK, Osaka, Kyoto, Tokyo</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-22"><div class="todo-checkbox"></div><span class="todo-text">Download Google Translate offline packs: Japanese + Cantonese</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-shink-infant"><div class="todo-checkbox"></div><span class="todo-text"><strong>Shinkansen — Jem's infant ticket:</strong> Jem travels on lap on the Oct 20 Shinkansen. Confirm free infant ticket process with smart-ex.jp when booking reserved seats — infants under 6 travel free but may need a formal (free) ticket issued for the reserved car.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-23"><div class="todo-checkbox"></div><span class="todo-text"><strong>Suica setup:</strong> Android users — open Google Pay → + → Transit card → Suica. No region switching needed. iPhone users — easiest to buy physical Suica cards at KIX arrivals (¥500 deposit each, load ¥3,000–5,000) rather than dealing with App Store region switching. Physical cards work on every train, bus, and konbini in Japan.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-24"><div class="todo-checkbox"></div><span class="todo-text">Print Goong Goong&apos;s Japanese diabetes card: 私は糖尿病です</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-25"><div class="todo-checkbox"></div><span class="todo-text">Confirm crib at every Japan hotel 2 weeks before arrival</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-26"><div class="todo-checkbox"></div><span class="todo-text">Notify banks of travel dates for all 3 countries</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-27"><div class="todo-checkbox"></div><span class="todo-text">Test NordVPN. Connect before stepping into Shenzhen.</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-28"><div class="todo-checkbox"></div><span class="todo-text">Keep Jem&apos;s passport accessible at every border for stamps</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-29"><div class="todo-checkbox"></div><span class="todo-text">Carry passports everywhere in Japan for tax-free shopping</span></div>
-    <div class="todo-item" onclick="toggleTodo(this)" id="todo-30"><div class="todo-checkbox"></div><span class="todo-text">Google Photos auto-backup enabled on all phones</span></div>
+  <div class="section-card">
+    <div class="section-title">BEFORE YOU GO</div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-19"><div class="todo-checkbox"></div><span class="todo-text"><strong>Visit Japan Web</strong> — register all 5 travellers at vjw-lp.digital.go.jp before flying to KIX. Do it on the plane. Digital arrival card — much faster than the paper form at immigration.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-20"><div class="todo-checkbox"></div><span class="todo-text"><strong>Download Google Maps offline</strong> — HK, Osaka, Kyoto, Tokyo. Already done but confirm before departure.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-21"><div class="todo-checkbox"></div><span class="todo-text"><strong>Download Google Translate offline packs</strong> — Japanese + Cantonese. Already done but confirm.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-22"><div class="todo-checkbox"></div><span class="todo-text"><strong>NordVPN</strong> — installed and tested. Connect before stepping into Shenzhen — cannot configure inside China.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-23"><div class="todo-checkbox"></div><span class="todo-text"><strong>Print Goong Goong's Japanese medical card</strong> — 私は糖尿病です. Carry in wallet at all times in Japan.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-24"><div class="todo-checkbox"></div><span class="todo-text"><strong>Notify banks</strong> of travel dates for all 3 countries — HK, China, Japan.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-25"><div class="todo-checkbox"></div><span class="todo-text"><strong>Confirm crib</strong> at every Japan hotel 2 weeks before arrival — Hinode (rental booked separately), MIMARU (guaranteed), Keio Plaza (confirmed at booking).</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-26"><div class="todo-checkbox"></div><span class="todo-text"><strong>Google Photos auto-backup</strong> — enabled on all phones before departure.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-27"><div class="todo-checkbox"></div><span class="todo-text"><strong>Jem's passport</strong> — accessible at every border. Confirm it runs past October 2026.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-28"><div class="todo-checkbox"></div><span class="todo-text"><strong>Shinkansen infant ticket</strong> — Jem travels on lap. Confirm free infant ticket process with smart-ex.jp when booking reserved seats.</span></div>
+    <div class="todo-item checked" onclick="toggleTodo(this)" id="td-29"><div class="todo-checkbox">✓</div><span class="todo-text"><strong>Travel insurance</strong> — confirmed for all 5.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-30"><div class="todo-checkbox"></div><span class="todo-text"><strong>eSIM</strong> — set up before leaving Canada for Japan leg. Airalo, Holafly, or Ubigi. Activates on landing at KIX.</span></div>
+    <div class="todo-item" onclick="toggleTodo(this)" id="td-31"><div class="todo-checkbox"></div><span class="todo-text"><strong>Send Japlan link to Becca, Popo &amp; Goong Goong</strong> — https://mkukucska.github.io/Japlanning-2026/ &middot; Open in Safari (iPhone) or Chrome (Android) → Add to Home Screen.</span></div>
   </div>
+
 </div>
 
 <div id="tab-hotels" class="tab-content">
