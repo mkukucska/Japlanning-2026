@@ -228,6 +228,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <button class="tab-btn" onclick="switchTab('todo',this)">&#9989; To-Do</button>
     <button class="tab-btn" onclick="switchTab('hotels',this)">&#127970; Hotels</button>
     <button class="tab-btn" onclick="switchTab('norms',this)">🙏 Norms</button>
+    <button class="tab-btn" onclick="switchTab('food',this)">🍱 Food</button>
   </div>
 </div>
 <div class="content">
@@ -361,15 +362,6 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-meta"><span><strong>From hotel:</strong> 10-min walk</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Any HK day</span></div>
   </div>
 
-  
-  <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
-    <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Hong Kong</div>
-    <div class="sugg-desc">Rain in HK is warm and manageable — you have umbrellas, rain jackets, and a stroller cover. Most anchors are fine in rain. If it's genuinely heavy: Harbour City mall is enormous and covered — nursing room, food court, shops, hours of indoor browsing. HK Museum of History is excellent on a rainy afternoon. The Peak in light rain is actually beautiful — mist over the harbour is extraordinary.</div>
-    <div class="sugg-meta"><span><strong>Best shelter:</strong> Harbour City (10-min walk from hotel) &middot; HK Museum of History (10-min walk)</span></div>
-  </div>
-
-  
-
   </div>
 </div>
 
@@ -398,7 +390,13 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-meta"><span><strong>Location:</strong> Metro Line 1 or 7, Huaqiangbei Station</span><span><strong>Time needed:</strong> 2 hrs</span><span><strong>Best day:</strong> Oct 7 morning before crossing back</span></div>
   </div>
 
+  <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
+    <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Hong Kong</div>
+    <div class="sugg-desc">Rain in HK is warm and manageable — you have umbrellas, rain jackets, and a stroller cover. Most anchors are fine in rain. If it's genuinely heavy: Harbour City mall is enormous and covered — nursing room, food court, shops, hours of indoor browsing. HK Museum of History is excellent on a rainy afternoon. The Peak in light rain is actually beautiful — mist over the harbour is extraordinary.</div>
+    <div class="sugg-meta"><span><strong>Best shelter:</strong> Harbour City (10-min walk from hotel) &middot; HK Museum of History (10-min walk)</span></div>
+  </div>
 
+  
 
   <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
     <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Shenzhen</div>
@@ -609,6 +607,12 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-name">Asakusa Sumo Club — Dinner Show<span class="sugg-highlight-badge">ASAKUSA LEG — 5-MIN WALK</span></div>
     <div class="sugg-desc">A sumo dinner show run by ex-professional wrestlers right in Asakusa — one of the most universally loved group experiences in Tokyo. Interactive, funny, and genuinely spectacular. Includes live sumo demonstrations, a traditional meiko dance opener, audience participation (someone will be chosen to get in the ring), all-you-can-eat chicken hotpot, one free drink, group photo, and take-home gift bag. Families call it the best thing they did in all of Tokyo. Everyone seated, fed, and entertained together — walk home in 5 minutes after.</div>
     <div class="sugg-meta"><span><strong>From Airbnb:</strong> 5-min walk on Kokusai-dori &middot; ANNEX at 7-11 Asakusa, Taito</span><span><strong>Book:</strong> asakusa-sumo.com &middot; Sells out — book in advance</span><span><strong>Cost:</strong> ~¥14,000 (~CAD $133)/adult at ANNEX, dinner included</span><span><strong>Best day:</strong> Oct 21 evening &mdash; confirmed</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Dosanko Plaza — Hokkaido Dairy <span style="font-size:10px;opacity:0.6">[Shibuya leg — 5-min Yamanote to Shinjuku]</span></div>
+    <div class="sugg-desc">Hokkaido's official antenna shop — soft-serve made with higher-fat Hokkaido milk, fresh dairy goods, butter, cheese, and packaged specialties including Shiroi Koibito. Near the Tokyo Metropolitan Government Building, a 5-min train + 10-min walk from the Shibuya hotel. Also a branch near Yurakucho Station passing through on Oct 20.</div>
+    <div class="sugg-meta"><span><strong>From Shibuya hotel:</strong> 5-min Yamanote to Shinjuku, then 10-min walk to TMG Building</span><span><strong>Also:</strong> Branch near Yurakucho Station — you pass through Oct 20 from Tokyo Station</span></div>
   </div>
 
   <div class="sugg-card highlight">
@@ -851,7 +855,6 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 
 </div>
 </div>
-
 <div id="tab-phrases" class="tab-content">
   <div class="phrase-intro" style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#c4b5fd;">
     🔊 Tap the speaker button on any phrase to hear it spoken aloud. Works offline. Japanese and Cantonese pronunciation included.
@@ -1411,8 +1414,6 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
-
-
 <div id="tab-norms" class="tab-content">
   <div class="section-card">
     <div class="section-title">🇯🇵 JAPAN — SOCIETAL NORMS</div>
@@ -1451,7 +1452,125 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
-<div class="footer"><div class="footer-title">HAVE AN INCREDIBLE TRIP</div>Micheal &middot; Becca &middot; Jem &middot; Popo &middot; Goong Goong<br/>October 3 &ndash; 27, 2026<br/>Hong Kong &middot; Shenzhen &middot; Osaka &middot; Kyoto &middot;
+<div id="tab-food" class="tab-content">
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — THE HOT COUNTER</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Karaage (唐揚げ) ✓ BECCA SAFE</strong> — Japanese fried chicken from the heated glass case behind the register. Point and they bag it. Plain, crispy, perfectly seasoned, no mayo in the preparation. ¥150–200 for a couple of pieces. Lawson's karaage is the most debated konbini food in Japan.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Nikuman (肉まん) ✓ BECCA SAFE</strong> — steamed pork bun. FamilyMart's is considered the best. October is when they come back for the cold season — you're arriving at exactly the right time. ¥130–160 each. Eat immediately, standing outside.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Oden (おでん) ✓ BECCA SAFE</strong> — a hot pot of ingredients simmered in dashi broth. Daikon, fish cakes, boiled eggs, konjac, atsuage tofu. Point at what you want, they ladle it into a cup. ¥100–150 per piece. October is oden season. Do this at least once.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Steamed gyoza ✓ BECCA SAFE</strong> — Lawson specifically carries these. Excellent.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>🔴 Becca note:</strong> Hot counter items are generally mayo-free. If karaage has a sauce drizzled on top, check. Plain karaage from the glass case = safe. Anything labelled マヨ = avoid.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — ONIGIRI GUIDE</div>
+    <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span><strong>✓ Safe for Becca:</strong> 鮭 (sake/salmon) — most popular. 梅 (umeboshi/pickled plum). 昆布 (kombu/kelp). おかか (bonito flakes). 明太子 (mentaiko). たらこ (tarako/plain roe).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>🔴 NOT SAFE:</strong> ツナマヨ (tuna mayo) — most common after salmon. エビマヨ (shrimp mayo). Any filling with マヨ in the name.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>唐揚げおにぎり (karaage onigiri)</strong> — fried chicken rice ball, usually no mayo. Check アレルゲン label — マヨネーズ will appear if present.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Wrapper technique:</strong> Three numbered tabs (1, 2, 3). Pull in order — the plastic splits without the nori going soggy.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — SWEETS &amp; SNACKS</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Purin (プリン)</strong> — Japanese custard pudding. Lawson's is widely considered the best in Japan. ¥200–300. Get it cold.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Cream puff (シュークリーム)</strong> — freshly made daily. FamilyMart's is the benchmark.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Melon pan (メロンパン)</strong> — sweet bread with a crispy sugar crust. Not actually melon flavoured.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Dorayaki (どら焼き)</strong> — two small pancakes sandwiching red bean paste. Doraemon's favourite food.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Hi-Chew (ハイチュウ)</strong> — Japanese chewy candy. Muscat grape, lychee, yuzu, Japanese peach — flavours unavailable in Canada. Good gifts.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Umaibo (うまい棒)</strong> — puffed corn snack, ¥12 each. Corn potage flavour is the classic. Cheapest snack in Japan.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Calbee chips (カルビー)</strong> — Consommé (コンソメ) flavour is iconic. Nori shio (seaweed salt) second. Regional flavours vary by prefecture.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Japanese Kit Kats</strong> — matcha, hojicha, sake, sweet potato, sakura. Buy a variety at HND on Oct 27 — the departure selection is the best.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — DRINKS</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>BOSS canned coffee</strong> — from a vending machine, warm or cold. Rainbow Mountain Blend is the classic. ¥120–150.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Royal milk tea (ロイヤルミルクティー)</strong> — Lipton brand in a can, warm. Extremely comforting on an October evening.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Calpico / Calpis (カルピス)</strong> — milky sweet yogurt soda. Very Japanese, very refreshing.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Amazake (甘酒)</strong> — sweet fermented rice drink, non-alcoholic, warm from vending machines in autumn. Slightly thick, October is the perfect time.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Chu-hi (チューハイ)</strong> — canned cocktails: shochu + soda + fruit. Lemon and grapefruit are the classics. ¥150–200. Good for a konbini evening picnic.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Pocari Sweat / Aquarius</strong> — Japanese sports drinks, gentler than Gatorade. Good for jet lag recovery and long walking days.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — FOR JEM</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Kewpie baby food pouches</strong> — look for 5ヶ月 (5 months), 6ヶ月 (6 months), 7ヶ月 (7 months). Vegetable purées, fruit purées, okayu porridge. ¥100–200 per pouch.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Okayu (おかゆ)</strong> — rice porridge, Jem's classic first Japanese food. Kewpie plain okayu is perfect for 6 months. Wakodo brand is the alternative.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Merries diapers (メリーズ)</strong> — at virtually every konbini. Widely considered the best diaper in the world. Stock up here vs airport prices.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Pigeon brand</strong> — infant barley water, baby wipes, pacifiers. Full selection at Akachan Honpo.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)">
+    <div class="section-title" style="color:#fbbf24">🏪 KONBINI — CHAIN GUIDE</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Lawson (ローソン)</strong> — best for karaage, purin, steamed gyoza. Also has the Loppi machine for printing tickets (TeamLab, concerts, attractions).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>FamilyMart (ファミリーマート)</strong> — best for nikuman (the best in Japan), fried chicken, freshly baked pastries, cream puffs.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>7-Eleven (セブンイレブン)</strong> — best for egg salad sandwich, ATM (accepts all foreign Visa/Mastercard, 24 hours, English interface), hot snacks.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>October seasonal note:</strong> Hot food season starts now — oden, nikuman, and warm vending machine drinks all return. Best time of year for konbini hot food.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(239,68,68,0.04);border-color:rgba(239,68,68,0.2)">
+    <div class="section-title" style="color:#f87171">🥞 BENIZURU (紅鶴) — ASAKUSA SOUFFLÉ PANCAKES</div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>What it is:</strong> A tiny 12-seat counter pancake shop in Nishi-Asakusa. Famous for rice-flour soufflé pancakes — cloud-like, jiggly, made fresh to order with meringue kneaded after each ticket. Only one chef. ~60 pancakes per day. Watch every pancake cooked in front of you.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>Signature dishes:</strong> Bacon &amp; Eggs — triple-tiered stack with bacon, fried egg, cheese, egg yolk sauce. Honey &amp; Butter is the sweet version. Both are large and filling — one stack is a meal.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>Reservation system:</strong> No online booking. In-person same-day tickets only. Queue before 7am weekends (8:30am weekdays). ¥1,000 per order non-refundable deposit. Opens 10:30am. ~60 patrons max.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>Jet lag silver lining:</strong> Jem will likely be awake well before 7am during the Asakusa leg. One person queues, everyone else meets at the slot time.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Location:</strong> 8–10 min walk from Asakusa Tsubaki Airbnb — 2-1-11 Nishiasakusa, Taito-ku. Nearest station: Tawaramachi. Cash only. ~¥2,000–3,000/person. Best day: Oct 21, 22, or 23 morning.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🥩 MUST-EAT JAPANESE FOOD</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>A5 Wagyu / Kuroge Wagyu (黒毛和牛)</strong> — highest grade Japanese beef. Kuromon Market Osaka on Oct 12 is the natural first encounter. Look for 黒毛和牛 and A5 on restaurant windows. Lunch teishoku set is the best value entry point.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Takoyaki (たこ焼き)</strong> — Osaka's signature street food. Octopus balls in crispy-outside, gooey-inside batter. Dotonbori is the place. Ask for no mayo for Becca (マヨなしで).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Okonomiyaki (お好み焼き)</strong> — savoury pancake cooked on a griddle at your table. Osaka-style with cabbage and pork. Order Becca's without mayo (マヨなしで).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Kushikatsu (串カツ)</strong> — Shinsekai, Osaka. Deep-fried skewered meat and vegetables. Never double-dip in the communal sauce (二度づけ禁止).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Ramen (ラーメン)</strong> — each city has its own style. Osaka: shio/shoyu. Kyoto: rich chicken paitan. Tokyo: everything. Order at a ticket vending machine, hand ticket to chef.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Yakitori (焼き鳥)</strong> — grilled chicken skewers over charcoal. Hoppy Street Asakusa and Omoide Yokocho Shinjuku. Negima, tsukune, kawa. Tare or shio.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Conveyor belt sushi (回転寿司)</strong> — grab plates as they pass, pay by plate count. Fun for the whole group, Jem-friendly, no ordering pressure.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Gyudon (牛丼)</strong> — beef rice bowl from Yoshinoya or Sukiya. ¥500–600 (~CAD $5–6). One of Japan's great cheap meals.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Taiyaki (鯛焼き)</strong> — fish-shaped waffle filled with red bean or custard. Nakamise-dori in Asakusa has good ones.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Mochi (もち)</strong> — rice cake, red bean or ice cream filled. Kyoto has the best — fresh mochi from Nishiki Market. Warabi mochi is the Kyoto specialty.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Nagashi somen — Hirobun, Kibune ⚠️ Season check</strong> — noodles flowing down bamboo channels of cold mountain water, caught with chopsticks. Kibune village, 30–40 min from MIMARU. Season typically runs May–mid October — check if still running Oct 16–20. If closed, Kibune autumn foliage is extraordinary anyway.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🌏 REGIONAL SPECIALTIES</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Hokkaido dairy — Tokyo</strong> — Dosanko Plaza near the Tokyo Metropolitan Government Building in Shinjuku (5-min Yamanote from Shibuya, 10-min walk). Hokkaido milk, soft-serve, butter, Shiroi Koibito. Also a branch near Yurakucho Station on Oct 20 arrival day.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Hokkaido dairy — Osaka</strong> — Dosanko Plaza near Namba. Soft-serve and packaged dairy. Good during the Osaka leg.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Uji matcha — Oct 18 (Nintendo Museum day)</strong> — Tsuen Tea (通円), over 800 years old, steps from Uji Station. Buy loose-leaf matcha here. Nakamura Tokichi matcha soft-serve is the other must-try in Uji.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Kobe beef</strong> — a specific subset of Tajima wagyu. Osaka restaurants near Dotonbori serve it — look for 神戸牛 on the menu. More expensive than standard A5 wagyu.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Kyoto specialties</strong> — Yuba (湯葉, tofu skin), Kyo-yasai (京野菜, heirloom vegetables), warabi mochi. Nishiki Market is the best single stop for all three.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tokyo Banana (東京ばな奈)</strong> — banana-shaped sponge cake with banana custard. Only in Tokyo. Buy at Tokyo Station on Oct 20 arrival or HND on Oct 27 departure. Seasonal variants throughout the year.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🍺 DRINKS</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japanese beer:</strong> Sapporo (Hokkaido), Asahi (Tokyo), Kirin (Yokohama), Suntory (Osaka). Order draft (生ビール namabiiru) at any izakaya. All four are lagers, noticeably different from each other.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Suntory and Nikka whisky</strong> — Suntory Toki is the accessible entry point. Yamazaki 12 is the step up. Nikka From the Barrel is the serious one. Available at konbini, depachika, duty-free at HND.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Sake (日本酒)</strong> — Junmai is most approachable. Warm (atsukan) in autumn, cold (reishu) year-round. Ask staff for their local recommendation at any izakaya.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Umeshu (梅酒)</strong> — plum wine. Sweet, low alcohol, on ice or with soda. Best gateway drink for non-sake/beer drinkers. Choya brand is the standard.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Matcha latte</strong> — at every konbini and café. Japan uses real matcha. Starbucks Japan's matcha latte is noticeably better than the Canadian version.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🎁 THINGS TO BRING HOME</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japanese Kit Kats</strong> — matcha, hojicha, sake, sweet potato, sakura. Buy at HND Terminal 3 on Oct 27 — best airport selection. Most universally appreciated gift.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shiroi Koibito (白い恋人)</strong> — Hokkaido butter cookies sandwiching white chocolate. Most iconic Hokkaido souvenir. At Dosanko Plaza or HND.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Hi-Chew variety pack</strong> — Japanese flavours don't exist in Canada. Buy at any konbini. Light, cheap, universally loved gifts.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tokyo Banana</strong> — buy at HND on Oct 27. Already covered above.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Uji matcha (loose leaf)</strong> — buy at Tsuen Tea on Oct 18. Bring home a tin. Quality difference from Canadian matcha is significant.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Yuzu kosho (柚子胡椒)</strong> — citrus pepper paste. Incredible with grilled meat and noodles. Unavailable at this quality outside Japan. Any depachika.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Dashi packets (だし)</strong> — dried bonito and kelp stock. The backbone of Japanese cooking. Quality vs Canada is not comparable. Any konbini or depachika.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Furikake (ふりかけ)</strong> — rice seasoning blend. Dozens of varieties. Light, cheap, easy to pack, transforms plain rice at home.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japanese whisky</strong> — Suntory Toki (~¥2,500 / ~CAD $24 at konbini). Duty-free at HND has Yamazaki 12 and Nikka at good prices.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japanese knives (包丁)</strong> — Kappabashi Kitchen Street, Asakusa (3–5 min walk from the Airbnb). The best place in Japan to buy professional knives at non-tourist prices. Buy on the Oct 23 Asakusa day.</span></div>
+  </div>
+
+</div>
+
+<div class="footer"><div class="footer-title">HAVE AN INCREDIBLE TRIP</div>Micheal &middot; Becca &middot; Jem &middot; Popo &middot; Goong Goong<br/>October 3 &ndash; 27, 2026<br/>Hong Kong &middot; Shenzhen &middot; Osaka &middot; Kyoto &middot; Tokyo</div>
+</div>
+
 <script>
 const CC={
   "Travel":   {bg:"rgba(100,116,139,0.15)",br:"rgba(100,116,139,0.4)",tx:"#94a3b8"},
@@ -1584,7 +1703,7 @@ const days=[
  {date:"Sun Oct 19",suggs:["Kinkaku-ji (金閣寺) — on the Bus 59 route from central Kyoto to Arashiyama. 40min from hotel by bus, natural first stop before continuing to the anchor. Entry ¥500 (~CAD $5). Allow 45min.","Gion evening — 20min walk from MIMARU on return to Kyoto. Lanterns from 4pm, best 5–6pm."],city:"Kyoto",emoji:"🌸",title:"⚓ Arashiyama",dist:"📍 Bus 59 from central Kyoto to Arashiyama — ~30–40min.",
   note:"A whole neighbourhood on the western edge of Kyoto. Bamboo grove, Tenryu-ji garden, Togetsukyo Bridge, the ryokan lane, tofu kaiseki lunch. One of the most beautiful places in Japan. Note: Arashiyama in rain is genuinely beautiful — don't cancel if the weather turns.",
   popo:"Popo & Goong Goong: Tenryu-ji garden is flat and peaceful. Bamboo grove is a 200m flat paved path. October foliage on the hills.",
-  stand:"🎫 TONIGHT: Buy Shinkansen tickets at Kyoto Station Midori-no-madoguchi (green window). Ask for Nozomi to Tokyo, Car 16, seats A&B left side for Mt Fuji views. Takes 10 min. 🌸 Bamboo grove before 8am is extraordinary.",
+  stand:"🌸 Nishiki: 15-min walk this morning before the bus. 🏮 Gion: 20-min walk this evening.",
   items:["🎒 CARRIER RECOMMENDED: The bamboo grove path is narrow and busy. Arashiyama generally suits a carrier better than a stroller — the paths are beautiful but often crowded and uneven. Use the stroller for flat riverside sections.",
     "Bamboo Grove (竹林の小径): flat 200m path through towering bamboo. Best before 9am or after 3:30pm. Jem in the carrier here is extraordinary.","Tenryu-ji Garden (天龍寺): UNESCO zen garden, ¥500 (~CAD $5). Flat, stroller accessible. Allow 45min.","Togetsukyo Bridge (渡月橋): the iconic bridge over the Oi River with forested hills behind. October foliage. Free.","Ryokan lane: walk west of Tenryu-ji — wooden facades, stone gardens, yukata-clad staff. Free.","Tofu kaiseki lunch on Arashiyama main street: ~¥2,000–3,500 (~CAD $19–33) set menu","Pack bags tonight. 🧳 Pack bags tonight — travelling with luggage on the Shinkansen tomorrow."]},
 
