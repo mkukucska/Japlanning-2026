@@ -173,6 +173,34 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 .cad-item{font-family:'DM Mono',monospace;font-size:11px;color:#d1d5db;}
 .footer{margin-top:28px;padding:20px;background:var(--surface);border-radius:10px;border:1px solid var(--border);text-align:center;font-size:12px;color:var(--dim);line-height:2;}
 .footer-title{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--accent);margin-bottom:8px;}
+
+.phrase-speak {
+  background: none;
+  border: 1px solid rgba(167,139,250,0.3);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.phrase-speak:hover { background: rgba(167,139,250,0.15); }
+.phrase-speak:active { background: rgba(167,139,250,0.3); }
+.phrase-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.phrase-intro {
+  line-height: 1.5;
+}
+
 </style>
 </head>
 <body>
@@ -199,6 +227,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <button class="tab-btn" onclick="switchTab('packing',this)">&#127960; Packing</button>
     <button class="tab-btn" onclick="switchTab('todo',this)">&#9989; To-Do</button>
     <button class="tab-btn" onclick="switchTab('hotels',this)">&#127970; Hotels</button>
+    <button class="tab-btn" onclick="switchTab('norms',this)">🙏 Norms</button>
   </div>
 </div>
 <div class="content">
@@ -332,6 +361,15 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-meta"><span><strong>From hotel:</strong> 10-min walk</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Any HK day</span></div>
   </div>
 
+  
+  <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
+    <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Hong Kong</div>
+    <div class="sugg-desc">Rain in HK is warm and manageable — you have umbrellas, rain jackets, and a stroller cover. Most anchors are fine in rain. If it's genuinely heavy: Harbour City mall is enormous and covered — nursing room, food court, shops, hours of indoor browsing. HK Museum of History is excellent on a rainy afternoon. The Peak in light rain is actually beautiful — mist over the harbour is extraordinary.</div>
+    <div class="sugg-meta"><span><strong>Best shelter:</strong> Harbour City (10-min walk from hotel) &middot; HK Museum of History (10-min walk)</span></div>
+  </div>
+
+  
+
   </div>
 </div>
 
@@ -360,13 +398,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-meta"><span><strong>Location:</strong> Metro Line 1 or 7, Huaqiangbei Station</span><span><strong>Time needed:</strong> 2 hrs</span><span><strong>Best day:</strong> Oct 7 morning before crossing back</span></div>
   </div>
 
-  <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
-    <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Hong Kong</div>
-    <div class="sugg-desc">Rain in HK is warm and manageable — you have umbrellas, rain jackets, and a stroller cover. Most anchors are fine in rain. If it's genuinely heavy: Harbour City mall is enormous and covered — nursing room, food court, shops, hours of indoor browsing. HK Museum of History is excellent on a rainy afternoon. The Peak in light rain is actually beautiful — mist over the harbour is extraordinary.</div>
-    <div class="sugg-meta"><span><strong>Best shelter:</strong> Harbour City (10-min walk from hotel) &middot; HK Museum of History (10-min walk)</span></div>
-  </div>
 
-  
 
   <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
     <div class="sugg-name" style="color:#93c5fd">🌧️ Rainy Day Plan — Shenzhen</div>
@@ -385,9 +417,18 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <div class="sugg-city-content">
 
   <div class="sugg-card highlight">
-    <div class="sugg-name">Den Den Town (でんでんタウン)<span class="sugg-highlight-badge">STANDING DAILY NOTE</span></div>
-    <div class="sugg-desc">Osaka&apos;s otaku and electronics district &mdash; 15-min walk from Hinode Hotel every single evening. Multiple floors of retro games, trading cards, anime figures, and Book-Off. The mood will always strike. Never needs to be a scheduled anchor &mdash; just go when the evening is right.</div>
-    <div class="sugg-meta"><span><strong>From Hinode Hotel:</strong> right outside — hotel is on the Nipponbashi strip</span><span><strong>Time needed:</strong> 1&ndash;3 hrs</span><span><strong>Best day:</strong> Any Osaka evening</span></div>
+    <div class="sugg-name">Den Den Town (でんでんタウン) — Full Strategy<span class="sugg-highlight-badge">HOTEL DOORSTEP</span></div>
+    <div class="sugg-desc">Osaka's equivalent of Akihabara — and you're staying at it. The Hinode Hotel sits at the southern entrance of Den Den Town, with Ebisucho Station right next door. Two parallel streets cover everything: walk south down Sakaisuji for electronics, then back north up Ota Road (オタロード) for anime, retro games, trading cards, and figures. Over 150 shops in a compact 1km corridor. Don't stick to the main street — the best prices and rarest finds are in the back alleys. Half a day minimum. You have 5 evenings here. Use every single one.</div>
+    <div class="sugg-meta" style="flex-direction:column;gap:10px;margin-top:8px">
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Super Potato (スーパーポテト) — Ota Road:</strong> The anchor. The Osaka branch of Japan's most famous retro game store. Famicom, Super Famicom, Sega, Game Boy — every cartridge in great condition at prices that don't exist anywhere else. This is where vintage Game Boy DMG units and Pokémon Gold/Silver carts live. Browse the glass cases carefully. Start every Den Den Town session here.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Trader 2 — Ota Road:</strong> Right alongside Super Potato. Good deals on retro hardware and software, slightly less picked-over than Super Potato. Check both on the same visit.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Surugaya (駿河屋) — multiple branches:</strong> Two or three Surugaya branches in Den Den Town. Carries TCG singles including vintage Pokémon, figures, retro games, and manga. Prices are competitive. Good for Pokémon card hunting alongside Super Potato.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Jungle — Ota Road:</strong> Specialist figure and collectibles store. Particularly good for unique finds and rarer items. Worth a sweep for anyone hunting specific Pokémon figures or limited edition goods.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Mandarake (まんだらけ) — Ota Road:</strong> Multiple floors of secondhand manga, anime goods, TCG singles, and vintage figures. The Osaka branch is excellent for Pokémon card hunting. Less tourist traffic than the Akihabara branch so prices are often better.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Animate Osaka Nipponbashi:</strong> The main anime merchandise chain. Good for current Pokémon TCG product, new figures, and licensed goods. Not vintage but comprehensive for current stock.</span>
+      <span style="color:#d1d5db;font-size:13px"><strong style="color:#c4b5fd">Sofmap — Sakaisuji (north end):</strong> A huge multi-level secondhand electronics store at the northern edge of the strip. TVs, computers, gaming hardware, smartphones at rock-bottom prices. Good for a browse if you want to see what secondhand Japanese electronics look like.</span>
+      <span style="color:#d1d5db;font-size:13px;color:#fbbf24"><strong>Practical notes:</strong> Shops open ~11am, close ~8pm. Small independents prefer cash — carry ¥10,000–20,000 (~CAD $95–190) on any serious hunting evening. Tax-free available at larger stores. Bigger shops accept cards; smaller ones often cash only. Evening browsing after dinner is a legitimate Den Den Town activity — the strip stays lively until closing.</span>
+    </div>
   </div>
 
   <div class="sugg-card highlight">
@@ -467,6 +508,19 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-name">Dekasan (デカサン)</div>
     <div class="sugg-desc">A small sandwich shop in Chuo Ward that went viral for good reason. Two stars: the giant fluffy egg sandwich — whipped egg whites, egg salad, and a dripping egg yolk on top, served on pillowy Japanese milk bread — and the rare harami steak sandwich, 400g of skirt steak cooked medium-rare with pink peppercorns for ¥2,400 (~CAD $23). Tiny space with very limited seating. The takeout line moves faster than dine-in — grab it to go and eat in the park down the road.</div>
     <div class="sugg-meta"><span><strong>From Hinode Hotel:</strong> 31-min walk (2.3km north) or 18-min by transit</span><span><strong>Hours:</strong> 11am–4pm daily — arrive by 10:45am to avoid a long queue</span><span><strong>Order:</strong> Egg sandwich or harami steak sando. Takeout line is faster.</span><span><strong>Best day:</strong> Oct 12 (Osaka Castle day) — it's on the way back from the castle area</span></div>
+  </div>
+
+
+  <div class="sugg-card">
+    <div class="sugg-name">BOOKOFF Osaka Namba-naka</div>
+    <div class="sugg-desc">Japan's largest secondhand chain — manga, Pokémon cards, video games, figures, books, CDs. The Namba-naka branch is the closest to the hotel at roughly 10–15 min walk north through the Namba entertainment district. Carries used games and TCG alongside everything else. Open 10am–10pm daily. Worth a sweep on any Den Den Town day since you're already in the neighbourhood.</div>
+    <div class="sugg-meta"><span><strong>From Hinode Hotel:</strong> ~10–15 min walk north toward Namba &middot; 1 Chome-5-16 Namba, Chuo Ward</span><span><strong>Hours:</strong> 10:00–22:00 daily</span><span><strong>Also in Tokyo:</strong> BOOKOFF Akihabara (Oct 22 day) and branches near Shinjuku and Asakusa</span></div>
+  </div>
+
+  <div class="sugg-card">
+    <div class="sugg-name">Akachan Honpo (アカチャンホンポ) — Baby Superstore</div>
+    <div class="sugg-desc">Japan's premier baby specialty chain — founded in Osaka in 1932. Everything for Jem in one place: Merries diapers, Kewpie baby food pouches, formula, baby clothing, toys, bottles, skincare. Much cheaper than buying baby supplies piecemeal at konbini. Tax-free shopping available. The Hommachi branch is the closest to the hotel; the Kinshicho branch in Tokyo is convenient from Asakusa.</div>
+    <div class="sugg-meta"><span><strong>Osaka — Hommachi branch:</strong> ~15 min by subway (Midosuji Line to Hommachi, Exit 9) &middot; Minamihommachi 3-3-21, Chuo Ward &middot; Open 10:00–20:00 daily</span><span><strong>Tokyo — Kinshicho branch:</strong> 2 stops on Tsukuba Express from Asakusa (during Asakusa leg) &middot; Large store, 2,300 sqm floor area</span><span><strong>What to buy:</strong> Merries diapers (メリーズ), Kewpie baby food by age stage, Pigeon skincare, Combi stroller accessories</span></div>
   </div>
 
   <div class="sugg-card" style="background:rgba(59,130,246,0.05);border-color:rgba(59,130,246,0.25)">
@@ -777,10 +831,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="sugg-name">Tokyo Metropolitan Government Building</div>
     <div class="sugg-desc">Free observation deck at 202m &mdash; 1-min walk from the Shibuya leg (5-min train to Shinjuku on JR Yamanote, Oct 24-27). Open until 10:30pm (South Tower). One of the best free views in Tokyo. Go any evening after dinner.</div>
     <div class="sugg-meta"><span><strong>From hotel:</strong> 1-min walk</span><span><strong>Time needed:</strong> 45 min</span><span><strong>Best day:</strong> Any clear Tokyo evening</span></div>
-  </div>
 
-</div>
-</div>
 
   <div class="sugg-card">
     <div class="sugg-name">Hello Cycling — Bikeshare<span class="sugg-highlight-badge">ASAKUSA LEG</span></div>
@@ -795,35 +846,85 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   </div>
 </div>
 
+  </div>
 </div>
 
 <div id="tab-phrases" class="tab-content">
-  <div class="phrase-sh">JAPANESE &mdash; ESSENTIAL</div>
+  <div class="phrase-intro" style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#c4b5fd;">
+    🔊 Tap the speaker button on any phrase to hear it spoken aloud. Works offline. Japanese and Cantonese pronunciation included.
+  </div>
+
+  <div class="phrase-sh">JAPANESE &mdash; CRITICAL</div>
 
   <div class="phrase-card phrase-urgent">
-    <div class="phrase-top"><span class="phrase-roman">Mayo nashi de onegaishimasu</span><span class="phrase-native" style="color:#f87171">マヨネーズなしでお願いします</span></div>
+    <div class="phrase-top"><span class="phrase-roman">Mayo nashi de onegaishimasu</span><span class="phrase-native" style="color:#f87171">マヨネーズなしでお願いします</span><button class="phrase-speak" onclick="speakPhrase('マヨネーズなしでお願いします','ja-JP')" title="Hear pronunciation">🔊</button></div>
     <div class="phrase-meaning">No mayonnaise please &mdash; Becca&apos;s critical phrase</div>
     <div class="phrase-tip">&#128680; Say before ordering ANYTHING in Japan. Kewpie mayo is hidden in: takoyaki, okonomiyaki, convenience store sandwiches, potato salad, many sauces. Non-negotiable.</div>
   </div>
 
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Sumimasen</span><span class="phrase-native" style="color:#f87171">すみません</span></div><div class="phrase-meaning">Excuse me / Sorry &mdash; use constantly</div><div class="phrase-tip">Opens every door. Say before asking anyone anything.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Arigatou gozaimasu</span><span class="phrase-native" style="color:#f87171">ありがとうございます</span></div><div class="phrase-meaning">Thank you (formal)</div><div class="phrase-tip">Say with a slight bow. People genuinely light up.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Junyuushitsu wa arimasu ka?</span><span class="phrase-native" style="color:#f87171">授乳室はありますか？</span></div><div class="phrase-meaning">Is there a nursing room?</div><div class="phrase-tip">Every department store has one. Staff will lead you immediately. Look for 赤ちゃん休憩室 signs.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kore wa ikura desu ka?</span><span class="phrase-native" style="color:#f87171">これはいくらですか？</span></div><div class="phrase-meaning">How much is this?</div><div class="phrase-tip">Point at the item. Works anywhere.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Toire wa doko desu ka?</span><span class="phrase-native" style="color:#f87171">トイレはどこですか？</span></div><div class="phrase-meaning">Where is the toilet?</div><div class="phrase-tip">Japan has the best toilets on earth. Ask freely.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Watashi wa tounyoubyou desu</span><span class="phrase-native" style="color:#f87171">私は糖尿病です</span></div><div class="phrase-meaning">I am diabetic &mdash; Goong Goong&apos;s card phrase</div><div class="phrase-tip">Print on a small card. Show at restaurants and clinics. Japanese medical staff will respond immediately and helpfully.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kuroge Wagyu / A5</span><span class="phrase-native" style="color:#f87171">黒毛和牛 / A5</span></div><div class="phrase-meaning">Black wagyu / highest grade &mdash; look for on restaurant windows</div><div class="phrase-tip">Walk in and ask for the lunch teishoku set. Best value of the trip.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kusushon wa arimasu ka?</span><span class="phrase-native" style="color:#f87171">クッションはありますか？</span></div><div class="phrase-meaning">Do you have a cushion? (for Jem at restaurants)</div><div class="phrase-tip">Most Japanese restaurants have booster cushions for babies. Just ask.</div></div>
+  <div class="phrase-sh" style="margin-top:20px">JAPANESE &mdash; ESSENTIAL</div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Sumimasen</span><span class="phrase-native" style="color:#a78bfa">すみません</span><button class="phrase-speak" onclick="speakPhrase('すみません','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Excuse me / Sorry &mdash; use constantly</div><div class="phrase-tip">Opens every door. Say before asking anyone anything.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Arigatou gozaimasu</span><span class="phrase-native" style="color:#a78bfa">ありがとうございます</span><button class="phrase-speak" onclick="speakPhrase('ありがとうございます','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Thank you (formal)</div><div class="phrase-tip">Say with a slight bow. People genuinely light up.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Junyuushitsu wa arimasu ka?</span><span class="phrase-native" style="color:#a78bfa">授乳室はありますか？</span><button class="phrase-speak" onclick="speakPhrase('授乳室はありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Is there a nursing room?</div><div class="phrase-tip">Every department store has one. Staff will lead you immediately. Also search 授乳室 in Google Maps to find the nearest one anywhere in Japan.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kore wa ikura desu ka?</span><span class="phrase-native" style="color:#a78bfa">これはいくらですか？</span><button class="phrase-speak" onclick="speakPhrase('これはいくらですか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">How much is this?</div><div class="phrase-tip">Point at the item. Works anywhere.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Toire wa doko desu ka?</span><span class="phrase-native" style="color:#a78bfa">トイレはどこですか？</span><button class="phrase-speak" onclick="speakPhrase('トイレはどこですか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Where is the toilet?</div><div class="phrase-tip">Japan has the best toilets on earth. Ask freely.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Eigo no menyu wa arimasu ka?</span><span class="phrase-native" style="color:#a78bfa">英語のメニューはありますか？</span><button class="phrase-speak" onclick="speakPhrase('英語のメニューはありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Do you have an English menu?</div><div class="phrase-tip">Most tourist-area restaurants do. Smaller local places may not — that's fine, point at what others are eating.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kore wo hitotsu kudasai</span><span class="phrase-native" style="color:#a78bfa">これをひとつください</span><button class="phrase-speak" onclick="speakPhrase('これをひとつください','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">One of these please (pointing)</div><div class="phrase-tip">The single most useful ordering phrase. Point + say this = you have ordered successfully at any counter in Japan.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kaado de haraemasuka?</span><span class="phrase-native" style="color:#a78bfa">カードで払えますか？</span><button class="phrase-speak" onclick="speakPhrase('カードで払えますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Can I pay by card?</div><div class="phrase-tip">Ask before sitting down at smaller restaurants. If the answer is no, you need cash. Many small shops and retro game stores are cash only.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kaite kudasai</span><span class="phrase-native" style="color:#a78bfa">書いてください</span><button class="phrase-speak" onclick="speakPhrase('書いてください','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Please write it down</div><div class="phrase-tip">When you can't understand spoken Japanese, tap this phrase and hand over your phone. Japanese people are extraordinarily patient with this.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Betsu no saizu wa arimasu ka?</span><span class="phrase-native" style="color:#a78bfa">別のサイズはありますか？</span><button class="phrase-speak" onclick="speakPhrase('別のサイズはありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Do you have this in another size?</div><div class="phrase-tip">Japanese sizing runs small. Don't be shy about asking — staff will check stock immediately.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Totemo oishikatta desu, arigatou</span><span class="phrase-native" style="color:#a78bfa">とても美味しかったです、ありがとう</span><button class="phrase-speak" onclick="speakPhrase('とても美味しかったです、ありがとう','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">It was delicious, thank you</div><div class="phrase-tip">Say as you leave a restaurant. The chef or owner will remember you forever.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Akachan ga imasu. Junyuushitsu wa arimasu ka?</span><span class="phrase-native" style="color:#a78bfa">赤ちゃんがいます。授乳室はありますか？</span><button class="phrase-speak" onclick="speakPhrase('赤ちゃんがいます。授乳室はありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">I have a baby. Is there a nursing room?</div><div class="phrase-tip">Department stores, train stations, and shopping malls all have them. Staff will lead you directly. No appointment needed.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Karakuku shinai de kudasai</span><span class="phrase-native" style="color:#a78bfa">辛くしないでください</span><button class="phrase-speak" onclick="speakPhrase('辛くしないでください','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Please make it not spicy</div><div class="phrase-tip">Useful at ramen shops and izakayas. Japan is not particularly spicy by default but some dishes have optional heat — this covers it.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Watashi wa tounyoubyou desu</span><span class="phrase-native" style="color:#a78bfa">私は糖尿病です</span><button class="phrase-speak" onclick="speakPhrase('私は糖尿病です','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">I am diabetic &mdash; Goong Goong</div><div class="phrase-tip">Show at clinics and pharmacies. Japanese medical staff respond immediately and helpfully.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kuroge Wagyu / A5</span><span class="phrase-native" style="color:#a78bfa">黒毛和牛 / A5</span><button class="phrase-speak" onclick="speakPhrase('黒毛和牛、エーファイブ','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Black wagyu / highest grade &mdash; look for on restaurant windows</div><div class="phrase-tip">Walk in and ask for the lunch teishoku set. Best value of the trip.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Kusshon wa arimasu ka?</span><span class="phrase-native" style="color:#a78bfa">クッションはありますか？</span><button class="phrase-speak" onclick="speakPhrase('クッションはありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Do you have a cushion? (for Jem at restaurants)</div><div class="phrase-tip">Most Japanese restaurants have booster cushions for babies. Just ask.</div></div>
+
+  <div class="phrase-sh" style="margin-top:20px">JAPANESE &mdash; HEALTH &amp; EMERGENCIES</div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Akachan ga netsu ga arimasu</span><span class="phrase-native" style="color:#f87171">赤ちゃんが熱があります</span><button class="phrase-speak" onclick="speakPhrase('赤ちゃんが熱があります','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">My baby has a fever</div><div class="phrase-tip">At a pharmacy or clinic. Staff will respond quickly. Japanese pharmacies are excellent and well-stocked for infant care.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Akachan no kusuri wa arimasu ka?</span><span class="phrase-native" style="color:#f87171">赤ちゃんの薬はありますか？</span><button class="phrase-speak" onclick="speakPhrase('赤ちゃんの薬はありますか','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Do you have infant medicine?</div><div class="phrase-tip">Show at any pharmacy (薬局 yakkyoku). Staff speak enough English for medical situations in tourist areas but this phrase helps in local pharmacies.</div></div>
+
+  <div class="phrase-card" style="border:none"><div class="phrase-top"><span class="phrase-roman">Isha ni mite moraitai desu</span><span class="phrase-native" style="color:#f87171">医者に見てもらいたいです</span><button class="phrase-speak" onclick="speakPhrase('医者に見てもらいたいです','ja-JP')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">I need to see a doctor</div><div class="phrase-tip">Show at your hotel front desk first — they will call or arrange. Japanese hospitals have international patient desks in major cities.</div></div>
 
   <div class="phrase-sh" style="margin-top:24px">CANTONESE &mdash; ESSENTIAL</div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">M&agrave;h-g&#333;i</span><span class="phrase-native" style="color:#facc15">唔該</span></div><div class="phrase-meaning">Excuse me / Thank you for service</div><div class="phrase-tip">Most used phrase in HK. Say it constantly.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">D&#333;-jeh</span><span class="phrase-native" style="color:#facc15">多謝</span></div><div class="phrase-meaning">Thank you for gifts or compliments</div><div class="phrase-tip">Different from m&agrave;h-g&#333;i &mdash; for receiving something.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Gei d&#333; ch&iacute;n?</span><span class="phrase-native" style="color:#facc15">幾多錢？</span></div><div class="phrase-meaning">How much?</div><div class="phrase-tip">Markets love this. Cantonese speakers in the group handle the bargaining.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">H&oacute;u sihk!</span><span class="phrase-native" style="color:#facc15">好食！</span></div><div class="phrase-meaning">Delicious!</div><div class="phrase-tip">Say at any meal. Locals beam with pride.</div></div>
-  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">N&iacute; h&oacute;</span><span class="phrase-native" style="color:#c4b5fd">你好</span></div><div class="phrase-meaning">Hello &mdash; Mandarin, use in Shenzhen</div><div class="phrase-tip">HK: use Cantonese. Shenzhen: Mandarin is the norm.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">M&agrave;h-g&#333;i</span><span class="phrase-native" style="color:#facc15">唔該</span><button class="phrase-speak" onclick="speakPhrase('唔該','zh-HK')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Excuse me / Thank you for service</div><div class="phrase-tip">Most used phrase in HK. Say it constantly.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">D&#333;-jeh</span><span class="phrase-native" style="color:#facc15">多謝</span><button class="phrase-speak" onclick="speakPhrase('多謝','zh-HK')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Thank you for gifts or compliments</div><div class="phrase-tip">Different from m&agrave;h-g&#333;i &mdash; for receiving something.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">Gei d&#333; ch&iacute;n?</span><span class="phrase-native" style="color:#facc15">幾多錢？</span><button class="phrase-speak" onclick="speakPhrase('幾多錢','zh-HK')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">How much?</div><div class="phrase-tip">Markets love this. Cantonese speakers in the group handle the bargaining.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">H&oacute;u sihk!</span><span class="phrase-native" style="color:#facc15">好食！</span><button class="phrase-speak" onclick="speakPhrase('好食','zh-HK')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Delicious!</div><div class="phrase-tip">Say at any meal. Locals beam with pride.</div></div>
+
+  <div class="phrase-card"><div class="phrase-top"><span class="phrase-roman">N&iacute; h&oacute;</span><span class="phrase-native" style="color:#c4b5fd">你好</span><button class="phrase-speak" onclick="speakPhrase('你好','zh-CN')" title="Hear pronunciation">🔊</button></div><div class="phrase-meaning">Hello &mdash; Mandarin, use in Shenzhen</div><div class="phrase-tip">HK: use Cantonese. Shenzhen: Mandarin is the norm.</div></div>
 </div>
 
+
 <div id="tab-tips" class="tab-content">
+  <div class="section-card"><div class="section-title">🔌 POWER ADAPTORS</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Japan:</strong> Type A plug — same as North America. No adaptor needed at all. Every outlet in Japan will accept your Canadian plugs directly.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span><strong>Hong Kong: Type G (UK three-pin plug).</strong> This will catch you on arrival night at The Beacon. Bring at least 2–3 Type G adaptors for the group. Available at any Canadian electronics store or airport before departure. The Shenzhen hotel will likely have Type A alongside Type G — confirm at check-in.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Voltage:</strong> Japan is 100V (North America is 120V) and HK is 220V. Modern phone chargers, laptops, and camera chargers are universal (100–240V) and handle all of these automatically. Check your device's brick for the voltage range before using a high-draw appliance like a hair dryer.</span></div>
+  </div>
+
   <div class="section-card"><div class="section-title">&#128241; APPS TO DOWNLOAD BEFORE YOU GO</div>
     <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Google Maps</strong> &mdash; Download offline maps for Hong Kong, Osaka, Kyoto, and Tokyo before departure. Works without data. Essential everywhere.</span></div>
     <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Google Translate</strong> &mdash; Download Japanese and Traditional Chinese packs for offline use. Camera mode reads menus, signs, and product labels in real time. Life-changing in Japan.</span></div>
@@ -1281,7 +1382,21 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
     <div class="section-row"><span class="row-icon" style="color:#f9a8d4">&#8594;</span><span><strong>At restaurants:</strong> Plain steamed rice, soft tofu, and miso soup (cooled down) are available everywhere and are perfect first foods. Japanese restaurant staff are extraordinarily helpful with babies — just show the food and mime feeding.</span></div>
     <div class="section-row" style="border:none"><span class="row-icon" style="color:#f9a8d4">&#8594;</span><span><strong>A small thought:</strong> Whatever his first solid food turns out to be — a spoonful of okayu in Osaka, a piece of silken tofu in Kyoto — it'll be Japan. That's a pretty wonderful start.</span></div>
   </div>
-  <div id="jem-container"></div>
+  <div class="section-card" style="background:rgba(251,191,36,0.04);border-color:rgba(251,191,36,0.2)"><div class="section-title" style="color:#fbbf24">☀️ JEM — JET LAG (FIRST 2–3 DAYS IN HK)</div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>The situation:</strong> You land in Hong Kong at 7:10pm local time. Jem's body thinks it's 6:10am Toronto time. He's been awake for hours. The next 2–3 days he will be confused about when to sleep and when to be alert.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Morning light is the reset button.</strong> Get Jem outside in natural daylight as early as possible on Oct 5 and 6 — even 20 minutes on the hotel balcony or a short morning walk helps his circadian clock shift toward HK time. This is the most effective single intervention.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Feed on HK schedule, not Toronto schedule.</strong> If Jem wakes at 2am HK time wanting a feed (which is 1pm Toronto time for him), feed him — but keep the room dark and boring. No play, no stimulation. Feed and return to sleep. Gradually push morning wake time later over 2–3 days.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>Don't let afternoon naps run too long.</strong> A nap over 2 hours in the afternoon makes nighttime harder. Gentle wake if needed after 90 minutes during the first 2–3 days.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#fbbf24">&#8594;</span><span><strong>By Japan (Oct 11):</strong> Jem will be on Asia time. The HK leg is both the hardest and the reset. By the time you reach Osaka he'll be adapted and the Japan and Tokyo legs will be much smoother.</span></div>
+  </div>
+
+  <div class="section-card" style="background:rgba(236,72,153,0.04);border-color:rgba(236,72,153,0.2)"><div class="section-title" style="color:#f9a8d4">🤱 FINDING NURSING ROOMS IN JAPAN (授乳室)</div>
+    <div class="section-row"><span class="row-icon" style="color:#f9a8d4">&#8594;</span><span><strong>The magic search term:</strong> 授乳室 (junyūshitsu). Type it into Google Maps anywhere in Japan and it shows every nursing room nearby with directions. This works in every city on the trip.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#f9a8d4">&#8594;</span><span><strong>Where to find them:</strong> Every department store (デパート), most train stations, shopping malls, and tourist attractions. Look for signs saying 授乳室 or 赤ちゃん休憩室 (baby rest room). They typically include a private nursing area, changing table, baby sink, and often a microwave for warming bottles.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#f9a8d4">&#8594;</span><span><strong>The phrase to say:</strong> 授乳室はありますか？ (Junyūshitsu wa arimasu ka?) — "Is there a nursing room?" Staff will lead you immediately and without hesitation. Japan is extraordinarily accommodating for nursing parents.</span></div>
+  </div>
+
+    <div id="jem-container"></div>
 
 
   <div class="section-card" style="background:rgba(99,102,241,0.07);border-color:rgba(99,102,241,0.3);margin-top:20px">
@@ -1294,6 +1409,44 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
 </div>
 
 <div class="footer"><div class="footer-title">HAVE AN INCREDIBLE TRIP</div>Micheal &middot; Becca &middot; Jem &middot; Popo &middot; Goong Goong<br/>October 3 &ndash; 27, 2026<br/>Hong Kong &middot; Shenzhen &middot; Osaka &middot; Kyoto &middot; Tokyo</div>
+</div>
+
+<div id="tab-norms" class="tab-content">
+  <div class="section-card">
+    <div class="section-title">🇯🇵 JAPAN — SOCIETAL NORMS</div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>No eating or drinking while walking.</strong> Eating street food is done standing at the stall or sitting down nearby. Walking and eating — especially on busy streets — is considered rude. Konbini food is eaten outside the store or inside. Exception: ice cream cones are widely accepted.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>There are almost no public bins anywhere.</strong> This is the thing that catches every visitor off guard. You carry your rubbish until you find a konbini bin or get back to the hotel. Konbini bins outside stores are the main option. Carry a small bag in your daypack.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Trains are quiet.</strong> No phone calls. Voices low. Headphones in. Set your phone to silent. Jem crying is universally understood and forgiven — don't stress about it. What people notice is adults being loud.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Queue culture is absolute.</strong> Always queue in the marked lines. Never cut. At train platform doors, stand to the side of the yellow lines and let passengers off before boarding. This is observed almost universally.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Escalators: stand on the left in Tokyo, stand on the right in Osaka.</strong> Walk on the other side. This flips between cities — just watch what everyone else is doing on arrival.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Tipping is never done.</strong> Not at restaurants, taxis, hotels, or anywhere. Leaving money on the table can confuse or offend. The price on the bill is the price. No exceptions anywhere in Japan.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Cash is still king at small shops.</strong> Many small restaurants, retro game shops, and independents in Den Den Town and Akihabara are cash only. Always carry ¥5,000–10,000 (~CAD $47–95).</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Chopstick etiquette.</strong> Never stick chopsticks upright in rice — it's a funeral association. Never pass food chopstick to chopstick — also a funeral ritual. Rest them on the holder or across the bowl.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Shoes off.</strong> Any restaurant with tatami floor seating, traditional guesthouses, some temple interiors. Easy to spot — there will be a step up and a place to leave shoes. Just follow what others do.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Public onsen rules (public only — not your private Hinode booking).</strong> Full nudity, no swimwear, no towels in the water. Wash thoroughly at the shower station before entering the bath. Tattoos can bar entry at some traditional establishments — less strictly enforced now but check. Your Hinode Hotel booking is a private family session — none of these rules apply to you.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Bowing.</strong> A small nod or slight bow when someone helps you, serves you, or holds a door goes a long way. No need to go deep — just acknowledge. People genuinely appreciate it.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Wet umbrella sleeves.</strong> Shops provide plastic sleeves for wet umbrellas at the entrance. Use them — don't drag a dripping umbrella through the store. The stand is right at the door.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span><strong>Rubbish sorting.</strong> Hotels and public spots have separate bins for burnable waste, plastic, cans, and PET bottles. Follow the labels. Getting it right is appreciated — getting it wrong is forgiven for tourists but noticed.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🇭🇰 HONG KONG — SOCIETAL NORMS</div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Queue for everything.</strong> HK queues hard — MTR, taxis, escalators, dim sum restaurants. The queue is implicit even when not marked. Find the back of it and wait. Jumping it is noticed and frowned upon.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Escalators: stand on the right, walk on the left.</strong> Opposite to Tokyo. The long Central–Mid-Levels escalator and every MTR escalator in HK follows this rule religiously.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Cantonese first, always.</strong> Even a single word of Cantonese — m&agrave;h-g&#333;i (唔該), h&oacute;u sihk (好食) — opens doors that English won't. Older shopkeepers and market vendors respond visibly differently. Becca has a genuine superpower here.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Bargaining is expected at markets, never at malls.</strong> Temple Street Night Market, Ladies Market — bargain freely, it's part of the experience. Starting at 50–60% of the asking price is normal. Malls, restaurants, and chain stores have fixed prices.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Loud restaurants are normal.</strong> Dim sum restaurants and traditional HK eateries are genuinely noisy. Calling a waiter by raising your hand or saying m&agrave;h-g&#333;i loudly across the restaurant is standard and expected. Don't be shy.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Priority seats on the MTR.</strong> Always give up priority seats for elderly, pregnant, or people with babies. Socially enforced very strictly in HK. With Jem you'll be the recipient — accept graciously with a nod.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Eating while walking is more accepted than Japan</strong> but still considered casual or slightly rude in formal areas. Fine at markets and street stalls. Avoid on the MTR entirely — it's prohibited.</span></div>
+    <div class="section-row"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>Cash is common at markets, cards everywhere else.</strong> The MTR and most shops accept Visa/Mastercard contactless. Temple Street and Ladies Market: cash preferred for bargaining.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#facc15">&#8594;</span><span><strong>The harbour view is sacred.</strong> Locals take genuine pride in the Victoria Harbour skyline — especially at night. Expressing genuine appreciation (wow, this is incredible) lands well with Popo and Goong Goong's connections and with anyone you meet.</span></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-title">🇨🇳 SHENZHEN — ADDITIONAL NORMS</div>
+    <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span><strong>WeChat Pay is the only payment method at most places.</strong> Physical cash is increasingly refused. QR code payment is the norm. Have WeChat Pay set up and tested before crossing at Lo Wu — without it, many vendors simply can't take your money.</span></div>
+    <div class="section-row" style="border:none"><span class="row-icon" style="color:#34d399">&#8594;</span><span><strong>Photography in markets.</strong> Ask before photographing vendors or their stalls — some dislike it, especially in the fashion buildings. A quick gesture and a smile usually gets a yes or a polite no. Respect either answer.</span></div>
+  </div>
 </div>
 
 <script>
@@ -1400,7 +1553,8 @@ const days=[
   note:"Arriving at dusk is the best possible timing — crowds thin dramatically, the thousands of vermilion torii gates glow orange in the fading light. One of the most visually extraordinary places in Japan.",
   popo:"Popo & Goong Goong: lower gates only — the magic is in the first 20 minutes. Flat paved path, no need to climb.",
   stand:"🌸 Nishiki + Pokémon: 115-min walk from MIMARU any morning. 🏮 Gion: 20-min walk any evening, best 5–6pm.",
-  items:["Osaka→Kyoto: JR Special Rapid (新快速) from JR Osaka Station, ~75min, ¥570 (~CAD $5.50). Or Hankyu from Osaka-Umeda to Kawaramachi, ~45min, ¥410 (~CAD $4) — closer to MIMARU.","Check into MIMARU Kawaramachi. Confirm crib. Drop bags.","Arrive Fushimi Inari ~4:30–5pm. Carrier for Jem. Lower torii gate tunnels (千本鳥居) are 5-min walk from the station entrance.","Nursing: quiet stone benches in the lower shrine area — one of the more peaceful nursing spots of the Japan leg"]},
+  items:["🎒 CARRIER RECOMMENDED: Fushimi Inari has uneven stone steps through the torii gate tunnels. A carrier for Jem is significantly easier than a stroller on the upper sections. Stroller fine for the flat lower approach.",
+    "Osaka→Kyoto: JR Special Rapid (新快速) from JR Osaka Station, ~75min, ¥570 (~CAD $5.50). Or Hankyu from Osaka-Umeda to Kawaramachi, ~45min, ¥410 (~CAD $4) — closer to MIMARU.","Check into MIMARU Kawaramachi. Confirm crib. Drop bags.","Arrive Fushimi Inari ~4:30–5pm. Carrier for Jem. Lower torii gate tunnels (千本鳥居) are 5-min walk from the station entrance.","Nursing: quiet stone benches in the lower shrine area — one of the more peaceful nursing spots of the Japan leg"]},
 
  {date:"Fri Oct 17",suggs:["Gion (祇園) evening — 10min walk from MIMARU, 15min from Nijo Castle by subway. Lanterns from 4pm, best 5–6pm. Go if energy allows — can always slide to tomorrow or Oct 21.","Nishiki + Pokémon Center Kyoto — 5min walk from MIMARU, any morning. Already covered today but noted as standing daily option."],city:"Kyoto",emoji:"⛩️",title:"Nishiki + Pokémon (morning) ⚓ Nijo Castle (afternoon)",dist:"📍 Nishiki/Pokémon: 5-min walk. Nijo Castle: Subway Tozai Line ~15min.",
   note:"Morning close to home — Nishiki Market and Pokémon Center Kyoto are a 5-min walk and effectively one outing. Hotel reset at midday. Nijo Castle in the afternoon with a private guide.",
@@ -1428,7 +1582,8 @@ const days=[
   note:"A whole neighbourhood on the western edge of Kyoto. Bamboo grove, Tenryu-ji garden, Togetsukyo Bridge, the ryokan lane, tofu kaiseki lunch. One of the most beautiful places in Japan. Note: Arashiyama in rain is genuinely beautiful — don't cancel if the weather turns.",
   popo:"Popo & Goong Goong: Tenryu-ji garden is flat and peaceful. Bamboo grove is a 200m flat paved path. October foliage on the hills.",
   stand:"🌸 Nishiki: 15-min walk this morning before the bus. 🏮 Gion: 20-min walk this evening.",
-  items:["Bamboo Grove (竹林の小径): flat 200m path through towering bamboo. Best before 9am or after 3:30pm. Jem in the carrier here is extraordinary.","Tenryu-ji Garden (天龍寺): UNESCO zen garden, ¥500 (~CAD $5). Flat, stroller accessible. Allow 45min.","Togetsukyo Bridge (渡月橋): the iconic bridge over the Oi River with forested hills behind. October foliage. Free.","Ryokan lane: walk west of Tenryu-ji — wooden facades, stone gardens, yukata-clad staff. Free.","Tofu kaiseki lunch on Arashiyama main street: ~¥2,000–3,500 (~CAD $19–33) set menu","Pack bags tonight. 🧳 Pack bags tonight — travelling with luggage on the Shinkansen tomorrow."]},
+  items:["🎒 CARRIER RECOMMENDED: The bamboo grove path is narrow and busy. Arashiyama generally suits a carrier better than a stroller — the paths are beautiful but often crowded and uneven. Use the stroller for flat riverside sections.",
+    "Bamboo Grove (竹林の小径): flat 200m path through towering bamboo. Best before 9am or after 3:30pm. Jem in the carrier here is extraordinary.","Tenryu-ji Garden (天龍寺): UNESCO zen garden, ¥500 (~CAD $5). Flat, stroller accessible. Allow 45min.","Togetsukyo Bridge (渡月橋): the iconic bridge over the Oi River with forested hills behind. October foliage. Free.","Ryokan lane: walk west of Tenryu-ji — wooden facades, stone gardens, yukata-clad staff. Free.","Tofu kaiseki lunch on Arashiyama main street: ~¥2,000–3,500 (~CAD $19–33) set menu","Pack bags tonight. 🧳 Pack bags tonight — travelling with luggage on the Shinkansen tomorrow."]},
 
  {date:"Mon Oct 20",suggs:["Pokémon Center Tokyo DX — 15min walk or 2 subway stops from Ginza/Tsutaya. Nihonbashi Takashimaya East Building 5F. Life-sized Snorlax photo op with Jem. Read his mood before committing on arrival day.","Tokyo Metropolitan Government Building — 1-min walk from the Asakusa hotel. Senso-ji is a 10-12 min walk east. Go before 9am any morning for incense and almost no crowds."],city:"Travel",emoji:"🚄",title:"Shinkansen to Tokyo + ⚓ Tsutaya Books, Ginza",dist:"📍 Nozomi Kyoto→Tokyo Station ~2hr 15min, then Ginza Line ~8min to Asakusa hotel",
   note:"The Shinkansen is one of the great travel experiences in the world. Bags were sent ahead last night and arrive at the Asakusa hotel before you do. Travel completely light. Arrive Tokyo by midday, check in, Ginza for the afternoon anchor.",
@@ -1459,7 +1614,8 @@ const days=[
  {date:"Thu Oct 23",suggs:["Pokémon Center Skytree Town — 10min walk from Senso-ji anchor. Solamachi East Yard 4F, 30min from hotel. No queues. 50+ restaurants in Solamachi for lunch.","Tokyo Skytree observation deck — inside Solamachi, same destination as Pokémon Center. ¥2,100 (~CAD $20), 350m views over Tokyo.","Ryogoku sumo culture — 1 stop from Kinshicho on JR Sobu Line, ~30min from hotel. Sumo Museum (free, inside Kokugikan) + Edo Noren (walk-in sumo ring, restaurants).","Akachan Honpo Kinshicho — 1 stop east of Ryogoku on JR Sobu Line. Arcakit mall 5F, 1-min from station. Japan's best baby chain. Natural add-on to the Ryogoku visit."],city:"Tokyo",emoji:"🕌",title:"⚓ Senso-ji",dist:"📍 10-12 min walk from the Airbnb through Asakusa backstreets",
   note:"Tokyo's oldest temple — founded 645 AD — and from the Airbnb it is a 10-12 minute walk. Walk out any morning before 9am and the incense drifts through an almost empty courtyard. The Kaminarimon Gate, Nakamise-dori, the main hall — then walk to Kappabashi Kitchen Street in the afternoon and the Skytree Pokémon Center in the evening. A full day and you never take a single train.",
   popo:"Popo & Goong Goong: Asakusa is one of the most beautiful areas in Tokyo. Nakamise-dori is perfect for gift shopping.",
-  items:["Senso-ji (浅草寺): free, open 24hrs. Subway Ginza Line to Asakusa, Exit 1. The gate is 2 minutes straight ahead.","Nakamise-dori (仲見世通り): 200m of traditional snacks, fans, keychains — best souvenir shopping of the entire trip","Nursing: Asakusa Culture Tourist Information Center directly across from Kaminarimon Gate has a nursing room"]},
+  items:["🎒 CARRIER OPTION: The Nakamise-dori shopping street and temple approach work fine with a stroller. But the Asakusa backstreets and Hoppy Street izakaya lane are easier with Jem in a carrier — narrow, atmospheric, and better explored on foot.",
+    "Senso-ji (浅草寺): free, open 24hrs. Subway Ginza Line to Asakusa, Exit 1. The gate is 2 minutes straight ahead.","Nakamise-dori (仲見世通り): 200m of traditional snacks, fans, keychains — best souvenir shopping of the entire trip","Nursing: Asakusa Culture Tourist Information Center directly across from Kaminarimon Gate has a nursing room"]},
 
  {date:"Fri Oct 24",suggs:["Sky Plaza Ibasho soft play — inside nearby — Senso-ji grounds are peaceful in the evening and completely free. Good for Jem while others are at the gameble (~¥7,776 / ~CAD $74 for 2.5hrs)."],city:"Tokyo",emoji:"⚾",title:"⚓ Japan Series — Game 1",dist:"📍 Venue TBD — depends on Central League winner",
   note:"Japan Series Game 1. Jem sits this one out. Tickets via ticketsinjapan.com or StubHub as soon as the Series participants are known (~Oct 18).",
@@ -1723,6 +1879,17 @@ function filterCity(city,btn){
   document.querySelectorAll(".city-btn").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
   buildDays();
+}
+
+
+function speakPhrase(text, lang) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = lang || 'ja-JP';
+  u.rate = 0.85;
+  u.pitch = 1.0;
+  window.speechSynthesis.speak(u);
 }
 
 function switchTab(id,btn){
