@@ -10,16 +10,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="The Japlan">
 <script>
+// v49: service worker removed entirely — eliminates stale-cache issues.
+// Unregister any previously installed SW so browsers get fresh content.
 if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.getRegistrations().then(regs => {
-      regs.forEach(r => {
-        if(r.active && r.active.scriptURL && !r.active.scriptURL.includes('v=47')){
-          r.unregister();
-        }
-      });
-    });
-    navigator.serviceWorker.register('./sw.js?v=47').catch(e => console.log('SW error:', e));
+  navigator.serviceWorker.getRegistrations().then(regs=>{
+    regs.forEach(r=>r.unregister());
   });
 }
 </script>
@@ -334,7 +329,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
   <div class="sugg-card anchor-item">
     <div class="sugg-name">Kowloon Walled City Park<span class="sugg-anchor-badge">ANCHOR &mdash; Oct 8</span></div>
     <div class="sugg-desc">A peaceful, beautifully landscaped park on the site of the former Kowloon Walled City &mdash; one of the most densely populated places in human history. The exhibition hall inside tells the full story with maps, photographs and scale models. Completely flat, entirely stroller-friendly.</div>
-    <div class="sugg-meta"><span><strong>From hotel:</strong> MTR Kwun Tong Line to Lok Fu, 10-min walk south, ~25 min total</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 8</span></div>
+    <div class="sugg-meta"><span><strong>From hotel:</strong> MTR Tuen Ma Line to Sung Wong Toi, Exit B2, 10-min walk &mdash; ~25–30 min total</span><span><strong>Time needed:</strong> 1.5&ndash;2 hrs</span><span><strong>Best day:</strong> Oct 8</span></div>
   </div>
 
   <div class="sugg-card anchor-item">
@@ -1191,15 +1186,18 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
       <div class="hotel-dates">Oct 5 &rarr; Oct 7 &middot; 2 nights</div>
     </div>
     <div class="hotel-body">
-      <div class="hotel-why">Luohu District — walking distance from Lo Wu border crossing. Booked by Goong Goong. Close to Nanyou Fashion Market. Co-sleeping with Jem for this leg — no crib needed.</div>
+      <div class="hotel-why">Luohu District — walking distance from Lo Wu border crossing. Booked by Goong Goong. Co-sleeping with Jem for this leg — no crib needed. Dongmen Pedestrian Street (Shenzhen&apos;s main shopping area) is a 10–15 min taxi or 25 min via Line 1.</div>
       <div class="hotel-section-label">AMENITIES</div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Indoor heated swimming pool &middot; children&apos;s pool area &middot; sauna and steam room</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Cribs available on request</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>3 on-site restaurants (Chinese and Western) &middot; free WiFi &middot; gym</span></div>
-      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Metro Line 9 at hotel entrance &middot; Metro Lines 11 &amp; 12 at Nanshan Station, 550m walk</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Nearest metro: Line 2 at Xinxiu Station (~6 min walk) &middot; Lines 2 &amp; 5 at Huangbeiling Station (~10 min walk)</span></div>
       <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nanyou Fashion Market: 5-min walk</span></div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Shenzhen Bay Port: 10-min drive &middot; Shekou Ferry Terminal: 15-min drive</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Lo Wu border crossing: walking distance &mdash; this is why the hotel was chosen</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Dongmen Pedestrian Street (东门步行街): 10–15 min taxi (~¥20) or Line 1 via Luohu Station (~25 min)</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Huaqiangbei electronics market: Line 1 direct to Huaqiang Road Station, ~25–30 min, no transfer</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Nanyou Fashion Market: cross-city trip (~30 min taxi or 60–70 min metro) &mdash; plan a full half-day</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Shenzhen Bay Port: ~35–50 min taxi (opposite side of city) &middot; Shekou Ferry: ~45–55 min taxi</span></div>
       <div class="hotel-section-label red" style="margin-top:10px">NOTE</div>
       <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Booked by Goong Goong &middot; WeChat Pay accepted on-site &middot; Co-sleeping with Jem &mdash; no crib needed</span></div>
       <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Declare all 5 guests including Jem &mdash; required by Chinese law</span></div>
@@ -1215,13 +1213,13 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
       <div class="hotel-dates">Oct 7 &rarr; Oct 11 (4 nights) &middot; Oct 27 (1 night return stopover) &middot; 2 rooms &middot; Check-in: 3:00pm &middot; Check-out: 12:00pm</div>
     </div>
     <div class="hotel-body">
-      <div class="hotel-why">Right on Nathan Road &mdash; Temple Street Night Market ~25min walk or 5min by MTR (Jordan Station), TST waterfront and Symphony of Lights promenade 10 minutes, Jordan MTR directly below for every day trip. Solid mid-range international brand with no surprises, crib available on request. You&apos;re not spending much time in the room in HK &mdash; the neighbourhood is what counts, and this location delivers it.</div>
+      <div class="hotel-why">Right on Nathan Road &mdash; Temple Street Night Market 15–20 min walk north or 1 MTR stop to Jordan, TST waterfront and Symphony of Lights promenade 10 minutes south, Tsim Sha Tsui MTR directly below for every day trip. Solid mid-range international brand with no surprises, crib available on request. You&apos;re not spending much time in the room in HK &mdash; the neighbourhood is what counts, and this location delivers it.</div>
       <div class="hotel-section-label">AMENITIES</div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Harbour-view and city-view rooms &mdash; request harbour-view at check-in</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Crib available on request — confirm on arrival</span></div>
       <div class="section-row"><span class="row-icon" style="color:#a78bfa">&#8594;</span><span>Restaurant &middot; Room service &middot; Concierge &middot; IHG One Rewards points</span></div>
       <div class="hotel-section-label green" style="margin-top:10px">LOCATION</div>
-      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Temple Street Night Market: ~25min walk or Jordan MTR (2 stops north)</span></div>
+      <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Temple Street Night Market: 15–20 min walk north, or 1 stop on Tsuen Wan Line to Jordan MTR (Exit A)</span></div>
       <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>TST waterfront / Symphony of Lights: 10-min walk east</span></div>
       <div class="section-row"><span class="row-icon" style="color:#34d399">&#8594;</span><span>Jordan MTR Station: 2-min walk &middot; Harbour City (nursing room): 15-min walk</span></div>
       <div class="hotel-section-label red" style="margin-top:10px">NOTE</div>
@@ -1319,6 +1317,7 @@ body{font-family:'Lora',Georgia,serif;background:var(--bg);color:var(--text);min
       <div class="section-row" style="border:none"><span class="row-icon" style="color:#f87171">&#8594;</span><span>Check-out 1:00pm Oct 27 &mdash; store bags with hotel concierge. Full day available until ~3:30pm, then head to HND.</span></div>
     </div>
   </div>
+</div>
 </div>
 
 <div id="tab-jem" class="tab-content">
@@ -1569,9 +1568,9 @@ const days=[
     "🩺 Goong Goong: medications in carry-on, not checked bags. Doctor's note in English accessible."
   ]},
 
- {date:"Sun Oct 4",suggs:["Temple Street Night Market (廟街夜市) — ~25min walk or Jordan MTR (2 stops north). Opens 6pm. Food stalls, fortune tellers, great atmosphere.","TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade with views across to HK Island.","1881 Heritage — 10min walk from hotel. Former Marine Police HQ, beautiful colonial buildings, free to wander."],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong — All Five Together",dist:"Hotel: MTR Airport Express ~24min from HKG",
+ {date:"Sun Oct 4",suggs:["Temple Street Night Market (廟街夜市) — ~15–20 min walk north, or MTR 1 stop to Jordan (Tsuen Wan Line, Exit A, 5 min walk). Opens 6pm. Food stalls, fortune tellers, great atmosphere.","TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade with views across to HK Island.","1881 Heritage — 10min walk from hotel. Former Marine Police HQ, beautiful colonial buildings, free to wander."],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong — All Five Together",dist:"Hotel: MTR Airport Express to Kowloon Station ~20min from HKG",
   note:"Land mid-afternoon. Popo and Goong Goong will be waiting in arrivals. Buy Octopus Cards and HK SIM before leaving the airport. One easy first night in Mong Kok.",
-  items:["Buy Octopus Cards (all 5) at HKG Customer Service Centre in arrivals — load HK$200 (~CAD $36) each. This card covers every MTR, bus, and tram in HK.","Buy HK SIM at 7-Eleven in arrivals hall — data SIM, cheap and fast","MTR Airport Express to Kowloon Station (~24min, HK$90 / ~CAD $16). Stroller fits in the designated carriage space.","Hotel near Mong Kok East MTR — one night, sleeping only. East Rail Line here goes directly to Lo Wu border crossing for Shenzhen tomorrow.","Buy diapers tonight: Watson's or Mannings near any Mong Kok hotel"]},
+  items:["Buy Octopus Cards (all 5) at HKG Customer Service Centre in arrivals — load HK$200 (~CAD $36) each. This card covers every MTR, bus, and tram in HK.","Buy HK SIM at 7-Eleven in arrivals hall — data SIM, cheap and fast","MTR Airport Express to Kowloon Station (~20min, HK$115 single / HK$105 Octopus, ~CAD $20). Stroller fits in the designated carriage space.","Hotel near Mong Kok East MTR — one night, sleeping only. East Rail Line here goes directly to Lo Wu border crossing for Shenzhen tomorrow.","Buy diapers tonight: Watson's or Mannings near any Mong Kok hotel"]},
 
  {date:"Mon Oct 5",suggs:["Shenzhen Metro Line 1 — see the city from the train on the way to the hotel"],city:"Shenzhen",emoji:"🏠",title:"Cross to Shenzhen — Family Time",dist:"Lo Wu Border: MTR East Rail Line from Mong Kok East, ~40min",
   note:"MTR East Rail Line to Lo Wu (last stop). Cross the border on foot. Settle in for a quiet family evening — the market is tomorrow.",
@@ -1586,21 +1585,21 @@ const days=[
     "🛒 TONIGHT: Buy diapers — Pampers China and Merries both excellent and very cheap. Family evening, no agenda."
   ]},
 
- {date:"Tue Oct 6",suggs:["Costco Shenzhen — Metro Line 4 to Shenzhen North, ~20min from hotel. Go before 11am before crowds hit.","Huaqiangbei electronics market — Metro Line 1 or 7, ~15min from hotel. World's largest electronics market, good for a browse."],city:"Shenzhen",emoji:"🛒",title:"⚓ Nanyou Fashion Centre",dist:"📍 Short walk from Shirriz Holiday Hotel",
+ {date:"Tue Oct 6",suggs:["Costco Shenzhen (Longhua) — Line 1 from Lo Wu to Science Museum, transfer to Line 6 north to Hongshan Station, ~55–65 min total. Worth it for bulk baby supplies.","Huaqiangbei electronics market — Line 1 direct to Huaqiang Road Station, ~25–30 min from Lo Wu, no transfer required."],city:"Shenzhen",emoji:"🛒",title:"⚓ Nanyou Fashion Centre",dist:"📍 ~30 min taxi from Shirriz Holiday Hotel (cross-city — plan a full half-day)",
   note:"The main Shenzhen mission. 20+ buildings of medium to high-end original Chinese designer brands. Allow the full day.",
   warn:"No trying on clothes. No photography. ~70% of stores open to retail. WeChat Pay only. WeChat Translate camera function essential — limited English.",
   items:["Hours: 9:30am–8pm (some buildings to 10pm) — arrive early for best selection","Buildings 107/108 (Tairong): the sweet spot for Chinese designer brands and boutique fashion. Start here.","WeChat Pay only throughout — have the app open and ready","Use WeChat Translate camera function on price tags and signs in real time","Last Shenzhen evening — restock baby supplies at a pharmacy before crossing back tomorrow"]},
 
- {date:"Wed Oct 7",suggs:["Huaqiangbei electronics market — Metro Line 1 or 7, ~15min from Shirriz Holiday Hotel. Good for a Shenzhen morning browse before the afternoon crossing.","1881 Heritage — 10min walk from Holiday Inn Golden Mile TST. Former Marine Police HQ, free to wander.","Harbour City mall — 15min walk from hotel. Nursing room inside, flat, good for an easy arrival afternoon."],city:"Hong Kong",emoji:"🔄",title:"Cross Back to HK — Settle into TST",dist:"Lo Wu Border back to Kowloon: MTR ~40min",
+ {date:"Wed Oct 7",suggs:["Huaqiangbei electronics market — Line 1 direct to Huaqiang Road Station, ~25–30 min from hotel. No transfer. World's largest electronics market.","1881 Heritage — 10min walk from Holiday Inn Golden Mile TST. Former Marine Police HQ, free to wander.","Harbour City mall — 15min walk from hotel. Nursing room inside, flat, good for an easy arrival afternoon."],city:"Hong Kong",emoji:"🔄",title:"Cross Back to HK — Settle into TST",dist:"Lo Wu Border back to Kowloon: MTR ~40min",
   note:"Loose morning in Shenzhen — Costco or Huaqiangbei if not done, or a slow family morning. Cross back to HK in the afternoon and check into Holiday Inn Golden Mile, TST.",
   items:["Shenzhen Metro back to Lo Wu — reverse the crossing, same process","HK Immigration back in, Octopus Card tapped, MTR East Rail Line to Kowloon (~40min)","Check into Holiday Inn Golden Mile, Nathan Road, TST — main HK base for 6 nights","Refund leftover Shenzhen yuan at HSBC or Bank of China before they become hard to exchange"]},
 
- {date:"Thu Oct 8",suggs:["Apliu Street flea market (鴨寮街) — 5min walk from Walled City Park via MTR (~10min to Sham Shui Po). Old electronics, cameras, gadgets. A serious hunting ground.","Fabric and trimming markets, Ki Lung Street — same Sham Shui Po neighbourhood, 5min walk from Apliu Street.","Dai pai dong lunch — open-air Cantonese food stalls scattered throughout Sham Shui Po. Very local, very cheap. Becca and Popo will navigate."],city:"Hong Kong",emoji:"🏰",title:"⚓ Kowloon Walled City Park",dist:"📍 MTR Tuen Ma Line to Sung Wong Toi Station, Exit B3, 10-min walk — ~35-40min from hotel",
+ {date:"Thu Oct 8",suggs:["Apliu Street flea market (鴨寮街) — 5min walk from Walled City Park via MTR (~10min to Sham Shui Po). Old electronics, cameras, gadgets. A serious hunting ground.","Fabric and trimming markets, Ki Lung Street — same Sham Shui Po neighbourhood, 5min walk from Apliu Street.","Dai pai dong lunch — open-air Cantonese food stalls scattered throughout Sham Shui Po. Very local, very cheap. Becca and Popo will navigate."],city:"Hong Kong",emoji:"🏰",title:"⚓ Kowloon Walled City Park",dist:"📍 MTR Tuen Ma Line to Sung Wong Toi Station, Exit B2, 10-min walk — ~25–30 min from hotel",
   note:"The site of the original Walled City — a lawless, densely packed enclave home to 33,000 people before demolition in 1994. Now a beautiful Jiangnan-style garden with a full exhibition hall. Free, flat, stroller-friendly throughout.",
   popo:"Popo & Goong Goong: completely flat and accessible throughout. The exhibition hall is worth 45–60 minutes — it gives real context to a remarkable place.",
-  items:["Free, open 6:30am–11pm. MTR Kwun Tong Line to Lok Fu, 10-min walk south.","Exhibition hall inside: full Walled City story through photographs, scale models, and maps. Allow 45–60 minutes.","Nursing: shaded park benches throughout — one of the nicest nursing spots of the HK leg"]},
+  items:["Free, open 6:30am–11pm. Take East Rail to Hung Hom, then Tuen Ma Line to Sung Wong Toi (Exit B2), 10-min walk.","Exhibition hall inside: full Walled City story through photographs, scale models, and maps. Allow 45–60 minutes.","Nursing: shaded park benches throughout — one of the nicest nursing spots of the HK leg"]},
 
- {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade. Good afternoon wander on the return from the Peak.","Temple Street Night Market — 2.5km from hotel, ~25min walk or 2 stops on MTR (Jordan Station). Opens 6pm. Food stalls, fortune tellers, great atmosphere.","Symphony of Lights — 10min walk from hotel, same TST promenade. FREE at 8pm. 15 minutes of lasers across the entire skyline. Arrive 7:45pm."],city:"Hong Kong",emoji:"⛰️",title:"⚓ The Peak",dist:"📍 Peak Tram terminal: MTR to Central Exit J2, 10-min walk — ~25min from hotel",
+ {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel. Flat harbour promenade. Good afternoon wander on the return from the Peak.","Temple Street Night Market — ~15–20 min walk north, or MTR 1 stop (TST → Jordan, Tsuen Wan Line, Exit A, ~5 min walk to market). Opens 6pm. Food stalls, fortune tellers, great atmosphere.","Symphony of Lights — 10min walk from hotel, same TST promenade. FREE at 8pm. 15 minutes of lasers across the entire skyline. Arrive 7:45pm."],city:"Hong Kong",emoji:"⛰️",title:"⚓ The Peak",dist:"📍 Peak Tram terminal: MTR to Central Exit J2, 10-min walk — ~25min from hotel",
   note:"Victoria Peak via the historic Peak Tram — one of the steepest funicular railways in the world. Extraordinary views over HK Island and Kowloon.",
   warn:"🔴 Book Peak Tram tickets in advance at thepeak.com.hk — walk-up queues can be 45min+.",
   popo:"Popo & Goong Goong: very steep on the tram — hold on. Free viewing area at Peak Galleria faces Kowloon.",
@@ -1747,7 +1746,7 @@ const jemDays=[
   nursing:"Feed on demand throughout. Cabin crew are experienced with nursing parents — ask for a privacy screen if needed.",
   nap:"Long flight = long sleep opportunity. Let Jem nap freely — you want him arriving on HKT."},
 
- {date:"Sun Oct 4",suggs:["Watson's / Mannings — buy diapers tonight", "Temple Street Night Market opens 6pm if energy allows", "TST waterfront — 10min walk, flat harbour promenade"],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong",
+ {date:"Sun Oct 4",suggs:["Watson's / Mannings — buy diapers tonight", "Temple Street Night Market opens 6pm if energy allows (15–20 min walk north or 1 MTR stop to Jordan)", "TST waterfront — 10min walk south, flat harbour promenade"],city:"Hong Kong",emoji:"🏙️",title:"Arrive Hong Kong",
   letter:"First soil, first stamp, first meeting with Popo and Goong Goong in person. He won't remember this day but everyone else will.",
   logistics:["Buy diapers tonight — Watson's or Mannings within walking distance of any Mong Kok hotel","Stroller from the airport — TST is flat and accessible","Hotel room for nursing tonight — no dedicated room needed"],
   nursing:"Hotel room. HK is very relaxed for breastfeeding in public.",
@@ -1777,7 +1776,7 @@ const jemDays=[
   nursing:"Kowloon Walled City Park has quiet shaded benches — one of the best nursing spots of the HK leg.",
   nap:"Park is perfect for a stroller nap — quiet, shaded, green."},
 
- {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel, flat", "Temple Street Night Market — Jordan MTR, opens 6pm", "Symphony of Lights — FREE, 8pm from TST promenade"],city:"Hong Kong",emoji:"⛰️",title:"The Peak + Symphony of Lights",
+ {date:"Fri Oct 9",suggs:["TST waterfront / Avenue of Stars — 10min walk from hotel, flat", "Temple Street Night Market — 1 stop to Jordan MTR, opens 6pm (15–20 min walk north is also fine)", "Symphony of Lights — FREE, 8pm from TST promenade"],city:"Hong Kong",emoji:"⛰️",title:"The Peak + Symphony of Lights",
   letter:"A full day. The Peak Tram is steep — hold Jem securely. The Symphony of Lights at 8pm will be his first laser show. He will stare.",
   logistics:["Carrier on the Peak Tram — steep incline, secure grip on Jem","Peak Galleria nursing room at the top","Temple Street is loud — baby-safe earplugs or headphones if you have them"],
   nursing:"Peak Galleria nursing room. Hotel is nearby for a midday reset if needed.",
@@ -1996,11 +1995,16 @@ function switchTab(id,btn){
   btn.classList.add("active");
 }
 
+function toggleSuggCity(header){
+  const section = header.closest('.sugg-city-section');
+  if(section) section.classList.toggle('collapsed');
+}
+
 
 buildDays();
 buildJem();
 
 </script>
-<div style="text-align:center;padding:24px 0 16px;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.05em;">The Japlan &mdash; v47</div>
+<div style="text-align:center;padding:24px 0 16px;font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:0.05em;">The Japlan &mdash; v51</div>
 </body>
 </html>
