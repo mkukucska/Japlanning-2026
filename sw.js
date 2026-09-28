@@ -1,4 +1,4 @@
-const CACHE = 'trip-2026-v44';
+const CACHE = 'trip-2026-v47';
 const ASSETS = ['./'];
 
 self.addEventListener('install', e => {
